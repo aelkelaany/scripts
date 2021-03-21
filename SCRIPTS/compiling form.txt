@@ -1,0 +1,45 @@
+
+INB1 : 10.10.80.72   ora11g/ BuOra@Inb17
+1 - Login to INB Server 
+2 - put the forms in the following path : /users/ora11g/custom_forms 
+3 - open SSH session via Putty 
+4 - run the following command : /users/ora11g/compile_forms.shl
+5 - enter the Database name or leave it as Default [TEST]
+6 - enter the environment path or leave it if you are compiling arabic form 
+    otherwise change it to /u01/app/sct/inb11g/TEST_en
+7 - enter baninst1 password 
+    done 
+
+/users/ora11g/compile_forms.shl
+/u01/app/sct/inb11g/TEST_en
+/users/ora11g/custom_forms/kilany
+BUaSIT60
+
+
+ 
+Insert into GENERAL.GUBOBJS
+   (GUBOBJS_NAME, GUBOBJS_DESC, GUBOBJS_OBJT_CODE, GUBOBJS_SYSI_CODE, GUBOBJS_USER_ID, 
+    GUBOBJS_ACTIVITY_DATE, GUBOBJS_HELP_IND, GUBOBJS_EXTRACT_ENABLED_IND, GUBOBJS_UI_VERSION)
+ Values
+   ('SYADTYP', 'Document Type Definition', 'FORM', 'S', 'LOCAL', 
+    sysdate, 'N', 'N', 'B');
+ 
+ -----------------
+ 
+  
+Insert into BANSECR.GURUOBJ
+   (GURUOBJ_OBJECT, GURUOBJ_ROLE, GURUOBJ_USERID, GURUOBJ_ACTIVITY_DATE, GURUOBJ_USER_ID)
+ Values
+   ('SYADTYP', 'BAN_DEFAULT_M', 'SAISUSR', SYSDATE, 'BANSECR');
+ 
+
+--------------------------
+SET DEFINE OFF;
+Insert into BANSECR.GURAOBJ
+   (GURAOBJ_OBJECT, GURAOBJ_DEFAULT_ROLE, GURAOBJ_CURRENT_VERSION, GURAOBJ_SYSI_CODE, GURAOBJ_ACTIVITY_DATE, 
+    GURAOBJ_USER_ID, GURAOBJ_OWNER, GURAOBJ_ACCESS_TRACKING_IND)
+ Values
+   ('SYADTYP', 'BAN_DEFAULT_M', '8.6', 'S', SYSDATE, 
+    'BANSECR', 'PUBLIC', 'Y');
+    -----------------
+COMMIT;

@@ -1,0 +1,26 @@
+select * from sgradvr
+where exists (SELECT '1'
+FROM SGBSTDN SG
+WHERE SGBSTDN_PIDM =SGRADVR_PIDM
+ 
+ 
+AND SGBSTDN_TERM_CODE_EFF =(SELECT MAX(SGBSTDN_TERM_CODE_EFF)
+FROM SGBSTDN
+WHERE 
+SGBSTDN_PIDM=SG.SGBSTDN_PIDM)
+AND SGBSTDN_STST_CODE in ('ŒÃ','IS','TE','ÿ”','„”','„Œ') );
+-------------------------------
+--delete
+-----------------------------
+
+delete from sgradvr
+where exists (SELECT '1'
+FROM SGBSTDN SG
+WHERE SGBSTDN_PIDM =SGRADVR_PIDM
+ 
+ 
+AND SGBSTDN_TERM_CODE_EFF =(SELECT MAX(SGBSTDN_TERM_CODE_EFF)
+FROM SGBSTDN
+WHERE 
+SGBSTDN_PIDM=SG.SGBSTDN_PIDM)
+AND SGBSTDN_STST_CODE in ('ŒÃ','IS','TE','ÿ”','„”','„Œ') );

@@ -1,0 +1,33 @@
+select 
+DECODE(STVDEGC_DESC,
+'','[«·≈Ã„«·Ì]',
+STVDEGC_DESC) AS "«·œ—Ã… «·⁄·„Ì…",
+DECODE(SGBSTDN_STYP_CODE,
+'„','„‰ Ÿ„',
+'“','“«∆— „‰ Œ«—Ã «·Ã«„⁄…',
+'Õ','„ÕÊ·',
+'Œ','„ÕÊ· Œ«—ÃÌ',
+'»','“«∆— „‰ œ«Œ· «·Ã«„⁄…',
+'‰','„‰ ”»',
+'0','€Ì— „Õœœ',
+' ',' Ã”Ì—',
+'','[«·≈Ã„«·Ì]',
+SGBSTDN_STYP_CODE) AS "‰Ê⁄ «·ÿ«·»" ,
+COUNT(THE_REGISTRATION.THE_PIDM) AS "«·≈Ã„«·Ì"
+from SGBSTDN sg , STVDEGC , 
+(
+select distinct(SFRSTCR_PIDM) AS THE_PIDM
+from SFRSTCR 
+where SFRSTCR_TERM_CODE=:THE_TERM
+and SFRSTCR_RSTS_CODE in ('RE','RW')
+) THE_REGISTRATION
+where trim(both ' ' from sgbstdn_term_code_eff)=( select max(trim(both ' ' from sgbstdn_term_code_eff)) 
+                                                  from sgbstdn 
+                                                  where sgbstdn_pidm=sg.sgbstdn_pidm)
+and THE_REGISTRATION.THE_PIDM=SGBSTDN_PIDM(+)
+and SGBSTDN_DEGC_CODE_1=STVDEGC_CODE(+)
+group by rollup (STVDEGC_DESC , SGBSTDN_STYP_CODE)
+order by STVDEGC_DESC ASC , SGBSTDN_STYP_CODE ASC
+
+
+

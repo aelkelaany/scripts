@@ -1,0 +1,90 @@
+select counT(*) from sfrstcr
+where 
+sfrstcr_term_code='144020'
+and sfrstcr_crn in 
+((select CRN from MAHAMOUD.SYR))
+and sfrstcr_rsts_code in ('RE','RW') ;
+
+CREATE TABLE SSBSECT10092019_DEL AS SELECT * FROM SSBSECT 
+WHERE SSBSECT_term_code='144010'
+and SSBSECT_crn in 
+(select col01 from BU_DEV.TMP_TBL03)
+
+CREATE TABLE SSRMEET10092019_DEL AS 
+SELECT * FROM SSRMEET 
+WHERE SSRMEET_term_code='144010'
+and SSRMEET_crn in 
+(select col01 from BU_DEV.TMP_TBL03)
+  
+ CREATE TABLE SSRRCOL10092019_DEL AS 
+SELECT * FROM SSRRCOL 
+WHERE SSRRCOL_term_code='144010'
+and SSRRCOL_crn in 
+(select col01 from BU_DEV.TMP_TBL03) ;
+
+
+CREATE TABLE SSRRCMP10092019_DEL AS 
+SELECT * FROM SSRRCMP 
+WHERE SSRRCMP_term_code='144010'
+and SSRRCMP_crn in 
+(select col01 from BU_DEV.TMP_TBL03) ;
+
+DELETE FROM SSRRCOL WHERE SSRRCOL_term_code='144010'
+and SSRRCOL_crn in 
+(select col01 from BU_DEV.TMP_TBL03) ;
+
+DELETE FROM SSRRCMP WHERE SSRRCMP_term_code='144010'
+and SSRRCMP_crn in 
+(select col01 from BU_DEV.TMP_TBL03) ;
+
+DELETE FROM SSRMEET WHERE SSRMEET_term_code='144010'
+and SSRMEET_crn in 
+(select col01 from BU_DEV.TMP_TBL03) ;
+
+DELETE FROM SSBSECT WHERE SSBSECT_term_code='144010'
+and SSBSECT_crn in 
+(select col01 from BU_DEV.TMP_TBL03) ;
+
+ 
+
+SSRMEET  
+
+SIRASGN
+
+SSRRCOL
+ 
+
+SSRRCMP
+
+-- delete from database without backup
+DELETE FROM SSRRCOL WHERE SSRRCOL_term_code='144020'
+and SSRRCOL_crn in 
+(select CRN from MAHAMOUD.SYR) ;
+
+DELETE FROM SSRRCMP WHERE SSRRCMP_term_code='144020'
+and SSRRCMP_crn in 
+(select CRN from MAHAMOUD.SYR) ;
+
+DELETE FROM SSRMEET WHERE SSRMEET_term_code='144020'
+and SSRMEET_crn in 
+(select CRN from MAHAMOUD.SYR) ;
+
+DELETE FROM SIRASGN WHERE SIRASGN_term_code='144020'
+and SIRASGN_crn in 
+(select CRN from MAHAMOUD.SYR) ;
+DELETE FROM SSRRTST WHERE SSRRTST_term_code='144020'
+and SSRRTST_crn in 
+(select CRN from MAHAMOUD.SYR) ;
+
+
+DELETE FROM SSRRDEP WHERE SSRRDEP_term_code='144020'
+and SSRRDEP_crn in 
+(select CRN from MAHAMOUD.SYR) ;
+DELETE FROM SSBSECT WHERE SSBSECT_term_code='144020'
+and SSBSECT_crn in 
+(select CRN from MAHAMOUD.SYR) ;
+
+SELECT COUNT(*) FROM SSBSECT 
+WHERE  SSBSECT_term_code='144020'
+and SSBSECT_crn in 
+(select DISTINCT CRN from MAHAMOUD.SYR) ;

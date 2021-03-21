@@ -1,0 +1,129 @@
+/* Formatted on 1/31/2019 2:59:42 PM (QP5 v5.227.12220.39754) */
+UPDATE SGBSTDN A
+   SET A.SGBSTDN_BLCK_CODE = 'C01'
+ WHERE     EXISTS
+              (SELECT 'y'
+                 FROM GLBEXTR
+                WHERE     GLBEXTR_KEY = A.SGBSTDN_PIDM
+                      AND GLBEXTR_SELECTION = 'BLOCK_REG_143920_MS')
+       AND A.SGBSTDN_BLCK_CODE = 'C1'
+       AND A.SGBSTDN_TERM_CODE_EFF =
+              (SELECT MAX (B.SGBSTDN_TERM_CODE_EFF)
+                 FROM SGBSTDN B
+                WHERE     SGBSTDN_TERM_CODE_EFF <= '143920'
+                      AND B.SGBSTDN_PIDM = A.SGBSTDN_PIDM)
+       AND ROWNUM <= 13;
+
+UPDATE SGBSTDN A
+   SET A.SGBSTDN_BLCK_CODE = 'C11'
+ WHERE     EXISTS
+              (SELECT 'y'
+                 FROM GLBEXTR
+                WHERE     GLBEXTR_KEY = A.SGBSTDN_PIDM
+                      AND GLBEXTR_SELECTION = 'BLOCK_REG_143920_MS')
+       AND A.SGBSTDN_BLCK_CODE = 'C1'
+       AND A.SGBSTDN_TERM_CODE_EFF =
+              (SELECT MAX (B.SGBSTDN_TERM_CODE_EFF)
+                 FROM SGBSTDN B
+                WHERE     SGBSTDN_TERM_CODE_EFF <= '143920'
+                      AND B.SGBSTDN_PIDM = A.SGBSTDN_PIDM);
+
+UPDATE SGBSTDN A
+   SET A.SGBSTDN_BLCK_CODE = 'C02'
+ WHERE     EXISTS
+              (SELECT 'y'
+                 FROM GLBEXTR
+                WHERE     GLBEXTR_KEY = A.SGBSTDN_PIDM
+                      AND GLBEXTR_SELECTION = 'BLOCK_REG_143920_MS')
+       AND A.SGBSTDN_BLCK_CODE = 'C2'
+       AND A.SGBSTDN_TERM_CODE_EFF =
+              (SELECT MAX (B.SGBSTDN_TERM_CODE_EFF)
+                 FROM SGBSTDN B
+                WHERE     SGBSTDN_TERM_CODE_EFF <= '143920'
+                      AND B.SGBSTDN_PIDM = A.SGBSTDN_PIDM)
+       AND ROWNUM <= 9;
+
+UPDATE SGBSTDN A
+   SET A.SGBSTDN_BLCK_CODE = 'C12'
+ WHERE     EXISTS
+              (SELECT 'y'
+                 FROM GLBEXTR
+                WHERE     GLBEXTR_KEY = A.SGBSTDN_PIDM
+                      AND GLBEXTR_SELECTION = 'BLOCK_REG_143920_MS')
+       AND A.SGBSTDN_BLCK_CODE = 'C2'
+       AND A.SGBSTDN_TERM_CODE_EFF =
+              (SELECT MAX (B.SGBSTDN_TERM_CODE_EFF)
+                 FROM SGBSTDN B
+                WHERE     SGBSTDN_TERM_CODE_EFF <= '143920'
+                      AND B.SGBSTDN_PIDM = A.SGBSTDN_PIDM);
+
+
+UPDATE SGBSTDN A
+   SET A.SGBSTDN_BLCK_CODE = 'O01'
+ WHERE     EXISTS
+              (SELECT 'y'
+                 FROM GLBEXTR
+                WHERE     GLBEXTR_KEY = A.SGBSTDN_PIDM
+                      AND GLBEXTR_SELECTION = 'BLOCK_REG_143920_MS')
+       AND A.SGBSTDN_BLCK_CODE = 'O1'
+       AND A.SGBSTDN_TERM_CODE_EFF =
+              (SELECT MAX (B.SGBSTDN_TERM_CODE_EFF)
+                 FROM SGBSTDN B
+                WHERE     SGBSTDN_TERM_CODE_EFF <= '143920'
+                      AND B.SGBSTDN_PIDM = A.SGBSTDN_PIDM)
+       AND ROWNUM <= 14;
+
+UPDATE SGBSTDN A
+   SET A.SGBSTDN_BLCK_CODE = 'O11'
+ WHERE     EXISTS
+              (SELECT 'y'
+                 FROM GLBEXTR
+                WHERE     GLBEXTR_KEY = A.SGBSTDN_PIDM
+                      AND GLBEXTR_SELECTION = 'BLOCK_REG_143920_MS')
+       AND A.SGBSTDN_BLCK_CODE = 'O1'
+       AND A.SGBSTDN_TERM_CODE_EFF =
+              (SELECT MAX (B.SGBSTDN_TERM_CODE_EFF)
+                 FROM SGBSTDN B
+                WHERE     SGBSTDN_TERM_CODE_EFF <= '143920'
+                      AND B.SGBSTDN_PIDM = A.SGBSTDN_PIDM);
+
+
+UPDATE SGBSTDN A
+   SET A.SGBSTDN_BLCK_CODE = 'O02'
+ WHERE     EXISTS
+              (SELECT 'y'
+                 FROM GLBEXTR
+                WHERE     GLBEXTR_KEY = A.SGBSTDN_PIDM
+                      AND GLBEXTR_SELECTION = 'BLOCK_REG_143920_MS')
+       AND A.SGBSTDN_BLCK_CODE = 'O2'
+       AND A.SGBSTDN_TERM_CODE_EFF =
+              (SELECT MAX (B.SGBSTDN_TERM_CODE_EFF)
+                 FROM SGBSTDN B
+                WHERE     SGBSTDN_TERM_CODE_EFF <= '143920'
+                      AND B.SGBSTDN_PIDM = A.SGBSTDN_PIDM)
+       AND ROWNUM <= 16;
+
+UPDATE SGBSTDN A
+   SET A.SGBSTDN_BLCK_CODE = 'O12'
+ WHERE     EXISTS
+              (SELECT 'y'
+                 FROM GLBEXTR
+                WHERE     GLBEXTR_KEY = A.SGBSTDN_PIDM
+                      AND GLBEXTR_SELECTION = 'BLOCK_REG_143920_MS')
+       AND A.SGBSTDN_BLCK_CODE = 'O2'
+       AND A.SGBSTDN_TERM_CODE_EFF =
+              (SELECT MAX (B.SGBSTDN_TERM_CODE_EFF)
+                 FROM SGBSTDN B
+                WHERE     SGBSTDN_TERM_CODE_EFF <= '143920'
+                      AND B.SGBSTDN_PIDM = A.SGBSTDN_PIDM);
+
+  SELECT SGBSTDN_BLCK_CODE, COUNT (SGBSTDN_BLCK_CODE)
+    FROM SGBSTDN A
+   WHERE     SGBSTDN_TERM_CODE_EFF =
+                (SELECT MAX (B.SGBSTDN_TERM_CODE_EFF)
+                   FROM SGBSTDN B
+                  WHERE     SGBSTDN_TERM_CODE_EFF <= '143920'
+                        AND B.SGBSTDN_PIDM = A.SGBSTDN_PIDM)
+         AND A.SGBSTDN_BLCK_CODE IN
+                ('C01', 'C02', 'C11', 'C12', 'O01', 'O02', 'O11', 'O12')
+GROUP BY SGBSTDN_BLCK_CODE;

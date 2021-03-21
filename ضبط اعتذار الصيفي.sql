@@ -1,0 +1,23 @@
+ select * from sfrstcr
+ where sfrstcr_term_code='144030'
+ and sfrstcr_rsts_code='к' ;
+ 
+ 
+ UPDATE SFRSTCR SET sfrstcr_rsts_code='DD' , SFRSTCR_GRDE_CODE=''
+ WHERE sfrstcr_term_code='144030'
+ and sfrstcr_rsts_code='к' ;
+ 
+ ------------------
+ SELECT * FROM SGBSTDN SG
+ WHERE SG.SGBSTDN_STST_CODE='ук'
+ AND SG.SGBSTDN_TERM_CODE_EFF='144030' ;
+ 
+ SELECT * FROM SFBETRM WHERE SFBETRM_TERM_CODE='144030'
+ AND SFBETRM_ESTS_CODE='к'  ;
+ UPDATE SFBETRM SET SFBETRM_ESTS_CODE='EL'
+ WHERE SFBETRM_TERM_CODE='144030'
+ AND SFBETRM_ESTS_CODE='к'  ;
+ 
+ UPDATE SGBSTDN SG SET  SG.SGBSTDN_STST_CODE='AS'
+ WHERE SG.SGBSTDN_STST_CODE='ук'
+ AND SG.SGBSTDN_TERM_CODE_EFF='144030' ;

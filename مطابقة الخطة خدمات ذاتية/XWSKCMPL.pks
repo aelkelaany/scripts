@@ -1,0 +1,5 @@
+CREATE OR REPLACE PACKAGE XWSKCMPL
+AS
+ pidm           spriden.spriden_pidm%TYPE;
+PROCEDURE P_DISPLAY_COMPLIANCE ;
+END;

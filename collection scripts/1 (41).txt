@@ -1,0 +1,190 @@
+select distinct
+sgbstdn_pidm AS PIDM_ID , 
+SPRIDEN_ID AS "—ﬁ„ «·ÿ«·»" , 
+SPBPERS_SSN AS "«·”Ã· «·„œ‰Ì" ,
+(
+select distinct SPRTELE_INTL_ACCESS 
+from SPRTELE
+where SGBSTDN_PIDM=SPRTELE_PIDM(+)
+and SPRTELE_TELE_CODE in ('HO','MO')
+and rownum=1
+) AS "—ﬁ„ «·ÃÊ«·" ,
+SGBSTDN_TERM_CODE_ADMIT AS "›’· «·ﬁ»Ê·" , 
+sgbstdn_term_code_eff AS "«·›’· «·›⁄«·",
+SPRIDEN_FIRST_NAME||' '||SPRIDEN_MI||' '||SPRIDEN_LAST_NAME AS "«”„ «·ÿ«·»" , 
+SPBPERS_SEX AS SEX_ID ,
+decode(SPBPERS_SEX,'M','«·ÿ«·»','F','«·ÿ«·»…','€Ì— „Õœœ') AS "«·Ã‰”" ,
+the_email.EMAIL_ADDRESS AS "«·«Ì„Ì·" ,
+SPBPERS_CITZ_CODE AS CITIZEN_ID ,
+STVCITZ_DESC AS "«·Ã‰”Ì…" ,
+sgbstdn_coll_code_1 AS COLLEGE_ID , 
+STVCOLL_DESC AS "«”„ «·ﬂ·Ì…" , 
+sgbstdn_program_1 AS PROGRAM_ID ,
+SMRPRLE_PROGRAM_DESC AS "«”„ «·»—‰«„Ã" ,
+sgbstdn_degc_code_1 AS DEGREE_ID , 
+STVDEGC_DESC AS "«·œ—Ã… «·⁄·„Ì…" , 
+sgbstdn_majr_code_1 AS MAJOR_ID ,
+STVMAJR_DESC AS "«”„ «· Œ’’" ,
+sgbstdn_dept_code AS DEPARTMENT_ID ,
+STVDEPT_DESC AS "«”„ «·ﬁ”„" ,
+sgbstdn_camp_code as CAMPUS_ID ,
+STVCAMP_DESC AS "«”„ «·›—⁄" ,
+sgbstdn_stst_code AS STATUS_ID ,
+STVSTST_DESC AS "Õ«·… «·ÿ«·»" ,
+sgbstdn_styp_code AS TYPE_ID ,
+STVSTYP_DESC AS "‰Ê⁄ «·ÿ«·»" ,
+shr.gpa AS "„⁄œ·  —«ﬂ„Ì" ,
+shr.hours AS "«·”«⁄« " ,
+NVL(THE_PROG.THE_HOURS,0) AS "”«⁄«  «·Œÿ…" ,
+NVL(THE_PROG.THE_HOURS,0)-shr.hours AS "›—ﬁ «·”«⁄« " ,
+DECODE(THE_SMBPOGN.MET_IND,'Y','‰⁄„','N','·«','€Ì— „Õœœ') AS "√ﬂ„· «·„Ê«œ",
+THE_SMBPOGN.REQ_CREDITS_OVERALL AS "”«⁄…-«·ﬂ·",
+THE_SMBPOGN.REQ_COURSES_OVERALL AS "„Ê«œ-«·ﬂ·", 
+THE_SMBPOGN.ACT_CREDITS_OVERALL AS "”«⁄…-„ Õﬁﬁ",
+THE_SMBPOGN.ACT_COURSES_OVERALL AS "„Ê«œ-„ Õﬁﬁ",
+THE_SFRSTCR.THE_TOTAL AS "”«⁄…-„”Ã·",
+(NVL(THE_SMBPOGN.ACT_CREDITS_OVERALL,0)+NVL(THE_SFRSTCR.THE_TOTAL,0)) AS "”«⁄…-Ìœ—”",
+the_mark.SHRTTRM_ASTD_CODE_END_OF_TERM AS GRADE_ID ,
+STVASTD_DESC AS "«· ﬁœÌ—" ,
+GORIMMU_COMMENT AS "—ﬁ„ «·√Ì»«‰" ,
+GORIMMU_IMST_CODE AS "IBAN_STATUS" ,
+GTVIMST_DESC AS "Õ«·… «·¬Ì»«‰" ,
+GORIMMU_IMMU_CODE AS "BANK_ID" ,
+GTVIMMU_DESC AS "«”„ «·»‰ﬂ",
+SORHSCH_SBGI_CODE AS "Qualification",
+STVSBGI_DESC AS "«·„ƒÂ· «·œ—«”Ì",
+SORHSCH_DPLM_CODE AS "High_School_TYPE",
+STVDPLM_DESC AS "‘Â«œ… «·À«‰ÊÌ…",
+SORHSCH_GPA AS "„⁄œ· «·À«‰ÊÌ…",
+QIYAS.THE_SCORE AS "«·ﬁÌ«”",
+Tahsili.THE_SCORE AS "«· Õ’Ì·Ì",
+DOUBLE_RATIO.THE_SCORE AS "«·À‰«∆Ì…",
+TRIPLE_RATIO_1.THE_SCORE AS "«·À·«ÀÌ… 1",
+TRIPLE_RATIO_2.THE_SCORE AS "«·À·«ÀÌ… 2"
+from sgbstdn sg , SPRIDEN , SPBPERS , general.GORIMMU , SMRPRLE , STVDEPT , STVCOLL , STVDEGC , STVMAJR , STVSTST , STVSTYP , STVCITZ , STVASTD , GTVIMST , GTVIMMU , SORHSCH , STVDPLM , STVSBGI , STVCAMP , 
+(select SHRTGPA_pidm ,
+round(DECODE(SUM(SHRTGPA_GPA_HOURS),0,0,SUM(SHRTGPA_QUALITY_POINTS) / SUM(SHRTGPA_GPA_HOURS)),2)  gpa,
+SUM(SHRTGPA_HOURS_EARNED) hours
+from SHRTGPA 
+group by SHRTGPA_pidm ) shr ,
+(
+SELECT DISTINCT GOREMAL_PIDM AS PIDM , GOREMAL_EMAIL_ADDRESS AS EMAIL_ADDRESS
+FROM GOREMAL GO
+WHERE GOREMAL_EMAIL_ADDRESS =(SELECT DISTINCT GOREMAL_EMAIL_ADDRESS
+                            FROM GOREMAL 
+                            WHERE GOREMAL_PIDM=GO.GOREMAL_PIDM
+                            AND GOREMAL_EMAL_CODE='PS'
+                            AND ROWNUM=1)
+) the_email ,
+(
+select SHRTTRM_pidm , SHRTTRM_ASTD_CODE_END_OF_TERM , SHRTTRM_TERM_CODE
+from SHRTTRM sh
+where SHRTTRM_TERM_CODE=( select max(SHRTTRM_TERM_CODE) 
+                          from SHRTTRM 
+                          where SHRTTRM_PIDM=sh.SHRTTRM_PIDM )
+) the_mark ,
+(
+SELECT SMBPGEN_PROGRAM AS THE_PROGRAM , MIN(SMBPGEN_REQ_CREDITS_OVERALL) AS THE_HOURS
+FROM SMBPGEN
+GROUP BY SMBPGEN_PROGRAM
+) THE_PROG,
+(
+SELECT DISTINCT
+SORTEST_PIDM AS THE_PIDM,
+SORTEST_TEST_SCORE AS THE_SCORE
+FROM SORTEST
+WHERE SORTEST_TESC_CODE=' Õ’·'
+) Tahsili,
+(
+SELECT DISTINCT
+SORTEST_PIDM AS THE_PIDM,
+SORTEST_TEST_SCORE AS THE_SCORE
+FROM SORTEST
+WHERE SORTEST_TESC_CODE='‰”»…'
+) TRIPLE_RATIO_1,
+(
+SELECT DISTINCT
+SORTEST_PIDM AS THE_PIDM,
+SORTEST_TEST_SCORE AS THE_SCORE
+FROM SORTEST
+WHERE SORTEST_TESC_CODE='‰”»2'
+) TRIPLE_RATIO_2,
+(
+SELECT DISTINCT
+SORTEST_PIDM AS THE_PIDM,
+SORTEST_TEST_SCORE AS THE_SCORE
+FROM SORTEST
+WHERE SORTEST_TESC_CODE='ﬁÌ«”'
+) QIYAS,
+(
+SELECT DISTINCT 
+SARRRAT_PIDM AS THE_PIDM,
+SARRRAT_TERM_CODE AS THE_TERM,
+MIN(SARRRAT_RATING) AS THE_SCORE
+FROM SARRRAT 
+WHERE SARRRAT_RATP_CODE='œ„.ﬂ'
+AND SARRRAT_RADM_CODE='RATER'
+GROUP BY SARRRAT_PIDM , SARRRAT_TERM_CODE
+) DOUBLE_RATIO ,
+(
+SELECT DISTINCT
+SMBPOGN_PIDM AS PIDM,
+SMBPOGN_REQUEST_NO AS REQUEST_NO,
+SMBPOGN_MET_IND AS MET_IND,
+SMBPOGN_REQ_CREDITS_OVERALL AS REQ_CREDITS_OVERALL,
+SMBPOGN_REQ_COURSES_OVERALL AS REQ_COURSES_OVERALL,
+SMBPOGN_ACT_CREDITS_OVERALL AS ACT_CREDITS_OVERALL,
+SMBPOGN_ACT_COURSES_OVERALL AS ACT_COURSES_OVERALL
+FROM SMBPOGN SMB
+WHERE SMBPOGN_REQUEST_NO=(SELECT MAX(SMBPOGN_REQUEST_NO)
+                          FROM SMBPOGN
+                          WHERE SMBPOGN_PIDM=SMB.SMBPOGN_PIDM) 
+) THE_SMBPOGN ,
+(
+SELECT 
+SFRSTCR_PIDM,
+SUM(SFRSTCR_CREDIT_HR) AS THE_TOTAL
+FROM SFRSTCR
+WHERE SFRSTCR_RSTS_CODE IN ('RE','RW')
+AND SFRSTCR_TERM_CODE=:THE_TERM
+GROUP BY SFRSTCR_TERM_CODE,SFRSTCR_PIDM
+) THE_SFRSTCR
+where to_number(trim(both ' ' from sgbstdn_term_code_eff))=( select max(to_number(trim(both ' ' from sgbstdn_term_code_eff))) 
+                                                             from sgbstdn 
+                                                             where sgbstdn_pidm=sg.sgbstdn_pidm )
+and sgbstdn_pidm=SPRIDEN_PIDM(+)
+and SPRIDEN_CHANGE_IND is null
+AND sgbstdn_pidm=THE_SMBPOGN.PIDM(+)
+and sgbstdn_pidm=SPBPERS_PIDM(+)
+and sgbstdn_pidm=GORIMMU_PIDM(+)
+and GORIMMU_IMST_CODE(+)='AC'
+and sgbstdn_pidm=shr.SHRTGPA_pidm(+)
+and sgbstdn_pidm=the_email.PIDM(+)
+and sgbstdn_pidm=the_mark.SHRTTRM_pidm(+)
+and the_mark.SHRTTRM_ASTD_CODE_END_OF_TERM=STVASTD_CODE(+)
+and SGBSTDN_PROGRAM_1=SMRPRLE_PROGRAM(+)
+and SMRPRLE_PROGRAM=THE_PROG.THE_PROGRAM(+)
+and sgbstdn_dept_code=STVDEPT_CODE(+)
+and sgbstdn_coll_code_1=STVCOLL_CODE(+)
+and sgbstdn_degc_code_1=STVDEGC_CODE(+)
+and sgbstdn_majr_code_1=STVMAJR_CODE(+)
+and sgbstdn_stst_code=stvstst_code(+)
+and sgbstdn_styp_code=STVSTYP_CODE(+)
+and sgbstdn_camp_code=STVCAMP_CODE(+)
+and SPBPERS_CITZ_CODE=STVCITZ_CODE(+)
+and GORIMMU_IMST_CODE=GTVIMST_CODE(+)
+and GORIMMU_IMMU_CODE=GTVIMMU_CODE(+)
+and sgbstdn_pidm=SORHSCH_PIDM(+)
+and SORHSCH_DPLM_CODE=STVDPLM_code(+)
+and SORHSCH_SBGI_CODE=STVSBGI_code(+)
+and sgbstdn_pidm=Tahsili.THE_PIDM(+)
+and sgbstdn_pidm=TRIPLE_RATIO_1.THE_PIDM(+)
+and sgbstdn_pidm=TRIPLE_RATIO_2.THE_PIDM(+)
+and sgbstdn_pidm=QIYAS.THE_PIDM(+)
+and sgbstdn_pidm=DOUBLE_RATIO.THE_PIDM(+)
+and SGBSTDN_TERM_CODE_ADMIT=DOUBLE_RATIO.THE_TERM(+)
+and sgbstdn_pidm=THE_SFRSTCR.SFRSTCR_PIDM(+)
+and sgbstdn_stst_code in ('AS','„Ê','„⁄','ÿ„','≈ﬁ')
+and SGBSTDN_TERM_CODE_ADMIT=:THE_TERM
+and ( THE_SFRSTCR.THE_TOTAL<=0 or THE_SFRSTCR.THE_TOTAL is null )
+order by sgbstdn_coll_code_1 asc , SPRIDEN_ID asc

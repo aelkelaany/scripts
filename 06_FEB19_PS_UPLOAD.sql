@@ -1,0 +1,91 @@
+
+update bu_dev.tmp_tbl03 set COL02=f_get_pidm(trim(COL01)) ;
+
+select distinct COL01   from bu_dev.tmp_tbl03
+WHERE  COL02 IS   NULL ;
+delete from bu_dev.tmp_tbl03
+WHERE  COL02 IS   NULL ;
+/*select * from bu_dev.tmp_tbl03
+
+where COL03 not
+in ( 
+
+select SSRBLCK_BLCK_CODE from   SSRBLCK where SSRBLCK_TERM_CODE='144010')*/
+
+
+Insert into GLBSLCT
+   (GLBSLCT_APPLICATION, GLBSLCT_SELECTION, GLBSLCT_CREATOR_ID, GLBSLCT_DESC, GLBSLCT_LOCK_IND, 
+    GLBSLCT_ACTIVITY_DATE, GLBSLCT_TYPE_IND)
+ Values
+   ('STUDENT', 'MED_30856', 'SAISUSR', '30856', 'N', 
+    SYSDATE, NULL);
+ 
+
+Insert into GLBEXTR
+   SELECT 'STUDENT', 'MED_30856', 'SAISUSR', 'SAISUSR', PIDM, 
+    SYSDATE, 'S', NULL  FROM 
+    (  SELECT DISTINCT COL02 PIDM
+FROM bu_dev.tmp_tbl03
+where COL01 is not null 
+ 
+   );
+--(  select distinct pidm_id PIDM from MAHAMOUD.THE_VALUE) ;
+  
+SFBETRM
+/*
+DELETE  FROM SFRSTCR
+WHERE SFRSTCR_TERM_CODE='144010'
+ 
+AND SFRSTCR_PIDM    IN  (  SELECT DISTINCT COL02
+FROM bu_dev.tmp_tbl03
+ 
+   ) ;*/
+   
+   UPDATE SGBSTDN  SET SGBSTDN_BLCK_CODE='F6'
+   WHERE   SGBSTDN_PIDM    IN  (  SELECT DISTINCT COL02
+FROM bu_dev.tmp_tbl03
+ 
+   ) ;
+
+
+
+SELECT f_chances_count(F_GET_PIDM('439015696')) FROM DUAL  ;
+
+
+
+
+
+Insert into GLBSLCT
+   (GLBSLCT_APPLICATION, GLBSLCT_SELECTION, GLBSLCT_CREATOR_ID, GLBSLCT_DESC, GLBSLCT_LOCK_IND, 
+    GLBSLCT_ACTIVITY_DATE, GLBSLCT_TYPE_IND)
+ Values
+   ('STUDENT', 'GPA', 'SAISUSR', 'gpa', 'N', 
+    SYSDATE, NULL);
+ 
+
+Insert into GLBEXTR
+   values( 'STUDENT', 'GPA', 'SAISUSR', 'SAISUSR', 201637, 
+    SYSDATE, 'S', NULL  ); 
+ ;
+ 
+ 
+ 
+ 
+ request_master
+ 
+ Insert into GLBSLCT
+   (GLBSLCT_APPLICATION, GLBSLCT_SELECTION, GLBSLCT_CREATOR_ID, GLBSLCT_DESC, GLBSLCT_LOCK_IND, 
+    GLBSLCT_ACTIVITY_DATE, GLBSLCT_TYPE_IND)
+ SELECT DISTINCT 'STUDENT', 'DNTST_'||COL03, 'SAISUSR', COUNT(COL02)||' ⁄œœ '||COL03||' √”‰«‰ ', 'N', 
+    SYSDATE, NULL
+    FROM bu_dev.tmp_tbl03
+    GROUP BY COL03 ;
+    
+    Insert into GLBEXTR
+   SELECT 'STUDENT', 'DNTST_'||COL03, 'SAISUSR', 'SAISUSR', PIDM, 
+    SYSDATE, 'S', NULL  FROM 
+    (  SELECT DISTINCT COL03 ,COL02 PIDM
+FROM bu_dev.tmp_tbl03
+where COL01 is not null 
+ 
+   );

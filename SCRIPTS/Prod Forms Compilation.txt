@@ -1,0 +1,8 @@
+cd /u01/app/ellucian/inb/PROD_en/forms/fmb
+
+export ORACLE_TERM=vt220
+
+frmcmp_batch userid=baninst1/BUaSIT60 module_type=form batch=no compile_all=special module=form_name.fmb
+
+cp form_name.fmx FORM_NAME.fmx
+mv form_name.fmx ../fmx

@@ -1,0 +1,90 @@
+SELECT DISTINCT
+Q1.THE_COLLEGE AS "—ﬁ„ «·ﬂ·Ì…",
+STVCOLL_DESC AS "«”„ «·ﬂ·Ì…",
+decode(Q1.THE_SEX,'M','«·ÿ·«»','F','«·ÿ«·»« ','€Ì— „Õœœ') AS "«·Ã‰”",
+Q1.THE_MIN AS "√’€— ‰”»…",
+Q1.THE_MAX AS "√ﬂ»— ‰”»…",
+Q1.THE_TOTAL AS "«·≈Ã„«·Ì"
+
+FROM(
+select DISTINCT 
+sgbstdn_coll_code_1 AS THE_COLLEGE, 
+SPBPERS_SEX AS THE_SEX, 
+MIN(TRIPLE_RATIO_2.THE_SCORE) AS THE_MIN,
+MAX(TRIPLE_RATIO_2.THE_SCORE) AS THE_MAX, 
+COUNT(*) AS THE_TOTAL
+from sgbstdn sg, SPBPERS , 
+(
+SELECT DISTINCT
+SORTEST_PIDM AS THE_PIDM,
+SORTEST_TEST_SCORE AS THE_SCORE
+FROM SORTEST
+WHERE SORTEST_TESC_CODE='‰”»2'
+) TRIPLE_RATIO_2
+where to_number(trim(both ' ' from sgbstdn_term_code_eff))=( select max(to_number(trim(both ' ' from sgbstdn_term_code_eff))) 
+                                                             from sgbstdn 
+                                                             where sgbstdn_pidm=sg.sgbstdn_pidm )
+and sgbstdn_pidm=TRIPLE_RATIO_2.THE_PIDM(+)
+and sgbstdn_pidm=SPBPERS_PIDM(+)
+and sgbstdn_coll_code_1 in ('14','25')
+and SGBSTDN_TERM_CODE_ADMIT=:THE_TERM
+GROUP BY sgbstdn_coll_code_1 , SPBPERS_SEX 
+
+UNION
+
+select DISTINCT 
+sgbstdn_coll_code_1 AS THE_COLLEGE, 
+SPBPERS_SEX AS THE_SEX, 
+MIN(TRIPLE_RATIO_1.THE_SCORE) AS THE_MIN,
+MAX(TRIPLE_RATIO_1.THE_SCORE) AS THE_MAX, 
+COUNT(*) AS THE_TOTAL
+from sgbstdn sg, SPBPERS , 
+(
+SELECT DISTINCT
+SORTEST_PIDM AS THE_PIDM,
+SORTEST_TEST_SCORE AS THE_SCORE
+FROM SORTEST
+WHERE SORTEST_TESC_CODE='‰”»…'
+) TRIPLE_RATIO_1
+where to_number(trim(both ' ' from sgbstdn_term_code_eff))=( select max(to_number(trim(both ' ' from sgbstdn_term_code_eff))) 
+                                                             from sgbstdn 
+                                                             where sgbstdn_pidm=sg.sgbstdn_pidm )
+and sgbstdn_pidm=TRIPLE_RATIO_1.THE_PIDM(+)
+and sgbstdn_pidm=SPBPERS_PIDM(+)
+and sgbstdn_coll_code_1 in ('55','33','32')
+and SGBSTDN_TERM_CODE_ADMIT=:THE_TERM
+GROUP BY sgbstdn_coll_code_1 , SPBPERS_SEX 
+
+UNION
+
+select DISTINCT 
+sgbstdn_coll_code_1 AS THE_COLLEGE, 
+SPBPERS_SEX AS THE_SEX, 
+MIN(DOUBLE_RATIO.THE_SCORE) AS THE_MIN,
+MAX(DOUBLE_RATIO.THE_SCORE) AS THE_MAX, 
+COUNT(*) AS THE_TOTAL
+from sgbstdn sg, SPBPERS , 
+(
+SELECT DISTINCT 
+SARRRAT_PIDM AS THE_PIDM,
+SARRRAT_TERM_CODE AS THE_TERM,
+to_char(MIN(SARRRAT_RATING)) AS THE_SCORE
+FROM SARRRAT 
+WHERE SARRRAT_RATP_CODE='œ„.ﬂ'
+AND SARRRAT_RADM_CODE='RATER'
+GROUP BY SARRRAT_PIDM , SARRRAT_TERM_CODE
+) DOUBLE_RATIO
+where to_number(trim(both ' ' from sgbstdn_term_code_eff))=( select max(to_number(trim(both ' ' from sgbstdn_term_code_eff))) 
+                                                             from sgbstdn 
+                                                             where sgbstdn_pidm=sg.sgbstdn_pidm )
+and sgbstdn_pidm=DOUBLE_RATIO.THE_PIDM(+)
+and SGBSTDN_TERM_CODE_ADMIT=DOUBLE_RATIO.THE_TERM(+)
+and sgbstdn_pidm=SPBPERS_PIDM(+)
+and sgbstdn_coll_code_1 NOT IN ('14','25','55','33','32')
+and SGBSTDN_TERM_CODE_ADMIT=:THE_TERM
+GROUP BY sgbstdn_coll_code_1 , SPBPERS_SEX 
+
+ORDER BY THE_COLLEGE ASC , THE_SEX DESC 
+) Q1 , STVCOLL
+WHERE Q1.THE_COLLEGE=STVCOLL.STVCOLL_CODE(+)
+ORDER BY Q1.THE_COLLEGE ASC
