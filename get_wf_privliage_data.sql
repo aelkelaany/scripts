@@ -1,4 +1,4 @@
- 
+ --needs to adding new catalog depts
 SELECT f_get_std_id (a.USER_PIDM) emp_id,
        f_get_std_name (a.USER_PIDM) emp_name,ATTRIBUTE_VALUE dept_code ,  f_get_desc_fnc ('STVDEPT', ATTRIBUTE_VALUE, 60)
             department ,
