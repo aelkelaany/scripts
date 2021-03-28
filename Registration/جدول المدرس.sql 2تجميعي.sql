@@ -1,4 +1,4 @@
-/* Formatted on 24/03/2021 14:22:37 (QP5 v5.227.12220.39754) */
+/* Formatted on 25/03/2021 10:10:27 (QP5 v5.227.12220.39754) */
   SELECT faculty_id,
          faculty_name,
          COLL_DESC,
@@ -8,7 +8,8 @@
          SUM (lec),
          SUM (lab),
          SUM (contact)
-    FROM (SELECT F_GET_DESC_FNC ('STVCOLL', SIRDPCL_COLL_CODE, 60) COLL_DESC,
+    FROM (SELECT DISTINCT
+                 F_GET_DESC_FNC ('STVCOLL', SIRDPCL_COLL_CODE, 60) COLL_DESC,
                  F_GET_DESC_FNC ('STVDEPT', SIRDPCL_DEPT_CODE, 60) DEPT_DESC,
                  f_get_std_name (sirasgn_pidm) faculty_name,
                  f_get_std_id (sirasgn_pidm) faculty_id,
@@ -38,10 +39,10 @@
                  AND A.SCBCRSE_SUBJ_CODE = ssbsect_subj_code
                  AND A.SCBCRSE_CRSE_NUMB = ssbsect_crse_numb
                  AND ssbsect_term_code = '144220'
-                 AND ssbsect_ptrm_code = '4'--------------------->>level
+                 AND ssbsect_ptrm_code = '4'      --------------------->>level
                  AND sirasgn_term_code = ssbsect_term_code
                  AND sirasgn_crn = ssbsect_crn
-               --  AND SIRASGN_PRIMARY_IND = 'Y'
+                 --  AND SIRASGN_PRIMARY_IND = 'Y'
                  AND SIRDPCL_PIDM = sirasgn_pidm
                  -- and SIRDPCL_HOME_IND='Y'
                  AND SIRDPCL_TERM_CODE_EFF =
@@ -52,4 +53,4 @@ GROUP BY COLL_DESC,
          DEPT_DESC,
          faculty_name,
          faculty_id
-ORDER BY 1     
+ORDER BY 1
