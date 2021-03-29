@@ -31,7 +31,7 @@
          AND sirasgn_term_code = ssbsect_term_code
          AND sirasgn_crn = ssbsect_crn
          AND SIRASGN_PRIMARY_IND = 'Y'
-         and f_get_std_id (sirasgn_pidm)='1963'
+         and f_get_std_id (sirasgn_pidm)='6449'
 ORDER BY 5;
 
 ----+++++++++++++++++++++++++++++++
