@@ -1,4 +1,4 @@
-/* Formatted on 21/03/2021 15:37:57 (QP5 v5.227.12220.39754) */
+/* Formatted on 25/03/2021 11:55:50 (QP5 v5.227.12220.39754) */
 DECLARE
    CURSOR get_reg_std
    IS

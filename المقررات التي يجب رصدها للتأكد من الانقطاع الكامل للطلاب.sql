@@ -1,4 +1,4 @@
-/* Formatted on 18/11/2020 09:50:51 (QP5 v5.227.12220.39754) */
+/* Formatted on 25/03/2021 11:56:23 (QP5 v5.227.12220.39754) */
   SELECT DISTINCT
          ssbsect_term_code term_code,
          sirasgn_crn crn,
