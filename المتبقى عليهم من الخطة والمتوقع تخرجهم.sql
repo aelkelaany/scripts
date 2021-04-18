@@ -39,8 +39,8 @@ SELECT A.*, "OVER_ALL" - ("ACT" + "REG_HRS")
                            FROM SGBSTDN
                           WHERE SGBSTDN_PIDM = A.SGBSTDN_PIDM)
                  AND SGBSTDN_STST_CODE = 'AS'
-                 AND A.SGBSTDN_STYP_CODE IN ('„', ' ')
-                 AND SMBPOGN_LEVL_CODE = 'Ã„'
+                 --AND A.SGBSTDN_STYP_CODE IN ('„', ' ')
+                 AND SMBPOGN_LEVL_CODE in ( 'Ã„','œ»')
                  AND NEW_COMP.SMBPOGN_REQUEST_NO =
                         (SELECT MAX (SMBPOGN_REQUEST_NO)
                            FROM SMBPOGN
