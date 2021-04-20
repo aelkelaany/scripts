@@ -12,7 +12,7 @@ UPDATE SHRTRCE
           (SELECT '1'
              FROM CAPP_MNPL_LOG_DETAIL
             WHERE     STD_PIDM = SHRTRCE_PIDM
-                  AND process_id = 2000
+                  AND process_id = 3900
                   AND MAPPING_SUCCESS_IND = 'Y'
                   AND GRDE_CODE_FINAL = 'ук'
                   AND RHS_SUBJ_CODE || RHS_CRSE_NUMB =
