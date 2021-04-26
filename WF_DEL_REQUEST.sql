@@ -5,14 +5,14 @@ update wf_request_flow f
 set ACTION_CODE='',
 NOTES=''
 where 
-request_no=226550
+request_no=233223
 and ACTION_CODE like '%REJECT%' 
 and SEQUENCE_NO=(select max(SEQUENCE_NO)
 from wf_request_flow
 where request_no=f.request_no)  ;
 
 update request_master set REQUEST_STATUS='P'
-where REQUEST_NO=226550
+where REQUEST_NO=233223
 and REQUEST_STATUS='R' ;
 ------------------------------------------------------
 --------------------------------------------------Reject request

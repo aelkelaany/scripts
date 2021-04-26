@@ -1,7 +1,7 @@
  declare
- P_PROCESS_ID number(8):=2600;
- l_subjCode varchar2(5):='BIO';
- l_crseNumb varchar(5):='10502';
+ P_PROCESS_ID number(8):=3900;
+ l_subjCode varchar2(5):='ARAB';
+ l_crseNumb varchar(5):='10806';
  l_credit_hrs number(2):=2;
  l_desc varchar2(30):='';
  REPLY_CODE varchar2(50);
@@ -12,9 +12,9 @@
          SELECT DISTINCT D.STD_PIDM
            FROM CAPP_MNPL_LOG_DETAIL D
           WHERE     D.PROCESS_ID = P_PROCESS_ID
-                AND D.MAPPING_SUCCESS_IND = 'N'
+                /*AND D.MAPPING_SUCCESS_IND = 'N'
                 and  D.LHS_SUBJ_CODE=l_subjCode
-                and  D.LHS_CRSE_NUMB=l_crseNumb
+                and  D.LHS_CRSE_NUMB=l_crseNumb */
                  ;
 
        
@@ -100,9 +100,9 @@
          END IF;
 
       
-         L_TRAM_SEQ_NO := L_TRIT_SEQ_NO;
+         L_TRAM_SEQ_NO := L_TRIT_SEQ_NO+1;
  
-
+BEGIN
          INSERT INTO SHRTRAM (SHRTRAM_PIDM,
                               SHRTRAM_TRIT_SEQ_NO,
                               SHRTRAM_SEQ_NO,
@@ -127,7 +127,8 @@
                       SYSDATE,
                       '',
                       '');
-
+                      
+END ;
           
             SELECT NVL (MAX (SHRTRCR_SEQ_NO), 0) + 1
               INTO L_TRCR_SEQ_NO

@@ -9,7 +9,7 @@
          DECODE (F_GET_STD_NAME (E.USER_PIDM),
                  '0', '',
                  F_GET_STD_NAME (E.USER_PIDM))
-            AS "Department Manager Name"
+            AS "Department Manager Name" 
     FROM STVdept B, USERS_ATTRIBUTES e
    WHERE     B.STVdept_CODE = e.ATTRIBUTE_VALUE
          AND NVL (e.ATTRIBUTE_CODE, 'DEPARTMENT') = 'DEPARTMENT'

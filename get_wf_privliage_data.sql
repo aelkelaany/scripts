@@ -7,6 +7,7 @@ SELECT f_get_std_id (a.USER_PIDM) emp_id,
  WHERE     a.USER_PIDM = r.USER_PIDM
        AND ATTRIBUTE_CODE = 'DEPARTMENT'
        AND ACTIVE = 'Y'
+       and    a.ROLE_CODE=r.ROLE_CODE
        AND r.ROLE_CODE = 'RO_DEPT_MANAGER'
        AND ATTRIBUTE_VALUE like NVL (:dept, '%');
        
@@ -20,7 +21,8 @@ SELECT f_get_std_id (a.USER_PIDM) emp_id,
  WHERE     a.USER_PIDM = r.USER_PIDM
        AND ATTRIBUTE_CODE = 'COLLEGE'
        AND ACTIVE = 'Y'
-       AND ROLE_CODE = 'RO_COLLEGE_DEAN'
+       and    a.ROLE_CODE=r.ROLE_CODE
+       AND a.ROLE_CODE = 'RO_COLLEGE_DEAN'
        AND ATTRIBUTE_VALUE like NVL (:dept, '%');
        
        
