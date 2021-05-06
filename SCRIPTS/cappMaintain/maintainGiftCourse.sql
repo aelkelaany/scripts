@@ -1,20 +1,22 @@
  declare
- P_PROCESS_ID number(8):=3900;
- l_subjCode varchar2(5):='ARAB';
- l_crseNumb varchar(5):='10806';
- l_credit_hrs number(2):=2;
+ P_PROCESS_ID number(8):=3300;
+ l_subjCode varchar2(5):='IS';
+ l_crseNumb varchar(5):='10002';
+ l_credit_hrs number(2):=3;
  l_desc varchar2(30):='';
  REPLY_CODE varchar2(50);
-  REPLY_message varchar2(50);
+  REPLY_message varchar2(500);
   l_row_count number:=0;
  CURSOR GET_TRNS_HEADER
       IS
          SELECT DISTINCT D.STD_PIDM
            FROM CAPP_MNPL_LOG_DETAIL D
           WHERE     D.PROCESS_ID = P_PROCESS_ID
-                /*AND D.MAPPING_SUCCESS_IND = 'N'
+        
+                 AND D.MAPPING_SUCCESS_IND = 'N'
                 and  D.LHS_SUBJ_CODE=l_subjCode
-                and  D.LHS_CRSE_NUMB=l_crseNumb */
+                and  D.LHS_CRSE_NUMB=l_crseNumb  
+              --  and D.STD_PIDM=167100
                  ;
 
        
@@ -100,10 +102,10 @@
          END IF;
 
       
-         L_TRAM_SEQ_NO := L_TRIT_SEQ_NO+1;
- 
+         L_TRAM_SEQ_NO := L_TRIT_SEQ_NO+0;
+ /*
 BEGIN
-         INSERT INTO SHRTRAM (SHRTRAM_PIDM,
+        INSERT INTO SHRTRAM (SHRTRAM_PIDM,
                               SHRTRAM_TRIT_SEQ_NO,
                               SHRTRAM_SEQ_NO,
                               SHRTRAM_LEVL_CODE,
@@ -128,8 +130,9 @@ BEGIN
                       '',
                       '');
                       
-END ;
-          
+END ; 
+ 
+        */  
             SELECT NVL (MAX (SHRTRCR_SEQ_NO), 0) + 1
               INTO L_TRCR_SEQ_NO
               FROM SHRTRCR A, SHRTRIT B, SHRTRAM C
@@ -228,7 +231,7 @@ END ;
       THEN
          REPLY_CODE := 90;
          REPLY_MESSAGE := SQLERRM || '--'; --|| REC.STD_PIDM || '***' || REC.SEQNO;
-          DBMS_OUTPUT.PUT_LINE ('REPLY_CODE'||REPLY_CODE||'*---*'||SQLERRM||'>>'||H_REC.STD_PIDM);
+          DBMS_OUTPUT.PUT_LINE ('REPLY_CODE'||REPLY_CODE||'*-L_TRIT_SEQ_NO#'||L_TRIT_SEQ_NO||'#-*L_TRAM_SEQ_NO#'|| L_TRAM_SEQ_NO  ||SQLERRM||'>>'||H_REC.STD_PIDM);
           end ;
 
       END LOOP;

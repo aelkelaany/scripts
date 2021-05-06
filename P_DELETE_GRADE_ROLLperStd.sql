@@ -1,3 +1,4 @@
+/*<TOAD_FILE_CHUNK>*/
  
 declare 
    CURSOR get_data
@@ -12,7 +13,7 @@ declare
              AND sfrstcr_term_code = shrtckn_term_code(+)
              AND sfrstcr_crn = shrtckn_crn(+)
              AND sfrstcr_term_code = '144220'
-              AND sfrstcr_crn = '14912'
+              AND sfrstcr_crn = '24356'
           -- and sfrstcr_pidm=f_get_pidm('441015688') --
              ;
 
@@ -75,8 +76,4 @@ END;
 /
  
 
-/*DELETE sfrstcr
-            
-          WHERE     sfrstcr_pidm = f_get_pidm('441015688')
-                AND sfrstcr_term_code = '144010'
-                */ 
+ 
