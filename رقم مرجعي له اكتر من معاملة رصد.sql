@@ -23,4 +23,4 @@ SELECT   crn.REQUEST_NO
        AND CRN.ITEM_CODE = 'CRN'
        AND TERM.ITEM_CODE = 'TERM'
        AND TERM.ITEM_VALUE = '144220'
-       and crn.item_value =25438 ;
+       and crn.item_value =26208 ;

@@ -35,11 +35,11 @@
                            FROM SCBCRSE
                           WHERE     SCBCRSE_SUBJ_CODE = A.SCBCRSE_SUBJ_CODE
                                 AND SCBCRSE_CRSE_NUMB = A.SCBCRSE_CRSE_NUMB
-                                AND SCBCRSE_EFF_TERM <= '144220')
+                                AND SCBCRSE_EFF_TERM <= '144230')
                  AND A.SCBCRSE_SUBJ_CODE = ssbsect_subj_code
                  AND A.SCBCRSE_CRSE_NUMB = ssbsect_crse_numb
-                 AND ssbsect_term_code = '144220'
-                 AND ssbsect_ptrm_code = '4'      --------------------->>level
+                 AND ssbsect_term_code = '144230'
+                -- AND ssbsect_ptrm_code = '4'      --------------------->>level
                  AND sirasgn_term_code = ssbsect_term_code
                  AND sirasgn_crn = ssbsect_crn
                  --  AND SIRASGN_PRIMARY_IND = 'Y'
@@ -53,4 +53,7 @@ GROUP BY COLL_DESC,
          DEPT_DESC,
          faculty_name,
          faculty_id
-ORDER BY 1
+ORDER BY COLL_DESC,
+         DEPT_DESC,
+         faculty_name,
+         faculty_id

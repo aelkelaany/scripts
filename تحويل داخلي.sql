@@ -91,7 +91,7 @@ SELECT ROW_NUMBER ()
                            FROM sgbstdn x
                           WHERE x.sgbstdn_pidm = b.sgbstdn_pidm)
                  AND object_code = 'WF_TRANSFER'
-                 AND request_status IN ('P')
+                 AND request_status IN ('C')
                  AND EXISTS
                         (SELECT 1
                            FROM WF_REQUEST_FLOW

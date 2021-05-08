@@ -260,3 +260,33 @@ BEGIN
                               '');
    END LOOP;
 END;
+
+----****************************ÊÑÍíá ÚÇÏí
+/* Formatted on 05/05/2021 19:27:45 (QP5 v5.227.12220.39754) */
+DECLARE
+   CURSOR crs_get_crn
+   IS
+      SELECT DISTINCT sfrstcr_term_code term_code, sfrstcr_crn crn
+        FROM sfrstcr x, ssbsect
+       WHERE     ssbsect_term_code = sfrstcr_term_code
+             AND ssbsect_crn = sfrstcr_crn
+             AND sfrstcr_term_code = '144220'
+             AND sfrstcr_grde_code IS NOT NULL
+             AND sfrstcr_grde_date IS NULL
+             AND SSBSECT_GRADABLE_IND = 'Y';
+
+BEGIN
+   FOR r IN crs_get_crn
+   LOOP
+      shkrols.p_do_graderoll (r.term_code,
+                              r.crn,
+                              'WORKFLOW',
+                              '1',
+                              '1',
+                              'O',
+                              '',
+                              '',
+                              '',
+                              '');
+   END LOOP;
+END;

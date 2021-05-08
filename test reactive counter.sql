@@ -1,5 +1,5 @@
 declare  
- p_pidm sgbstdn.sgbstdn_pidm%TYPE:=f_get_pidm('437002445');
+ p_pidm sgbstdn.sgbstdn_pidm%TYPE:=f_get_pidm('437004118');
    
    --Function calculate how many times student
    --has been disconnected
