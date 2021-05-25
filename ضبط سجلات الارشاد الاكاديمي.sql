@@ -6,7 +6,7 @@ SELECT f_get_std_id(SGRADVR_PIDM) student_id ,f_get_std_name(SGRADVR_PIDM) stude
            (SELECT MAX (SGBSTDN_TERM_CODE_EFF)
               FROM SGBSTDN
              WHERE     SGBSTDN_PIDM = SG.SGBSTDN_PIDM
-                   AND SGBSTDN_TERM_CODE_EFF <= '144210')
+                   AND SGBSTDN_TERM_CODE_EFF <= '144230')
        AND SGBSTDN_DEPT_CODE NOT IN
                (SELECT SIRDPCL_DEPT_CODE
                   FROM SIRDPCL
@@ -27,7 +27,7 @@ DELETE FROM
                             (SELECT MAX (SGBSTDN_TERM_CODE_EFF)
                                FROM SGBSTDN
                               WHERE     SGBSTDN_PIDM = SG.SGBSTDN_PIDM
-                                    AND SGBSTDN_TERM_CODE_EFF <= '144220')
+                                    AND SGBSTDN_TERM_CODE_EFF <= '144230')
                         AND SGBSTDN_DEPT_CODE NOT IN
                                 (SELECT SIRDPCL_DEPT_CODE
                                    FROM SIRDPCL
@@ -57,3 +57,6 @@ DELETE FROM
                             (SELECT MAX (SGBSTDN_TERM_CODE_EFF)
                                FROM sgbstdn
                               WHERE sgbstdn_pidm = sg.sgbstdn_pidm)) ;
+                              
+                              
+                              object_definition

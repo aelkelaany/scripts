@@ -1,5 +1,5 @@
 /* Formatted on 5/16/2020 11:29:26 PM (QP5 v5.360) */
-insert into SHRTCKG
+--insert into SHRTCKG
 select  SHRTCKG_PIDM, SHRTCKG_TERM_CODE, SHRTCKG_TCKN_SEQ_NO, 
    SHRTCKG_SEQ_NO  ,SHRTCKG_FINAL_GRDE_SEQ_NO,(SELECT shrgrds_grde_code_substitute
           FROM shrgrde g1, shrgrds
@@ -14,7 +14,7 @@ select  SHRTCKG_PIDM, SHRTCKG_TERM_CODE, SHRTCKG_TCKN_SEQ_NO,
                       FROM shrgrde g2
                      WHERE     g2.shrgrde_code = g1.shrgrde_code
                            AND g2.shrgrde_levl_code = g1.shrgrde_levl_code
-                           AND g2.shrgrde_term_code_effective <= '144020')) SHRTCKG_GRDE_CODE_FINAL ,SHRTCKG_GMOD_CODE, SHRTCKG_CREDIT_HOURS, SHRTCKG_GCHG_CODE, 
+                           AND g2.shrgrde_term_code_effective <= :term)) SHRTCKG_GRDE_CODE_FINAL ,SHRTCKG_GMOD_CODE, SHRTCKG_CREDIT_HOURS, SHRTCKG_GCHG_CODE, 
    SHRTCKG_INCOMPLETE_EXT_DATE, SHRTCKG_FINAL_GRDE_CHG_DATE, SHRTCKG_FINAL_GRDE_CHG_USER, 
    SHRTCKG_ACTIVITY_DATE, SHRTCKG_GCMT_CODE, SHRTCKG_TERM_CODE_GRADE, 
    SHRTCKG_DATA_ORIGIN, SHRTCKG_USER_ID, SHRTCKG_HOURS_ATTEMPTED, 
@@ -33,7 +33,7 @@ select  SHRTCKG_PIDM, SHRTCKG_TERM_CODE, SHRTCKG_TCKN_SEQ_NO,
   FROM shrtckg a, shrtckn
  WHERE     a.SHRTCKG_PIDM = shrtckn_pidm
        AND a.SHRTCKG_TERM_CODE = shrtckn_term_code
-       AND SHRTCKN_TERM_CODE = '144020'
+       AND SHRTCKN_TERM_CODE = :term
        AND a.SHRTCKG_TCKN_SEQ_NO = shrtckn_seq_no
        AND a.SHRTCKG_SEQ_NO =
            (SELECT MAX (SHRTCKG_SEQ_NO)

@@ -10,7 +10,7 @@ DECLARE
                AND F.FLOW_SEQ = 4
                AND USER_PIDM = f_get_pidm ('6603')
                AND ACTION_CODE IS NULL
-               AND ROWNUM <= 5
+               AND ROWNUM <= 10
       ORDER BY 1 ASC;
 
 BEGIN
@@ -29,8 +29,11 @@ UPDATE wf_request_flow
        AND USER_PIDM IN (235905, 235906, 235907, 235908, 235909)
        AND ROWNUM < 21;
 
-
-
+--4234 riyadh
+--5797 raqoush
+--2521 saeed
+--6603 omair
+--3377 khadraa
   SELECT COUNT (DISTINCT B.REQUEST_NO),
          f_get_STD_ID (b.user_pidm) EMPLOYEE_ID,
          f_get_STD_NAME (b.user_pidm) EMPLOYEE_NAME,
@@ -59,3 +62,20 @@ GROUP BY b.user_pidm;
                             WHERE request_no = B.REQUEST_NO)
          AND B.FLOW_SEQ = 4
 GROUP BY b.user_pidm;
+
+--------AUTO
+
+SELECT DISTINCT m.request_no REQ_NO
+          FROM request_master m, wf_request_flow f
+         WHERE     m.request_no = f.request_no
+               AND object_code = 'WF_REG_MAINTAIN'
+               AND m.request_status = 'P'
+             --  AND F.FLOW_SEQ = 4
+              
+               AND ACTION_CODE ='AUTO_APPROVE'
+              
+      ORDER BY 1 ASC;
+      
+      SELECT stvcitz_desc
+  FROM dle.stvcitz
+ WHERE stvcitz_code = :SPBPERS_CITZ_CODE ;
