@@ -17,7 +17,7 @@ BEGIN
    FOR REC IN GET_REQUESTS
    LOOP
       UPDATE wf_request_flow
-         SET USER_PIDM = f_get_pidm ('2521')
+         SET USER_PIDM = f_get_pidm ('4234')
        WHERE REQUEST_NO = REC.REQ_NO AND FLOW_SEQ = 4 --AND  USER_PIDM IS NULL
              AND ACTION_CODE IS NULL;
    END LOOP;
@@ -34,6 +34,7 @@ UPDATE wf_request_flow
 --2521 saeed
 --6603 omair
 --3377 khadraa
+--3466 Reem
   SELECT COUNT (DISTINCT B.REQUEST_NO),
          f_get_STD_ID (b.user_pidm) EMPLOYEE_ID,
          f_get_STD_NAME (b.user_pidm) EMPLOYEE_NAME,
