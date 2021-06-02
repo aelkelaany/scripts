@@ -62,8 +62,9 @@ ORDER BY COLL_DESC,
          -----------------NEW
          
          /* Formatted on 23/05/2021 09:09:49 (QP5 v5.227.12220.39754) */
-  SELECT faculty_id  ,
-         faculty_name  ,
+  /* Formatted on 25/05/2021 11:14:41 (QP5 v5.227.12220.39754) */
+  SELECT faculty_id,
+         faculty_name,
          (SELECT F_GET_DESC_FNC ('STVCOLL', SIRDPCL_COLL_CODE, 60)
             FROM SIRDPCL
            WHERE     SIRDPCL_PIDM = sirasgn_pidm
@@ -87,7 +88,8 @@ ORDER BY COLL_DESC,
          SUM (lec),
          SUM (lab),
          SUM (contact)
-    FROM (SELECT distinct f_get_std_name (sirasgn_pidm) faculty_name,
+    FROM (SELECT DISTINCT
+                 f_get_std_name (sirasgn_pidm) faculty_name,
                  f_get_std_id (sirasgn_pidm) faculty_id,
                  ssbsect_crn crn,
                  GREATEST (NVL (a.SCBCRSE_CREDIT_HR_LOW, 0),
@@ -115,10 +117,11 @@ ORDER BY COLL_DESC,
                  AND ssbsect_term_code = '144230'
                  -- AND ssbsect_ptrm_code = '4'      --------------------->>level
                  AND sirasgn_term_code = ssbsect_term_code
+                 and ssbsect_enrl>0
                  AND sirasgn_crn = ssbsect_crn)
-                 where faculty_id='4283'
+  -- WHERE faculty_id = '3939'
 GROUP BY faculty_name, faculty_id, sirasgn_pidm
 ORDER BY COLL_DESC,
          DEPT_DESC,
          faculty_name,
-         faculty_id ;
+         faculty_id;

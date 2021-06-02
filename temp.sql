@@ -191,14 +191,14 @@ SELECT shrttrm_term_code, shrttrm_astd_code_end_of_term
       
       
  spriden
- select f_get_std_id(106714) from dual ;
+ select f_get_pidm('3466') from dual ;
  
  insert into WTAILOR.TWGRROLE
  SELECT 
-   f_get_pidm('6603'), TWGRROLE_ROLE, TWGRROLE_ACTIVITY_DATE
+   f_get_pidm('3466'), TWGRROLE_ROLE, TWGRROLE_ACTIVITY_DATE
 FROM WTAILOR.TWGRROLE
 Where
-TWGRROLE_PIDM = f_get_pidm('3218')
+TWGRROLE_PIDM = f_get_pidm('6603') ;
 
 
 
