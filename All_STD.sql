@@ -86,7 +86,7 @@ DELETE FROM GLBEXTR
                            WHERE     SGBSTDN_PIDM = SG.SGBSTDN_PIDM
                                   )
                   AND SGBSTDN_STST_CODE IN
-                         ('AS', 'ãæ', 'ãÚ', 'Øã', 'ÅÞ', 'Ýß')
+                         ('AS', 'ãæ', 'ãÚ', 'Øã', 'ÅÞ', 'Ýß','Øí')
                          and sgbstdn_styp_code='ä'
            MINUS
            SELECT GLBEXTR_KEY

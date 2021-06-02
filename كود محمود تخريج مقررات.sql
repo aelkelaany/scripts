@@ -85,16 +85,15 @@ SELECT DISTINCT
        AND SGBSTDN_MAJR_CODE_1 = STVMAJR_CODE(+)
        AND SGBSTDN_PROGRAM_1 = SMRPRLE_PROGRAM(+)
        AND SHRTTRM_ASTD_CODE_END_OF_TERM = STVASTD_CODE(+)
-       AND SGBSTDN_STST_CODE IN
-              ('AS', 'ãæ', 'ãÚ', 'Øã', 'ÅÞ', 'Ýß', 'ÅÊ', 'ãä')
+       AND SGBSTDN_STST_CODE IN ('ÎÌ')
+          --    ('AS', 'ãæ', 'ãÚ', 'Øã', 'ÅÞ', 'Ýß', 'ÅÊ', 'ãä')
        AND SGBSTDN_DEGC_CODE_1 IN ('Èß Ê', 'Èß', '000000', 'ÏÈ')
-       AND SGBSTDN_COLL_CODE_1 NOT IN ('14', '25', '33', '55')
+       AND SGBSTDN_dept_CODE ='3201'-- IN ('14', '25', '33', '55')
        AND sgbstdn_styp_code = 'ã'
-       AND SMBPOGN_MET_IND = 'N'
-       AND SMBPOGN_REQ_COURSES_OVERALL - SMBPOGN_ACT_COURSES_OVERALL = 1
-       AND SHRTGPA_GPA >= 1
-       AND sgbstdn_program_1 IN
-              (SELECT PROGRAM_CODE FROM capp_program_mapping)
+       AND SMBPOGN_MET_IND = 'Y'
+      -- AND SMBPOGN_REQ_COURSES_OVERALL = SMBPOGN_ACT_COURSES_OVERALL   
+       --AND SHRTGPA_GPA >= 1
+        
        AND EXISTS
               (SELECT 1
                   FROM SATURN.SMRDOCN A  ,SHRGRDE

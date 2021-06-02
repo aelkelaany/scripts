@@ -1,5 +1,5 @@
-/* Formatted on 5/16/2020 11:29:26 PM (QP5 v5.360) */
---insert into SHRTCKG
+ 
+insert into SHRTCKG
 select  SHRTCKG_PIDM, SHRTCKG_TERM_CODE, SHRTCKG_TCKN_SEQ_NO, 
    SHRTCKG_SEQ_NO  ,SHRTCKG_FINAL_GRDE_SEQ_NO,(SELECT shrgrds_grde_code_substitute
           FROM shrgrde g1, shrgrds
@@ -34,6 +34,7 @@ select  SHRTCKG_PIDM, SHRTCKG_TERM_CODE, SHRTCKG_TCKN_SEQ_NO,
  WHERE     a.SHRTCKG_PIDM = shrtckn_pidm
        AND a.SHRTCKG_TERM_CODE = shrtckn_term_code
        AND SHRTCKN_TERM_CODE = :term
+      and a.SHRTCKG_PIDM=f_get_pidm(:std_id)
        AND a.SHRTCKG_TCKN_SEQ_NO = shrtckn_seq_no
        AND a.SHRTCKG_SEQ_NO =
            (SELECT MAX (SHRTCKG_SEQ_NO)
