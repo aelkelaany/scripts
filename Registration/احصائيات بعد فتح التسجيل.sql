@@ -1,4 +1,4 @@
-/* Formatted on 20/05/2021 14:59:58 (QP5 v5.227.12220.39754) */
+/* Formatted on 07/06/2021 09:56:21 (QP5 v5.227.12220.39754) */
 -- »‰«¡ ⁄ «·‰Ê⁄ Ê«·œ›⁄« 
 
   SELECT SUBSTR (f_get_std_id (sfrstcr_pidm), 1, 3),
@@ -22,6 +22,8 @@ SELECT COUNT (DISTINCT sfrstcr_pidm) all_reg_students
                  FROM bu_dev.summer_reg_list
                 WHERE pidm = sfrstcr_pidm);
 
+
+
 -- ﬂ· «·ÿ·«» «·„”Ã·Ì‰
 
 SELECT COUNT (DISTINCT sfrstcr_pidm) all_reg_students
@@ -33,7 +35,10 @@ SELECT COUNT (DISTINCT sfrstcr_pidm) all_reg_students
 SELECT COUNT (DISTINCT sfrstcr_pidm) all_reg_students
   FROM sfrstcr
  WHERE sfrstcr_term_code = '144230' AND sfrstcr_rsts_code IN ('RW');
-
+ --all reg crn
+SELECT COUNT (DISTINCT sfrstcr_crn) all_reg_crn
+  FROM sfrstcr
+ WHERE sfrstcr_term_code = '144230' AND sfrstcr_rsts_code IN ('RW', 'RE');
   -- empty crn
 
   SELECT SSBSECT_CRN,
@@ -57,8 +62,10 @@ SELECT COUNT (DISTINCT sfrstcr_pidm) all_reg_students
          AND SSBSECT_SEATS_AVAIL = SSBSECT_MAX_ENRL
          AND SSBSECT_SSTS_CODE = '‰'
 ORDER BY 1;
+
 --zeros crns
- SELECT SSBSECT_CRN,
+
+  SELECT SSBSECT_CRN,
          ssbsect_subj_code,
          ssbsect_crse_numb,
          scbcrse_title,
@@ -75,10 +82,11 @@ ORDER BY 1;
                         AND c2.scbcrse_crse_numb = c1.scbcrse_crse_numb
                         AND c2.scbcrse_eff_term <= '144230')
          AND ssbsect_term_code = '144230'
-         AND SSBSECT_MAX_ENRL =0 
+         AND SSBSECT_MAX_ENRL = 0
          AND SSBSECT_SEATS_AVAIL = 0
          AND SSBSECT_SSTS_CODE = '‰'
 ORDER BY 1;
+
        --NOT available ie full capacity
 
   SELECT SSBSECT_CRN,
@@ -127,6 +135,28 @@ ORDER BY 1;
          AND SSBSECT_SSTS_CODE = '‰'
 ORDER BY 1;
 
+-- registetered crn
+
+  SELECT SSBSECT_CRN,
+         ssbsect_subj_code,
+         ssbsect_crse_numb,
+         scbcrse_title,
+         SSBSECT_MAX_ENRL,
+         SSBSECT_ENRL,
+         SSBSECT_SEATS_AVAIL
+    FROM ssbsect, scbcrse c1
+   WHERE     ssbsect_subj_code = scbcrse_subj_code
+         AND ssbsect_crse_numb = scbcrse_crse_numb
+         AND scbcrse_eff_term =
+                (SELECT MAX (c2.scbcrse_eff_term)
+                   FROM scbcrse c2
+                  WHERE     c2.scbcrse_subj_code = c1.scbcrse_subj_code
+                        AND c2.scbcrse_crse_numb = c1.scbcrse_crse_numb
+                        AND c2.scbcrse_eff_term <= '144230')
+         AND ssbsect_term_code = '144230'
+         AND SSBSECT_ENRL > 0
+         AND SSBSECT_SSTS_CODE = '‰'
+ORDER BY 1;
 
 --count of registered CRN(S)
 
@@ -215,12 +245,15 @@ ORDER BY 1;
          AND SSBSECT_SSTS_CODE = '‰'
 ORDER BY 1;
 
---‘⁄» ·„œ—” „⁄Ì‰ 
+--‘⁄» ·„œ—” „⁄Ì‰
 
-SELECT DISTINCT ssbsect_subj_code, ssbsect_crse_numb, scbcrse_title , SSBSECT_MAX_ENRL,
-         SSBSECT_ENRL,
-         SSBSECT_SEATS_AVAIL
-    FROM ssbsect, scbcrse c1 ,sirasgn
+  SELECT DISTINCT ssbsect_subj_code,
+                  ssbsect_crse_numb,
+                  scbcrse_title,
+                  SSBSECT_MAX_ENRL,
+                  SSBSECT_ENRL,
+                  SSBSECT_SEATS_AVAIL
+    FROM ssbsect, scbcrse c1, sirasgn
    WHERE     ssbsect_subj_code = scbcrse_subj_code
          AND ssbsect_crse_numb = scbcrse_crse_numb
          AND scbcrse_eff_term =
@@ -231,7 +264,7 @@ SELECT DISTINCT ssbsect_subj_code, ssbsect_crse_numb, scbcrse_title , SSBSECT_MA
                         AND c2.scbcrse_eff_term <= '144230')
          AND ssbsect_term_code = '144230'
          AND SSBSECT_SSTS_CODE = '‰'
-         and SIRASGN_TERM_CODE=ssbsect_term_code
-         and ssbsect_crn=SIRASGN_crn
-         and SIRASGN_pidm=f_get_pidm('6590')
+         AND SIRASGN_TERM_CODE = ssbsect_term_code
+         AND ssbsect_crn = SIRASGN_crn
+         AND SIRASGN_pidm = f_get_pidm ('6590')
 ORDER BY 1;

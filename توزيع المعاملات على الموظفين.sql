@@ -8,16 +8,16 @@ DECLARE
                AND object_code = 'WF_REG_MAINTAIN'
                AND m.request_status = 'P'
                AND F.FLOW_SEQ = 4
-               AND USER_PIDM = f_get_pidm ('6603')
+               AND USER_PIDM = f_get_pidm ('2521')
                AND ACTION_CODE IS NULL
-               AND ROWNUM <= 10
+               AND ROWNUM <= 3
       ORDER BY 1 ASC;
 
 BEGIN
    FOR REC IN GET_REQUESTS
    LOOP
       UPDATE wf_request_flow
-         SET USER_PIDM = f_get_pidm ('4234')
+         SET USER_PIDM = f_get_pidm ('3377')
        WHERE REQUEST_NO = REC.REQ_NO AND FLOW_SEQ = 4 --AND  USER_PIDM IS NULL
              AND ACTION_CODE IS NULL;
    END LOOP;
@@ -66,14 +66,14 @@ GROUP BY b.user_pidm;
 
 --------AUTO
 
-SELECT DISTINCT m.request_no REQ_NO
+SELECT DISTINCT m.request_no REQ_NO ,ACTION_CODE ,REQUEST_DATE
           FROM request_master m, wf_request_flow f
          WHERE     m.request_no = f.request_no
                AND object_code = 'WF_REG_MAINTAIN'
                AND m.request_status = 'P'
-             --  AND F.FLOW_SEQ = 4
-              
-               AND ACTION_CODE ='AUTO_APPROVE'
+               AND F.FLOW_SEQ = 4
+            --  and user_pidm=235909
+             --  AND ACTION_CODE =''
               
       ORDER BY 1 ASC;
       
