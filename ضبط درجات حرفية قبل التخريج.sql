@@ -1,7 +1,7 @@
-/* Formatted on 16/06/2021 10:04:29 (QP5 v5.227.12220.39754) */
---insert into SHRTCKG
+/* Formatted on 16/06/2021 10:08:39 (QP5 v5.227.12220.39754) */
+ insert into SHRTCKG
 
-SELECT SHRTCKG_PIDM,
+SELECT SHRTCKG_PIDM ,
        SHRTCKG_TERM_CODE,
        SHRTCKG_TCKN_SEQ_NO,
        SHRTCKG_SEQ_NO,
@@ -19,7 +19,7 @@ SELECT SHRTCKG_PIDM,
                          FROM shrgrde g2
                         WHERE     g2.shrgrde_code = g1.shrgrde_code
                               AND g2.shrgrde_levl_code = g1.shrgrde_levl_code
-                              AND g2.shrgrde_term_code_effective <= :term))
+                               /*AND g2.shrgrde_term_code_effective <=a.SHRTCKN_TERM_CODE :term*/ ))
           SHRTCKG_GRDE_CODE_FINAL,
        SHRTCKG_GMOD_CODE,
        SHRTCKG_CREDIT_HOURS,
@@ -58,8 +58,14 @@ SELECT SHRTCKG_PIDM,
           FROM shrtckg a, shrtckn
          WHERE     a.SHRTCKG_PIDM = shrtckn_pidm
                AND a.SHRTCKG_TERM_CODE = shrtckn_term_code
-               AND SHRTCKN_TERM_CODE = :term
-               -- and a.SHRTCKG_PIDM=f_get_pidm(:std_id)
+              -- AND SHRTCKN_TERM_CODE = :term
+              /* AND EXISTS
+                      (SELECT '1'
+                         FROM shrdgmr
+                        WHERE     shrdgmr_pidm = a.SHRTCKG_PIDM
+                              AND SHRDGMR_TERM_CODE_GRAD = '144220'
+                                /*AND shrdgmr_COLL_CODE_1 = '18')*/
+                                
                AND a.SHRTCKG_TCKN_SEQ_NO = shrtckn_seq_no
                AND a.SHRTCKG_SEQ_NO =
                       (SELECT MAX (SHRTCKG_SEQ_NO)

@@ -1,6 +1,6 @@
 
 declare 
-l_process_id number(9):=3700;
+l_process_id number(9):=4300;
 l_reply_code varchar2(50);
 l_reply_message varchar2(200);
 begin
@@ -10,7 +10,7 @@ delete TRANSFER_STUDENT_PROGRAM ;
                                                      l_reply_code,
                                                      l_reply_message);
        DBMS_OUTPUT.PUT_LINE (
-              'parameters 8: REPLACE_PROGRAM BIO'
+              'parameters 8: REPLACE_PROGRAM NUTR'
            || l_reply_code
            || '-----'
            || l_reply_message
@@ -23,12 +23,12 @@ Insert into GLBSLCT
    (GLBSLCT_APPLICATION, GLBSLCT_SELECTION, GLBSLCT_CREATOR_ID, GLBSLCT_DESC, GLBSLCT_LOCK_IND, 
     GLBSLCT_ACTIVITY_DATE, GLBSLCT_TYPE_IND)
  Values
-   ('STUDENT', 'CAPP_STD_BIO35', 'SAISUSR', 'ÿ·»… BIO 35', 'N', 
+   ('STUDENT', 'CAPP_STD_NUTR35', 'SAISUSR', 'ÿ·»… NUTR 35', 'N', 
     SYSDATE, NULL);
  
  
 Insert into GLBEXTR
-   SELECT 'STUDENT', 'CAPP_STD_BIO35', 'SAISUSR', 'SAISUSR', PIDM, 
+   SELECT 'STUDENT', 'CAPP_STD_NUTR35', 'SAISUSR', 'SAISUSR', PIDM, 
     SYSDATE, 'S', NULL  FROM 
 ( SELECT 
      PIDM_CD PIDM 
