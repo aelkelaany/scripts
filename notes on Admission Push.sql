@@ -16,7 +16,7 @@ sarappd choices header
 sabnstu --Password table
 moe_cd   moe_cd from MOE
 sarhead --Application header
-sarpers --personal data
+sarpers  ,adm_english_names--personal data
 sarhsch --high school
 sarhsum --School GPA
 sartest --Test Scores
@@ -31,3 +31,4 @@ adm_push_log
 adm_push_result
 
 
+admissionCountSummary

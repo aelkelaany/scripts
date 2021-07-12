@@ -1,7 +1,7 @@
 select f_get_std_id(sgbstdn_pidm) stid,f_get_std_name(sgbstdn_pidm)std_name, sg.* from sgbstdn sg,spbpers
 where
 sgbstdn_pidm=spbpers_pidm
-and spbpers_ssn='1124227248'
+and spbpers_ssn='1100949047'
 
 
 
