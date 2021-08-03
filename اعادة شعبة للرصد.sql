@@ -1,4 +1,3 @@
- 
 
 
 SELECT DISTINCT crn.item_value crn, A.REQUEST_NO, A.REQUEST_STATUS
@@ -10,11 +9,11 @@ SELECT DISTINCT crn.item_value crn, A.REQUEST_NO, A.REQUEST_STATUS
        AND CRN.SEQUENCE_NO = 1
        AND CRN.ITEM_CODE = 'CRN'
        AND TERM.ITEM_CODE = 'TERM'
-       AND TERM.ITEM_VALUE = '144210'
-       AND crn.item_value = '16198';
+       AND TERM.ITEM_VALUE = '144230'
+       AND crn.item_value = '31118';
 
 BEGIN
-   p_Delete_wf ('211454');
+   p_Delete_wf ('299267');
 END;
 
 DELETE FROM gac_crn
@@ -113,8 +112,3 @@ END;
 /
  
 
-/*DELETE sfrstcr
-            
-          WHERE     sfrstcr_pidm = f_get_pidm('441015688')
-                AND sfrstcr_term_code = '144010'
-                */ 

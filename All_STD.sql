@@ -55,7 +55,7 @@ DELETE FROM GLBEXTR
                                     WHERE     SGBSTDN_PIDM = SG.SGBSTDN_PIDM
                                            )
                            AND SGBSTDN_STST_CODE IN
-                                  ('ŒÃ', 'ÿ”', '„”', '„‰')
+                                  ('ŒÃ', 'ÿ”', '„”', '„Œ')
                                   and sgbstdn_pidm=GLBEXTR_KEY) ;
                                   
                                   

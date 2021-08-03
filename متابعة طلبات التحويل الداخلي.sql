@@ -85,6 +85,15 @@ SELECT ROW_NUMBER ()
                          AND shrlgpa_levl_code = sgbstdn_levl_code
                          AND shrlgpa_gpa_type_ind = 'O')
                     CGPA ,(select SORTEST_TEST_SCORE from SORTEST where SORTEST_TESC_CODE='äÓÈ2' and SORTEST_PIDM=b.sgbstdn_pidm)as "ËáÇËíÉ" ,(select SORHSCH_GPA from SORHSCH where SORHSCH_pidm=b.sgbstdn_pidm) as  "ËÇäæíÉ"
+                    ,(SELECT action_code
+                           FROM WF_REQUEST_FLOW
+                          WHERE     REQUEST_NO = m.request_no
+                          and FLOW_SEQ  = 2
+                            ) DepaermentAction ,(SELECT action_code
+                           FROM WF_REQUEST_FLOW
+                          WHERE     REQUEST_NO = m.request_no
+                          and FLOW_SEQ  = 3
+                            ) DeanAction
             FROM request_master m, sgbstdn b
            WHERE     sgbstdn_pidm = requester_pidm
                  AND sgbstdn_term_code_eff =
@@ -101,7 +110,9 @@ SELECT ROW_NUMBER ()
                                        (SELECT MAX (FLOW_SEQ)
                                           FROM WF_REQUEST_FLOW
                                          WHERE REQUEST_NO = m.request_no)
-                                AND FLOW_SEQ >= 2)
+                                AND FLOW_SEQ  >= 4
+                                  )
+                                   
                  AND EXISTS
                         (SELECT 1
                            FROM request_details d
