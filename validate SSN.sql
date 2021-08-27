@@ -1,7 +1,7 @@
  
  
 declare 
-v_ssn varchar2(10):='1115768994';
+v_ssn varchar2(10):='1123026453';
  BEGIN
   IF F_VALIDATE_SSN (v_ssn) THEN
     dbms_output.put_line(' SSN is true');

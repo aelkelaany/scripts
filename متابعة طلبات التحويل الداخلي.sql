@@ -1,5 +1,5 @@
 SELECT ROW_NUMBER ()
-         OVER (PARTITION BY request_term, requester_college, requester_major
+         OVER (PARTITION BY request_term, requester_college, requester_major,GENDER
                ORDER BY CGPA DESC, Earned_Hours DESC)
             row_num,
          a.*,
@@ -56,6 +56,7 @@ SELECT ROW_NUMBER ()
                             AND d.sequence_no = 1
                             AND d.item_code = 'TRANSFER_MAJOR'),
                     60)
+                    
                     requester_major,
                  (SELECT d.item_value
                     FROM request_details d
@@ -89,11 +90,15 @@ SELECT ROW_NUMBER ()
                            FROM WF_REQUEST_FLOW
                           WHERE     REQUEST_NO = m.request_no
                           and FLOW_SEQ  = 2
-                            ) DepaermentAction ,(SELECT action_code
+                            ) DepartmentAction ,(SELECT action_code
                            FROM WF_REQUEST_FLOW
                           WHERE     REQUEST_NO = m.request_no
                           and FLOW_SEQ  = 3
-                            ) DeanAction
+                            ) DeanAction ,(SELECT action_code
+                           FROM WF_REQUEST_FLOW
+                          WHERE     REQUEST_NO = m.request_no
+                          and FLOW_SEQ  = 4
+                            ) DARAction
             FROM request_master m, sgbstdn b
            WHERE     sgbstdn_pidm = requester_pidm
                  AND sgbstdn_term_code_eff =
@@ -101,7 +106,7 @@ SELECT ROW_NUMBER ()
                            FROM sgbstdn x
                           WHERE x.sgbstdn_pidm = b.sgbstdn_pidm)
                  AND object_code = 'WF_TRANSFER'
-                 AND request_status IN ('P')
+                 AND request_status IN ('C','R')
                  AND EXISTS
                         (SELECT 1
                            FROM WF_REQUEST_FLOW
@@ -145,6 +150,7 @@ SELECT ROW_NUMBER ()
                                     AND d.item_value = :p_major)
                       OR :p_major = '%')) a
  --  WHERE A.DEPT_CODE IS NULL
+--where deanaction is null --deanaction='APPROVE' and departmentaction='APPROVE_07'
 ORDER BY requester_college,
          requester_major,
          CGPA DESC,

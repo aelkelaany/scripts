@@ -32,7 +32,7 @@ f_get_std_id (SGBSTDN_PIDM) id, f_get_std_name (SGBSTDN_PIDM) ,SG.SGBSTDN_PROGRA
       AND EXISTS(SELECT 'Y' FROM SHRDGMR
       WHERE SHRDGMR_PIDM=SG.SGBSTDN_PIDM
        AND SHRDGMR_DEGS_CODE='ŒÃ'
-      AND SHRDGMR_TERM_CODE_GRAD='144020'
+      AND SHRDGMR_TERM_CODE_GRAD='144230'
       )
       AND SG.SGBSTDN_PROGRAM_1=SMRPRLE_PROGRAM
         AND SG.SGBSTDN_PROGRAM_1 IN('1-13013-1433','2-13013-1433')
@@ -43,7 +43,7 @@ f_get_std_id (SGBSTDN_PIDM) id, f_get_std_name (SGBSTDN_PIDM) ,SG.SGBSTDN_PROGRA
 UPDATE SHRDGMR
    SET SHRDGMR_MAJR_CODE_1 = '1312'
  WHERE     SHRDGMR_DEGS_CODE = 'ŒÃ'
-       AND SHRDGMR_TERM_CODE_GRAD = '144020' --***********›’· «· Œ—Ã
+       AND SHRDGMR_TERM_CODE_GRAD = '144230' --***********›’· «· Œ—Ã
        AND SHRDGMR_MAJR_CODE_1 = '1301'
        AND EXISTS
               (SELECT 'Y'
@@ -65,7 +65,7 @@ UPDATE SHRDGMR
                              UPDATE SHRDGMR
    SET SHRDGMR_MAJR_CODE_1 = '1315'
  WHERE     SHRDGMR_DEGS_CODE = 'ŒÃ'
-       AND SHRDGMR_TERM_CODE_GRAD = '144020' --***********›’· «· Œ—Ã
+       AND SHRDGMR_TERM_CODE_GRAD = '144230' --***********›’· «· Œ—Ã
        AND SHRDGMR_MAJR_CODE_1 = '1301'
        AND EXISTS
               (SELECT 'Y'
@@ -88,7 +88,7 @@ UPDATE SHRDGMR
  UPDATE SHRDGMR
    SET SHRDGMR_MAJR_CODE_1 = '1313'
  WHERE     SHRDGMR_DEGS_CODE = 'ŒÃ'
-       AND SHRDGMR_TERM_CODE_GRAD = '144020' --***********›’· «· Œ—Ã
+       AND SHRDGMR_TERM_CODE_GRAD = '144230' --***********›’· «· Œ—Ã
        AND SHRDGMR_MAJR_CODE_1 = '1301'
        AND EXISTS
               (SELECT 'Y'
@@ -111,7 +111,7 @@ UPDATE SHRDGMR
  UPDATE SHRDGMR
    SET SHRDGMR_MAJR_CODE_1 = '1311'
  WHERE     SHRDGMR_DEGS_CODE = 'ŒÃ'
-       AND SHRDGMR_TERM_CODE_GRAD = '144020' --***********›’· «· Œ—Ã
+       AND SHRDGMR_TERM_CODE_GRAD = '144230' --***********›’· «· Œ—Ã
        AND SHRDGMR_MAJR_CODE_1 = '1301'
        AND EXISTS
               (SELECT 'Y'

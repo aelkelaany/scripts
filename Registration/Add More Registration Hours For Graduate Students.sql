@@ -74,7 +74,7 @@ BEGIN
       UPDATE sfbetrm
          SET sfbetrm_mhrs_over = NVL (i.stvastd_max_reg_hours, 0) + 5,
              sfbetrm_activity_date = SYSDATE+1
-       WHERE sfbetrm_pidm = i.student_pidm AND sfbetrm_term_code = '144210';
+       WHERE sfbetrm_pidm = i.student_pidm AND sfbetrm_term_code = '144310';
 
       IF SQL%NOTFOUND
       THEN
@@ -98,14 +98,14 @@ BEGIN
                               sfbetrm_min_hrs,
                               sfbetrm_minh_srce_cde,
                               sfbetrm_maxh_srce_cde)
-              VALUES ('144210',
+              VALUES ('144310',
                       i.student_pidm,
                       'EL',
-                      TRUNC (SYSDATE)+1,
+                      TRUNC (SYSDATE)+3,
                       NVL (i.stvastd_max_reg_hours, 0) + 5,
                       'N',
                       '',
-                      TRUNC (SYSDATE)+1,
+                      TRUNC (SYSDATE)+3,
                       SYSDATE+1,
                       '',
                       '',
@@ -127,7 +127,7 @@ BEGIN
 
    UPDATE sfbetrm
       SET sfbetrm_mhrs_over = 24
-    WHERE sfbetrm_term_code = '144210' AND sfbetrm_mhrs_over > 24;
+    WHERE sfbetrm_term_code = '144310' AND sfbetrm_mhrs_over > 24;
 
    DBMS_OUTPUT.put_line ('Updated Records : ' || l_updated_rec);
    DBMS_OUTPUT.put_line ('Inserted Records : ' || l_inserted_rec);

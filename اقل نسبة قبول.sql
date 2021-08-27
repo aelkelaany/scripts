@@ -17,7 +17,7 @@
          AND student_gender = 'M'
          AND student_diploma_type = 'Ú'
          -- AND test_score_3 <= 75.18
-         AND test_score_3 <= 68
+         AND test_score_3 <= 90
          AND EXISTS
                 (SELECT 'X'
                    FROM vw_applicant_choices y
@@ -29,11 +29,13 @@
                    FROM ADM_QUOTA_RULE_SEQ, vw_applicant_choices
                   WHERE     QUOTA_SCORE_CODE = 'ã.ß'
                         AND QUOTA_BATCH_NO = '1'
-                        AND QUOTA_RUN_SEQUENCE = 3
-                        AND QUOTA_TERM = '144010'
-                        AND ADMIT_TERM = '144010'
+                        AND QUOTA_RUN_SEQUENCE = 2
+                        AND QUOTA_TERM = '144310'
+                        AND ADMIT_TERM = '144310'
                         AND APPLICANT_CHOICE = QUOTA_PROGRAM
                         AND applicant_decision IN
                                ('QA', 'CA', 'WA', 'RA', 'FA')
                         AND applicant_pidm = d.student_pidm)
 ORDER BY 9 ASC
+
+ 

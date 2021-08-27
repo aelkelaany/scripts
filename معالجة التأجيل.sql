@@ -2,18 +2,19 @@
 DECLARE
    CURSOR get_std
    IS
-     SELECT REQUESTER_PIDM pidm
+     SELECT REQUESTER_PIDM pidm ,a.request_no
         FROM request_master a, request_details b
        WHERE     object_code = UPPER ('wf_postpone_term')
              AND a.request_no = b.request_no
              AND item_code = 'TERM'
-             AND item_value = '144210'
+             AND item_value = '144310'
+             and A.REQUEST_STATUS='C'
             -- AND REQUESTER_PIDM = 184138
              AND EXISTS
                     (SELECT 'y'
                        FROM sgbstdn
                       WHERE     SGBSTDN_PIDM = a.REQUESTER_PIDM
-                            AND SGBSTDN_TERM_CODE_EFF = '144210'
+                            AND SGBSTDN_TERM_CODE_EFF = '144310'
                             AND SGBSTDN_STST_CODE = 'AS'); 
                          --  select f_get_pidm('438000924') pidm from dual ;
 

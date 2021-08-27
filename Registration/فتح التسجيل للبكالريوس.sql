@@ -58,3 +58,10 @@ DELETE FROM sprhold
                            AND SGBSTDN_STYP_CODE IN ('ã', 'Ê')
                            AND sprhold_pidm = SG.sgbstdn_pidm)
             AND SPRHOLD_HLDD_CODE = 'RH';
+            
+            -------------time ticket------------
+            DELETE 
+ FROM sprhold
+      WHERE     EXISTS
+ (select '1' from SFBRGRP where SFBRGRP_pidm=sprhold_pidm and SFBRGRP_TERM_CODE='144310'  ) 
+            AND SPRHOLD_HLDD_CODE = 'RH';
