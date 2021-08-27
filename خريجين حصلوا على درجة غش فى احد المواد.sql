@@ -8,9 +8,9 @@ SELECT F_GET_STD_ID (SHRTCKN_PIDM) STD_ID,
        shrtckg g1,
        scbcrse c1
  WHERE     a.sgbstdn_pidm = shrtckn_pidm
-       AND a.sgbstdn_term_code_eff ='144210' /* (SELECT MAX (b.sgbstdn_term_code_eff)
+       AND a.sgbstdn_term_code_eff ='144230'/*(SELECT MAX (b.sgbstdn_term_code_eff)
                                         FROM sgbstdn b
-                                       WHERE b.sgbstdn_pidm = a.sgbstdn_pidm) */
+                                       WHERE b.sgbstdn_pidm = a.sgbstdn_pidm)*/
        AND shrtckn_pidm = g1.shrtckg_pidm
        AND g1.shrtckg_term_code = shrtckn_term_code
        AND g1.shrtckg_tckn_seq_no = shrtckn_seq_no

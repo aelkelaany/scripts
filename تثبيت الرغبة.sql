@@ -3,11 +3,11 @@ DECLARE
    l_reply_message   VARCHAR (100);
 BEGIN
    DELETE FROM adm_student_confirmation
-         WHERE ADMIT_TERM = '144010' AND APPLICANT_PIDM = :pidm;
+         WHERE ADMIT_TERM = '144310' AND APPLICANT_PIDM = :pidm;
 
-   pg_quota.p_add_decision ('144010',
+   pg_quota.p_add_decision ('144310',
                             :pidm,
-                            12,
+                            5,
                             'CU',
                             l_reply_code,
                             l_reply_message);

@@ -30,5 +30,11 @@ ADM_DispTestScoreRequests
 adm_push_log
 adm_push_result
 
-
+VW_APPLICANT_CHOICES 
 admissionCountSummary
+
+
+ADM_RECONFIRM_ADM_REQUEST ≈⁄«œ… «· √ﬂÌœ
+
+ADM_CHANGE_CAMP_REQUEST  ÕÊÌ· „ﬁ— «·œ—«”…
+ADM_CHNG_CAMP_REQ_DETAILS
