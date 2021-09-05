@@ -7,16 +7,16 @@ INSERT INTO GLBSLCT (GLBSLCT_APPLICATION,
                      GLBSLCT_ACTIVITY_DATE,
                      GLBSLCT_TYPE_IND)
      VALUES ('STUDENT',
-             'BLOCKS_REGS_144210',
+             'BLOCKS_REGS_144310',
              'SAISUSR',
-             ' ”ÃÌ· —“„ 144210  ',
+             ' ”ÃÌ· —“„ 144310  ',
              'N',
              SYSDATE,
              NULL);
 
 INSERT INTO GLBEXTR
    SELECT 'STUDENT',
-          'BLOCKS_REGS_144210',
+          'BLOCKS_REGS_144310',
           'SAISUSR',
           'SAISUSR',
           SGBSTDN_PIDM,
@@ -31,13 +31,13 @@ INSERT INTO GLBEXTR
                            WHERE SGBSTDN_PIDM = A.SGBSTDN_PIDM)
                   AND SGBSTDN_STST_CODE = 'AS'
                   AND A.SGBSTDN_STYP_CODE = '„'
-                  AND SGBSTDN_TERM_CODE_ADMIT = '144210'
+                  AND SGBSTDN_TERM_CODE_ADMIT = '144310'
                   AND EXISTS
                          (SELECT '1'
                             FROM SARAPPD
                            WHERE     SARAPPD_PIDM = A.SGBSTDN_PIDM
                                  AND SARAPPD_APDC_CODE = 'FA'
-                                 AND SARAPPD_TERM_CODE_ENTRY = '144210'));
+                                 AND SARAPPD_TERM_CODE_ENTRY = '144310'));
 
 
  --delete from GLBEXTR where  GLBEXTR_SELECTION='BLOCKS_REGS_144010' ;
@@ -46,7 +46,7 @@ INSERT INTO GLBEXTR
 
 UPDATE SYRBLKR
    SET SYRBLKR_CAPACITY_USED = 0
- WHERE SYRBLKR_TERM_CODE = '144210';
+ WHERE SYRBLKR_TERM_CODE = '144310';
 
 UPDATE SGBSTDN A
    SET A.sgbstdn_blck_code = NULL
@@ -54,8 +54,8 @@ UPDATE SGBSTDN A
               (SELECT MAX (SGBSTDN_TERM_CODE_EFF)
                  FROM SGBSTDN
                 WHERE     SGBSTDN_PIDM = A.SGBSTDN_PIDM
-                      AND SGBSTDN_TERM_CODE_EFF <= '144210')
-       AND SGBSTDN_TERM_CODE_ADMIT = '144210';
+                      AND SGBSTDN_TERM_CODE_EFF <= '144310')
+       AND SGBSTDN_TERM_CODE_ADMIT = '144310';
 
 INSERT INTO GLBSLCT (GLBSLCT_APPLICATION,
                      GLBSLCT_SELECTION,

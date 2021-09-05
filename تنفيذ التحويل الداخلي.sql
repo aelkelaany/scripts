@@ -153,7 +153,7 @@ ORDER BY SOBCURR_COLL_CODE;
 
 /*Excuting*/
 
---exec ITRANSFER_PROC ('144310') ;
+exec ITRANSFER_PROC ('144310') ;
 
  SELECT f_get_std_id(pidm_cd),a.*
           FROM TRANSFER_STUDENT_PROGRAM a
@@ -164,11 +164,11 @@ ORDER BY SOBCURR_COLL_CODE;
    (GLBSLCT_APPLICATION, GLBSLCT_SELECTION, GLBSLCT_CREATOR_ID, GLBSLCT_DESC, GLBSLCT_LOCK_IND, 
     GLBSLCT_ACTIVITY_DATE, GLBSLCT_TYPE_IND)
  Values
-   ('STUDENT', 'ST_TRANS_1443', 'SAISUSR', 'ÿ·«» „ÕÊ·Ì‰ 1443', 'N', 
+   ('STUDENT', 'ST_TRANS_14431', 'SAISUSR', 'ÿ·«» „ÕÊ·Ì‰ 1443', 'N', 
     SYSDATE, NULL);
                                   INSERT INTO GLBEXTR
    SELECT 'STUDENT',
-          'ST_TRANS_1443',
+          'ST_TRANS_14431',
           'SAISUSR',
           'SAISUSR',
           PIDM,
@@ -186,3 +186,7 @@ ORDER BY SOBCURR_COLL_CODE;
       WHERE SGRADVR_PIDM IN
                 (  SELECT PIDM_CD PIDM
              FROM  TRANSFER_STUDENT_PROGRAM);
+             
+             
+             
+             
