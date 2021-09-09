@@ -97,3 +97,7 @@ INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
                            AND SUBSTR (spriden_id, 1, 3) = '443')
                            and not exists (select '1' from sfrstcr where sfrstcr_term_code='144310' and sfrstcr_pidm=SG.sgbstdn_pidm)
                            and not exists (select '1' from SFBRGRP where SFBRGRP_PIDM=SG.sgbstdn_pidm ); 
+                           
+                           
+                           
+                            

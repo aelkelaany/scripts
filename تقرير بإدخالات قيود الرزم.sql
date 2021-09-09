@@ -149,3 +149,25 @@ where stvblck_CODE not in (select SSRBLCK_BLCK_CODE
 from ssrblck
 where SSRBLCK_TERM_CODE='144310' )
  and stvblck_CODE like '%PG%'; 
+ 
+ 
+ ----MASTERS
+ 
+   SELECT a.*,
+         b.*,
+         (SELECT MAX (scbcrse_title)
+            FROM scbcrse, ssbsect
+           WHERE     ssbsect_term_code = '144310'
+                 AND ssbsect_crn = SSRBLCK_CRN
+                 AND scbcrse_subj_code || scbcrse_crse_numb =
+                     ssbsect_subj_code || ssbsect_crse_numb)    title
+    FROM SSRBLCK a, stvblck b
+   WHERE     SSRBLCK_BLCK_CODE = stvblck_CODE
+         AND SSRBLCK_TERM_CODE = '144310'
+         AND SSRBLCK_BLCK_CODE LIKE '%PG%'
+         AND NOT EXISTS
+                 (SELECT '1'
+                    FROM SYRBLKR
+                   WHERE     SSRBLCK_TERM_CODE = SYRBLKR_TERM_CODE
+                         AND SSRBLCK_BLCK_CODE = SYRBLKR_BLCK_CODE)
+ORDER BY 2;
