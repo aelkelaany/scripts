@@ -17,7 +17,7 @@
             lab,
          GREATEST (NVL (a.SCBCRSE_CONT_HR_LOW, 0),
                    NVL (a.SCBCRSE_CONT_HR_HIGH, 0))
-            contact
+            contact,ssbsect_camp_code,f_get_desc_fnc('stvcamp',ssbsect_camp_code,30) campus
     FROM scbcrse a, ssbsect, sirasgn
    WHERE     A.SCBCRSE_EFF_TERM =
                 (SELECT MAX (SCBCRSE_EFF_TERM)
@@ -31,7 +31,7 @@
          AND sirasgn_term_code = ssbsect_term_code
          AND sirasgn_crn = ssbsect_crn
          AND SIRASGN_PRIMARY_IND = 'Y'
-         and f_get_std_id (sirasgn_pidm)='6449'
+         and f_get_std_id (sirasgn_pidm)='1296'
 ORDER BY 5;
 
 ----+++++++++++++++++++++++++++++++

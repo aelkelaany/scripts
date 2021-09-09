@@ -1,3 +1,9 @@
+--deploy script
+-- functions for rule items 
+F_INTRNL_VSTOR_FNC
+
+-- rule items RULE_ITEMS
+
 /* Formatted on 29/12/2020 14:06:07 (QP5 v5.227.12220.39754) */
 CREATE TABLE BU_APPS.SYMTRCL_DEPT_MAPPING
 (
@@ -30,7 +36,7 @@ INSERT INTO BU_APPS.RULE_DEFINITION (RULE_CODE,
      VALUES (
                'R_WF_INT_VIST',
                'ﬁ«⁄œ… ÿ·» “«∆— œ«Œ·Ì',
-               TO_DATE ('12/29/2020 13:02:55', 'MM/DD/YYYY HH24:MI:SS'),
+               sysdate,
                'BU_APPS',
                'Â–Â «·Œœ„… „ «Õ… ›ﬁÿ ·ÿ·»… «·√ﬁ”«„ «·„ ‰«Ÿ—… ');
 
@@ -107,7 +113,7 @@ INSERT INTO BU_APPS.WF_OBJECT_ATTRIBUTES (OBJECT_CODE,
              'DEPARTMENT',
              SYSDATE,
              'BU_APPS');
- SET DEFINE OFF;
+
 Insert into BU_APPS.WF_FLOW
    (OBJECT_CODE, FLOW_SEQ, FLOW_DISPLAY, FLOW_PROCEDURE, FLOW_TYPE, 
     HISTORY_IND, ACTIVITY_DATE, USER_ID, MATCH_TYPE, REVIEW_PROCEDURE, 

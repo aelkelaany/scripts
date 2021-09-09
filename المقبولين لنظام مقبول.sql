@@ -51,7 +51,7 @@ SELECT *
                AND sarappd_pidm = spbpers_pidm
                AND spbpers_ssn = z."Student_Identity"
                AND z."Student_Identity" = x.student_ssn
-               AND s1.sarappd_term_code_entry = '144010'
+               AND s1.sarappd_term_code_entry = '144310'
                AND s1.sarappd_seq_no =
                       (SELECT MAX (s2.sarappd_seq_no)
                          FROM sarappd s2
@@ -59,13 +59,13 @@ SELECT *
                               AND s2.sarappd_term_code_entry =
                                      s1.sarappd_term_code_entry
                               AND s2.sarappd_appl_no = s1.sarappd_appl_no)
-               AND sarappd_apdc_code IN ('QA')
+               AND sarappd_apdc_code IN ('QA','FA')
                AND EXISTS
                       (SELECT 1
                          FROM adm_student_confirmation
                         WHERE     applicant_pidm = sarappd_pidm
-                              AND admit_term = '144010'));
+                              AND admit_term = '144310'));
 							  
 							  
 							  
-							  TRANSFER_STUDENT_PROGRAM
+						--	  TRANSFER_STUDENT_PROGRAM

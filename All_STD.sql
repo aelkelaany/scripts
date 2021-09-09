@@ -94,3 +94,42 @@ DELETE FROM GLBEXTR
             WHERE     GLBEXTR_APPLICATION = 'STUDENT'
                   AND GLBEXTR_SELECTION LIKE 'ALL_STD_IR'
                   AND GLBEXTR_CREATOR_ID = 'SAISUSR');
+                  
+                  ---------colleges 
+                  
+                   -- 33 medical science 
+                   
+                   
+                                                     ------------intesab
+                                   Insert into GLBSLCT
+   (GLBSLCT_APPLICATION, GLBSLCT_SELECTION, GLBSLCT_CREATOR_ID, GLBSLCT_DESC, GLBSLCT_LOCK_IND, 
+    GLBSLCT_ACTIVITY_DATE, GLBSLCT_TYPE_IND)
+ Values
+   ('STUDENT', 'ALL_STD_COLL33', 'SAISUSR', 'All students 33', 'N', 
+    SYSDATE, NULL);
+                                  INSERT INTO GLBEXTR
+   SELECT 'STUDENT',
+          'ALL_STD_COLL33',
+          'SAISUSR',
+          'SAISUSR',
+          PIDM,
+          SYSDATE,
+          'S',
+          NULL
+     FROM (SELECT DISTINCT TO_CHAR (SGBSTDN_PIDM) PIDM
+             FROM SGBSTDN SG
+            WHERE     SGBSTDN_TERM_CODE_EFF =
+                         (SELECT MAX (SGBSTDN_TERM_CODE_EFF)
+                            FROM SGBSTDN
+                           WHERE     SGBSTDN_PIDM = SG.SGBSTDN_PIDM
+                                  )
+                  AND SGBSTDN_STST_CODE IN
+                         ('AS', 'ãæ', 'ãÚ', 'Øã', 'ÅÞ', 'Ýß','Øí')
+                         and sgbstdn_coll_code_1='33'
+                        
+           MINUS
+           SELECT GLBEXTR_KEY
+             FROM GLBEXTR
+            WHERE     GLBEXTR_APPLICATION = 'STUDENT'
+                  AND GLBEXTR_SELECTION LIKE 'ALL_STD_COLL33'
+                  AND GLBEXTR_CREATOR_ID = 'SAISUSR');

@@ -60,3 +60,7 @@ DELETE FROM
                               
                               
                               object_definition
+                              
+                          
+                        
+                         SFRSTCA

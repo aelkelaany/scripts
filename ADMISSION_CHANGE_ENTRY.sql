@@ -13,7 +13,7 @@ SELECT STUDENT_SSN,
        LAST_NAME_EN,
        GENDER
   FROM BU_APPS.STU_MAIN_DATA_VW
- WHERE STUDENT_SSN = '1119944518';
+ WHERE STUDENT_SSN = '1120971880';
 DECLARE
    l_pidm           NUMBER := :l_pidm;
    l_old            NUMBER := :l_old;
