@@ -46,7 +46,7 @@
          AND A.SCBCRSE_SUBJ_CODE = ssbsect_subj_code
          AND A.SCBCRSE_CRSE_NUMB = ssbsect_crse_numb
          AND ssbsect_term_code = '144230'
-         -- AND ssbsect_ptrm_code = '4'      --------------------->>level
+        
          AND sirasgn_term_code = ssbsect_term_code
          AND ssbsect_enrl > 0
          AND sirasgn_crn = ssbsect_crn
@@ -78,16 +78,9 @@
                  AND A.SCBCRSE_SUBJ_CODE = ssbsect_subj_code
                  AND A.SCBCRSE_CRSE_NUMB = ssbsect_crse_numb
                  AND ssbsect_term_code = '144230'
-                 -- AND ssbsect_ptrm_code = '4'      --------------------->>level
+                 
                  AND sirasgn_term_code = ssbsect_term_code
                  and ssbsect_enrl>0
-                 AND sirasgn_crn = ssbsect_crn)
-              -- where faculty_id=:faculty_id
-  HAVING  SUM (credit)>10
-GROUP BY faculty_name, faculty_id, sirasgn_pidm)
-ORDER BY 1,11,12;
-
-
--------
-
- ;
+                 AND sirasgn_crn = ssbsect_crn
+              
+ 
