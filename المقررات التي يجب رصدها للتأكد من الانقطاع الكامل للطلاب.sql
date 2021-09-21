@@ -42,7 +42,7 @@
                                                   (SELECT '1'
                                                      FROM sybstdc
                                                     WHERE     sybstdc_term_code =
-                                                                 '144220'
+                                                                 '144310'
                                                           AND sybstdc_pidm =
                                                                  a.sybstdc_pidm
                                                           AND SYBSTDC_DISCONNECTED =
