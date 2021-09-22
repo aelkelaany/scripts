@@ -29,7 +29,7 @@ declare
                                       WHERE sgbstdn_pidm = F_GET_PIDM(:p_pidm))
                              AND SUBSTR (stvterm_code, 5) != '30') b
                WHERE     a.sgbstdn_term_code_eff(+) = b.stvterm_code
-                     AND stvterm_code <=
+                     AND stvterm_code <
                             f_get_param ('WORKFLOW', 'CURRENT_TERM', 1))
        WHERE status = 'Øí'
        GROUP BY stvterm_code  ;

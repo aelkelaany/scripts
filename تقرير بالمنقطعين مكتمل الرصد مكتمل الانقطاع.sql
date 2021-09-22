@@ -32,17 +32,17 @@
          AND NOT EXISTS
                     (SELECT '1'
                        FROM sybstdc
-                      WHERE     sybstdc_term_code = '144220'
+                      WHERE     sybstdc_term_code = '144310'
                             AND sybstdc_pidm = sgbstdn_pidm
                             AND SYBSTDC_DISCONNECTED = 'N')
          AND (SELECT COUNT (*)
                 FROM sybstdc
-               WHERE     sybstdc_term_code = '144220'
+               WHERE     sybstdc_term_code = '144310'
                      AND SYBSTDC_DISCONNECTED = 'Y'
                      AND sybstdc_pidm = sgbstdn_pidm) =
                 (SELECT COUNT (*)
                    FROM sfrstcr
-                  WHERE     SFRSTCR_TERM_CODE = '144220'
+                  WHERE     SFRSTCR_TERM_CODE = '144310'
                         AND SFRSTCR_pidm = sgbstdn_pidm
                         AND SFRSTCR_RSTS_CODE IN ('RE', 'RW')
                         AND EXISTS

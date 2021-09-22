@@ -1,7 +1,7 @@
 UPDATE sfbetrm
          SET sfbetrm_mhrs_over = 24,
              sfbetrm_activity_date = SYSDATE 
-       WHERE   sfbetrm_term_code = '144220'
+       WHERE   sfbetrm_term_code = '144310'
        and sfbetrm_pidm in (SELECT DISTINCT SGBSTDN_PIDM 
   FROM SGBSTDN SG
  WHERE     SGBSTDN_TERM_CODE_EFF = (SELECT MAX (SGBSTDN_TERM_CODE_EFF)
@@ -22,7 +22,7 @@ DECLARE
                                      WHERE SGBSTDN_PIDM = SG.SGBSTDN_PIDM)
        AND SGBSTDN_STST_CODE IN ('AS')
        AND SGBSTDN_STYP_CODE IN ('ä')
-       and not exists (select '1' from sfbetrm where sfbetrm_term_code='144220' and sfbetrm_pidm=sg.sgbstdn_pidm);
+       and not exists (select '1' from sfbetrm where sfbetrm_term_code='144310' and sfbetrm_pidm=sg.sgbstdn_pidm);
 
    
    l_inserted_rec   NUMBER := 0;
@@ -50,7 +50,7 @@ BEGIN
                               sfbetrm_min_hrs,
                               sfbetrm_minh_srce_cde,
                               sfbetrm_maxh_srce_cde)
-              VALUES ('144220',
+              VALUES ('144310',
                       i.student_pidm,
                       'EL',
                       TRUNC (SYSDATE) ,

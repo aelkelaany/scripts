@@ -5,7 +5,7 @@ SELECT SYBSSNL_SSN,
        sabnstu_pin,
        sabnstu_aidm,
        SARHEAD_APPL_COMP_IND,
-       SYBSSNL_ADMISSION_TYPE
+       SYBSSNL_ADMISSION_TYPE ,SYBSSNL_ADMISSION_TYPE ,SYBSSNL_TERM_CODE 
   FROM SYBSSNL, sabnstu, sarhead
  WHERE sabnstu_aidm = SYBSSNL_aidm AND sarhead_aidm = SYBSSNL_aidm -- AND SYBSSNL_TERM_CODE = '144310'
                                                                    --AND SYBSSNL_ADMISSION_TYPE = 'UG'
@@ -50,7 +50,7 @@ SELECT f_get_std_id (sgbstdn_pidm) stid,
        f_get_std_name (sgbstdn_pidm) std_name,
        sg.*
   FROM sgbstdn sg, spbpers
- WHERE sgbstdn_pidm = spbpers_pidm AND spbpers_ssn = '1119686572';
+ WHERE sgbstdn_pidm = spbpers_pidm AND spbpers_ssn = '1120560543';
 
      --  admissionCountSummary
 
