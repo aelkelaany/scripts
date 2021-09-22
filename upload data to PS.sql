@@ -145,3 +145,28 @@ Insert into GLBEXTR
         ORDER BY SFRSTCR_PIDM DESC)
   ;
   
+---- ”ÃÌ· Ã„«⁄Ì „‰ „·›
+declare 
+cursor get_data is select  distinct col03 crn  from bu_dev.tmp_tbl_kilany;
+begin 
+for rec in get_data loop 
+Insert into GLBSLCT
+   (GLBSLCT_APPLICATION, GLBSLCT_SELECTION, GLBSLCT_CREATOR_ID, GLBSLCT_DESC, GLBSLCT_LOCK_IND, 
+    GLBSLCT_ACTIVITY_DATE, GLBSLCT_TYPE_IND)
+ Values
+   ('STUDENT', 'REG_MA_'||rec.crn, 'SAISUSR', ' ”ÃÌ·  ', 'N', 
+    SYSDATE, NULL);
+    
+    
+    Insert into GLBEXTR
+   SELECT 'STUDENT', 'REG_MA_'||rec.crn, 'SAISUSR', 'SAISUSR',  PIDM, 
+    SYSDATE, 'S', NULL  FROM 
+(  SELECT  f_get_pidm(col02) PIDM
+            from bu_dev.tmp_tbl_kilany
+           WHERE      col03=crn)
+        
+        ;
+        DBMS_OUTPUT.put_line ('REG_MA_'||rec.crn );
+        
+        
+        end ;

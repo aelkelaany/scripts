@@ -8,16 +8,16 @@ DECLARE
                AND object_code = 'WF_REG_MAINTAIN'
                AND m.request_status = 'P'
                AND F.FLOW_SEQ = 4
-               AND USER_PIDM = f_get_pidm ('3497') -->>> From
+               AND USER_PIDM = f_get_pidm ('3466') -->>> From
                AND ACTION_CODE IS NULL
-               AND ROWNUM <= 10
+               AND ROWNUM <= 5
       ORDER BY 1 ASC;
 
 BEGIN
    FOR REC IN GET_REQUESTS
    LOOP
       UPDATE wf_request_flow
-         SET USER_PIDM = f_get_pidm ('3466')--<<< To
+         SET USER_PIDM = f_get_pidm ('5797')--<<< To
        WHERE REQUEST_NO = REC.REQ_NO AND FLOW_SEQ = 4 --AND  USER_PIDM IS NULL
              AND ACTION_CODE IS NULL;
    END LOOP;
@@ -36,7 +36,9 @@ UPDATE wf_request_flow
 --3377 khadraa
 --3466 Reem
 --3344 Nora Ghamdi
-
+---********
+select f_get_pidm('2521') from dual ; 
+---********
   SELECT COUNT (DISTINCT B.REQUEST_NO),
          f_get_STD_ID (b.user_pidm) EMPLOYEE_ID,
          f_get_STD_NAME (b.user_pidm) EMPLOYEE_NAME,
@@ -48,7 +50,7 @@ UPDATE wf_request_flow
          AND B.FLOW_SEQ = (SELECT MAX (FLOW_SEQ)
                              FROM wf_request_flow
                             WHERE request_no = B.REQUEST_NO)
-         AND B.FLOW_SEQ = 4
+         AND B.FLOW_SEQ =  4
 GROUP BY b.user_pidm;
 
 
@@ -65,6 +67,7 @@ GROUP BY b.user_pidm;
                             WHERE request_no = B.REQUEST_NO)
          AND B.FLOW_SEQ = 4
          and exists (select '1' from request_details where request_no=a.request_no and item_value='144310')
+          
 GROUP BY b.user_pidm
 ORDER BY 1 DESC;
 
