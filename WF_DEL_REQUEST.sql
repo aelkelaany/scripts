@@ -1,5 +1,6 @@
-exec p_Delete_wf('311139') ;
-
+exec p_Delete_wf('320733') ;
+select f_get_std_id('215491') from  dual ;
+SGAASST
    -----------------------------cancel rejection   
 update wf_request_flow f
 set ACTION_CODE='',

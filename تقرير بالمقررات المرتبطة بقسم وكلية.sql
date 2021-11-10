@@ -14,7 +14,7 @@
                    FROM SCBCRSE
                   WHERE     SCBCRSE_SUBJ_CODE = A.SCBCRSE_SUBJ_CODE
                         AND SCBCRSE_CRSE_NUMB = A.SCBCRSE_CRSE_NUMB
-                        AND SCBCRSE_EFF_TERM <= '144210')
+                        AND SCBCRSE_EFF_TERM <= '144310')
          AND A.SCBCRSE_COLL_CODE = B.STVCOLL_CODE(+)
          AND A.SCBCRSE_DEPT_CODE = C.STVDEPT_CODE(+)
          and A.SCBCRSE_CSTA_CODE='A'
