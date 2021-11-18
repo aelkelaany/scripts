@@ -40,3 +40,11 @@ SELECT ROWID,
                                   FROM spriden
                                  WHERE     spriden_pidm = SG.sgbstdn_pidm
                                        AND SUBSTR (spriden_id, 1, 3) = '443'));
+                                       
+                                       
+                                       
+ STUDENT_EMAIL_PASSWORD
+ 
+ SEC_HOLD_STD_CHANGE_PIN
+ 
+ LOG_SUCCESS_LOGIN
