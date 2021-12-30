@@ -12,8 +12,8 @@ declare
        WHERE     sfrstcr_pidm = shrtckn_pidm(+)
              AND sfrstcr_term_code = shrtckn_term_code(+)
              AND sfrstcr_crn = shrtckn_crn(+)
-             AND sfrstcr_term_code = '144220'
-              AND sfrstcr_crn = '24356'
+             AND sfrstcr_term_code = '144230'
+              AND sfrstcr_crn = '30273'
           -- and sfrstcr_pidm=f_get_pidm('441015688') --
              ;
 
