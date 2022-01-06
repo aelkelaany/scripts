@@ -95,8 +95,8 @@ SELECT COUNT (*) OVER (PARTITION BY day) AS day_cnt,
                          ssrmeet,
                          stvschd,
                          slbrdef
-                   WHERE     sfrstcr_pidm = f_get_pidm('434008262')
-                         AND sfrstcr_term_code = '144010'
+                   WHERE     sfrstcr_pidm = f_get_pidm('441014218')
+                         AND sfrstcr_term_code = '144310'
                          AND ssrmeet_term_code(+) = ssbsect_term_code
                          AND ssrmeet_crn(+) = ssbsect_crn
                          AND sfrstcr_term_code = ssbsect_term_code

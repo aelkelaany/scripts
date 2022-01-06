@@ -1,4 +1,4 @@
-/*<TOAD_FILE_CHUNK>*/
+ 
  
 declare 
    CURSOR get_data
@@ -12,8 +12,8 @@ declare
        WHERE     sfrstcr_pidm = shrtckn_pidm(+)
              AND sfrstcr_term_code = shrtckn_term_code(+)
              AND sfrstcr_crn = shrtckn_crn(+)
-             AND sfrstcr_term_code = '144220'
-              AND sfrstcr_crn = '24356'
+             AND sfrstcr_term_code = '144310'
+              AND sfrstcr_crn in ( '12068'/*,'15130','15034','15149','15091'*/)
           -- and sfrstcr_pidm=f_get_pidm('441015688') --
              ;
 
@@ -73,7 +73,14 @@ BEGIN
    DBMS_OUTPUT.put_line ('SHRTCKN Deleted Rows : ' || l_shrtckn_count);
    DBMS_OUTPUT.put_line ('SFRSTCR Updated Rows : ' || l_sfrstcr_count);
 END;
-/
  
+ wf_external_visitor
+ 
+exec p_Delete_wf('336508') ;
+ 
+select f_get_std_id('54645') from dual ; 
 
- 
+
+--dle.STVmajr
+
+WF_INTERNAL_VISITOR

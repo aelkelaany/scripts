@@ -1,7 +1,7 @@
-  update BU_DEV.TMP_TBL03 set  COL02 =f_get_pidm(COL02);
- update BU_DEV.TMP_TBL03 set  COL04 =f_get_pidm('3955');
+  update BU_DEV.TMP_TBL_kilany set  COL02 =f_get_pidm(COL01);
+ update BU_DEV.TMP_TBL_kilany set  COL04 =f_get_pidm('1595');
 DECLARE
-    CURSOR GET_STUDENTS IS SELECT COL02 PIDM, COL04 ADV FROM BU_DEV.TMP_TBL03;
+    CURSOR GET_STUDENTS IS SELECT COL02 PIDM, COL04 ADV FROM BU_DEV.TMP_TBL_kilany;
 
     l_FALIURE_COUNTER    NUMBER:=0;
     L_SUCCSESS_COUNTER   NUMBER:=0;
@@ -16,14 +16,14 @@ BEGIN
                                         SGRADVR_PRIM_IND,
                                         SGRADVR_ACTIVITY_DATE)
                  VALUES (STD.PIDM,
-                         '144210',
+                         '144310',
                          STD.ADV,
                           '„—‘œ',
            'Y',
            SYSDATE );
 
             L_SUCCSESS_COUNTER := L_SUCCSESS_COUNTER + 1;
-            update  BU_DEV.TMP_TBL03
+            update  BU_DEV.TMP_TBL_kilany
    SET COL05 = 'DONE'
    where col02=STD.PIDM ;
         EXCEPTION
