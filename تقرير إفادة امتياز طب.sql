@@ -35,10 +35,10 @@ INSERT INTO syrmgrd
          upper(syrmgrd_name_en),
          spbpers_ssn                                student_ssn,
          spbpers_sex,
-         '”⁄ÊœÌ'                               nationality,
-         '«·ÿ»'                                 college,
-         'ÿ» ÊÃ—«Õ…'                        major,
-         '»ﬂ«·—ÌÊ”'                         srudent_LEVEL,
+       decode(spbpers_sex,'M','','')                              nationality,
+         ''                                 college,
+         ''                        major,
+         ''                         srudent_LEVEL,
          syrmgrd_internship_start,
          syrmgrd_internship_end
     FROM sgbstdn s1, spbpers, syrmgrd
@@ -55,3 +55,9 @@ select distinct   syrmgrd_internship_start,
          syrmgrd_internship_end
          
          from  syrmgrd ;
+         
+         
+         select f_get_pidm('436002879') from dual ; 
+         f_get_pidm('436002879')
+         
+         FATIMAH MOHAMMED SHARAF ALSHAKHS 

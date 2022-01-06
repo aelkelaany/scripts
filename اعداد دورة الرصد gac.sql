@@ -175,3 +175,25 @@ END;
 -- select a.* ,f_get_std_name(dept_pidm) ,f_get_std_name(vice_pidm),f_get_std_name(dean_pidm) from 
 --gac_crn a
 --where term_code='144310'
+
+begin
+UPDATE GAC_CRN
+       SET wf_request_no =
+               (SELECT MAX (crn.request_no)
+                  FROM request_details  crn,
+                       request_details  term,
+                       request_master   a
+                 WHERE     a.object_code = 'WF_GRADE_APPROVAL'
+                       AND A.REQUEST_NO = crn.REQUEST_NO
+                       AND A.REQUEST_NO = term.REQUEST_NO
+                       AND TERM.SEQUENCE_NO = 1
+                       AND CRN.SEQUENCE_NO = 1
+                       AND CRN.ITEM_CODE = 'CRN'
+                       AND TERM.ITEM_CODE = 'TERM'
+                       AND TERM.ITEM_VALUE = '144310'
+                       AND crn.item_value = GAC_CRN.crn)
+     WHERE     term_code = '144310'
+  ;
+
+    COMMIT;
+end;

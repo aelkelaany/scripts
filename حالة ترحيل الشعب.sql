@@ -94,7 +94,7 @@ select scbcrse_coll_code , scbcrse_dept_code ,
              AND sfrstcr_grde_code IS not  NULL
             AND sfrstcr_grde_date IS     NULL
              AND sfrstcr_rsts_code IN ('RE', 'RW')) 
-             and SCBCRSE_COLL_CODE 
+            -- and SCBCRSE_COLL_CODE 
  --and SCBCRSE_COLL_CODE   in ('11','00')
                         ;      
                         -------------„⁄«„·«   Õ  «·«Ã—«¡ 

@@ -1,5 +1,5 @@
  
-  SELECT DISTINCT
+  SELECT DISTINCT  
          SUBSTR (stvdept_CODE, 1, 2) coll_code,
          f_get_desc_fnc ('stvcoll', SUBSTR (stvdept_CODE, 1, 2), 30) coll_desc,
          stvdept_CODE AS "Department  Code",
