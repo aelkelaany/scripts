@@ -32,7 +32,7 @@ f_get_std_id (SGBSTDN_PIDM) id, f_get_std_name (SGBSTDN_PIDM) ,SG.SGBSTDN_PROGRA
       AND EXISTS(SELECT 'Y' FROM SHRDGMR
       WHERE SHRDGMR_PIDM=SG.SGBSTDN_PIDM
        AND SHRDGMR_DEGS_CODE='ŒÃ'
-      AND SHRDGMR_TERM_CODE_GRAD='144230'
+      AND SHRDGMR_TERM_CODE_GRAD='144310'
       )
       AND SG.SGBSTDN_PROGRAM_1=SMRPRLE_PROGRAM
         AND SG.SGBSTDN_PROGRAM_1 IN('1-13013-1433','2-13013-1433')
@@ -43,7 +43,7 @@ f_get_std_id (SGBSTDN_PIDM) id, f_get_std_name (SGBSTDN_PIDM) ,SG.SGBSTDN_PROGRA
 UPDATE SHRDGMR
    SET SHRDGMR_MAJR_CODE_1 = '1312'
  WHERE     SHRDGMR_DEGS_CODE = 'ŒÃ'
-       AND SHRDGMR_TERM_CODE_GRAD = '144230' --***********›’· «· Œ—Ã
+       AND SHRDGMR_TERM_CODE_GRAD = '144310' --***********›’· «· Œ—Ã
        AND SHRDGMR_MAJR_CODE_1 = '1301'
        AND EXISTS
               (SELECT 'Y'
@@ -60,12 +60,32 @@ UPDATE SHRDGMR
                       AND SG.SGBSTDN_PIDM = SHRDGMR_PIDM
                       AND SG.SGBSTDN_PROGRAM_1 IN
                              ('1-13012-1433', '2-13012-1433'));
-                             
+                    
+UPDATE sgbstdn sg
+   SET sgbstdn_MAJR_CODE_1 = '1312'
+ WHERE      
+          SGBSTDN_TERM_CODE_EFF =
+                             (SELECT MAX (SGBSTDN_TERM_CODE_EFF)
+                                FROM SGBSTDN
+                               WHERE SGBSTDN_PIDM = SG.SGBSTDN_PIDM)
+                      AND SGBSTDN_STST_CODE IN ('ŒÃ')
+                      AND SGBSTDN_DEGC_CODE_1 IN
+                             ('»ﬂ', '»ﬂ  ', '000000')
+                      AND SG.SGBSTDN_COLL_CODE_1 = '13'
+                      AND SG.SGBSTDN_MAJR_CODE_1 = '1301'
+                     
+                      AND SG.SGBSTDN_PROGRAM_1 IN
+                             ('1-13012-1433', '2-13012-1433') ;
+
+
+
+
+         
                              --«÷ÿ—«»«  ‰ÿﬁ Ê·€… 
                              UPDATE SHRDGMR
    SET SHRDGMR_MAJR_CODE_1 = '1315'
  WHERE     SHRDGMR_DEGS_CODE = 'ŒÃ'
-       AND SHRDGMR_TERM_CODE_GRAD = '144230' --***********›’· «· Œ—Ã
+       AND SHRDGMR_TERM_CODE_GRAD = '144310' --***********›’· «· Œ—Ã
        AND SHRDGMR_MAJR_CODE_1 = '1301'
        AND EXISTS
               (SELECT 'Y'
@@ -83,12 +103,27 @@ UPDATE SHRDGMR
                       AND SG.SGBSTDN_PROGRAM_1 IN
                              ('1-13015-1433', '2-13015-1433'));
                              
+         UPDATE sgbstdn sg
+   SET sgbstdn_MAJR_CODE_1 = '1315'
+ WHERE      
+          SGBSTDN_TERM_CODE_EFF =
+                             (SELECT MAX (SGBSTDN_TERM_CODE_EFF)
+                                FROM SGBSTDN
+                               WHERE SGBSTDN_PIDM = SG.SGBSTDN_PIDM)
+                      AND SGBSTDN_STST_CODE IN ('ŒÃ')
+                      AND SGBSTDN_DEGC_CODE_1 IN
+                             ('»ﬂ', '»ﬂ  ', '000000')
+                      AND SG.SGBSTDN_COLL_CODE_1 = '13'
+                      AND SG.SGBSTDN_MAJR_CODE_1 = '1301'
+                     
+                      AND SG.SGBSTDN_PROGRAM_1 IN
+                             ('1-13015-1433', '2-13015-1433') ;        
                              --’⁄Ê»«   ⁄·„ 
                              
  UPDATE SHRDGMR
    SET SHRDGMR_MAJR_CODE_1 = '1313'
  WHERE     SHRDGMR_DEGS_CODE = 'ŒÃ'
-       AND SHRDGMR_TERM_CODE_GRAD = '144230' --***********›’· «· Œ—Ã
+       AND SHRDGMR_TERM_CODE_GRAD = '144310' --***********›’· «· Œ—Ã
        AND SHRDGMR_MAJR_CODE_1 = '1301'
        AND EXISTS
               (SELECT 'Y'
@@ -106,12 +141,27 @@ UPDATE SHRDGMR
                       AND SG.SGBSTDN_PROGRAM_1 IN
                              ('1-13013-1433', '2-13013-1433'));
                              
+      UPDATE sgbstdn sg
+   SET sgbstdn_MAJR_CODE_1 = '1313'
+ WHERE      
+          SGBSTDN_TERM_CODE_EFF =
+                             (SELECT MAX (SGBSTDN_TERM_CODE_EFF)
+                                FROM SGBSTDN
+                               WHERE SGBSTDN_PIDM = SG.SGBSTDN_PIDM)
+                      AND SGBSTDN_STST_CODE IN ('ŒÃ')
+                      AND SGBSTDN_DEGC_CODE_1 IN
+                             ('»ﬂ', '»ﬂ  ', '000000')
+                      AND SG.SGBSTDN_COLL_CODE_1 = '13'
+                      AND SG.SGBSTDN_MAJR_CODE_1 = '1301'
+                     
+                      AND SG.SGBSTDN_PROGRAM_1 IN
+                             ('1-13013-1433', '2-13013-1433') ;  
                              
         -- «⁄«ﬁ… ”„⁄Ì…                                                    
  UPDATE SHRDGMR
    SET SHRDGMR_MAJR_CODE_1 = '1311'
  WHERE     SHRDGMR_DEGS_CODE = 'ŒÃ'
-       AND SHRDGMR_TERM_CODE_GRAD = '144230' --***********›’· «· Œ—Ã
+       AND SHRDGMR_TERM_CODE_GRAD = '144310' --***********›’· «· Œ—Ã
        AND SHRDGMR_MAJR_CODE_1 = '1301'
        AND EXISTS
               (SELECT 'Y'
@@ -128,7 +178,21 @@ UPDATE SHRDGMR
                       AND SG.SGBSTDN_PIDM = SHRDGMR_PIDM
                       AND SG.SGBSTDN_PROGRAM_1 IN
                              ('1-13011-1430', '2-13011-1430'));
-                             
+                             UPDATE sgbstdn sg
+   SET sgbstdn_MAJR_CODE_1 = '1311'
+ WHERE      
+          SGBSTDN_TERM_CODE_EFF =
+                             (SELECT MAX (SGBSTDN_TERM_CODE_EFF)
+                                FROM SGBSTDN
+                               WHERE SGBSTDN_PIDM = SG.SGBSTDN_PIDM)
+                      AND SGBSTDN_STST_CODE IN ('ŒÃ')
+                      AND SGBSTDN_DEGC_CODE_1 IN
+                             ('»ﬂ', '»ﬂ  ', '000000')
+                      AND SG.SGBSTDN_COLL_CODE_1 = '13'
+                      AND SG.SGBSTDN_MAJR_CODE_1 = '1301'
+                     
+                      AND SG.SGBSTDN_PROGRAM_1 IN
+                             ('1-13011-1433', '2-13011-1433') ;
                              
                              ----------------------------------------------
                              /* Formatted on 6/3/2020 11:08:42 AM (QP5 v5.227.12220.39754) */
@@ -165,4 +229,38 @@ FROM bu_dev.tmp_tbl04 )
      AND  SHRDGMR_DEGS_CODE ='ŒÃ') 
      and SHRDGMR_SEQ_NO=(select max(SHRDGMR_SEQ_NO) from SHRDGMR where shrdgmr_pidm=SGBSTDN_PIDM and SHRDGMR_DEGS_CODE='ŒÃ' )
          AND X.STVMAJR_CODE(+) = '13' || SUBSTR (SG.SGBSTDN_PROGRAM_1, 6, 2)
-ORDER BY SMRPRLE_PROGRAM_DESC
+ORDER BY SMRPRLE_PROGRAM_DESC ;
+
+
+
+
+------ SGBSTDN
+
+UPDATE SGBSTDN SG
+   AND EXISTS
+              (SELECT 'Y'
+                 FROM SGBSTDN SG
+                WHERE     SGBSTDN_TERM_CODE_EFF =
+                             (SELECT MAX (SGBSTDN_TERM_CODE_EFF)
+                                FROM SGBSTDN
+                               WHERE SGBSTDN_PIDM = SG.SGBSTDN_PIDM)
+                      AND SGBSTDN_STST_CODE IN ('ŒÃ')
+                      AND SGBSTDN_DEGC_CODE_1 IN
+                             ('»ﬂ', '»ﬂ  ', '000000')
+                      AND SG.SGBSTDN_COLL_CODE_1 = '13'
+                      AND SG.SGBSTDN_MAJR_CODE_1 = '1301'
+                      AND SG.SGBSTDN_PIDM = SHRDGMR_PIDM
+                      AND SG.SGBSTDN_PROGRAM_1 IN
+                             ('1-13011-1430', '2-13011-1430'));
+       
+       
+       
+      SELECT * FROM  SGBSTDN SG
+    -- SGBSTDN_MAJR_CODE_1 = '1312'
+       WHERE 
+         SGBSTDN_TERM_CODE_EFF = '144310' --***********›’· «· Œ—Ã
+       AND SGBSTDN_MAJR_CODE_1 = '1301'
+       AND SGBSTDN_LEVL_CODE='Ã„'
+         AND SGBSTDN_STST_CODE='ŒÃ'
+       AND   SG.SGBSTDN_PROGRAM_1 IN ('1-13012-1433', '2-13012-1433') 
+       ;

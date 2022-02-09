@@ -6,9 +6,13 @@
             sex,
          COUNT (DISTINCT sfrstcr_pidm) all_reg_students
     FROM sfrstcr
-   WHERE sfrstcr_term_code = '144320' AND sfrstcr_rsts_code IN ('RW', 'RE')
+   WHERE sfrstcr_term_code = '144320' AND sfrstcr_rsts_code IN ('RW')
+   
+   and exists (select '1' from sgbstdn where sgbstdn_pidm=sfrstcr_pidm and sgbstdn_levl_code='œ»')
 GROUP BY SUBSTR (f_get_std_id (sfrstcr_pidm), 1, 3),
          DECODE (f_get_gender (sfrstcr_pidm), 'M', 'ÿ«·»', 'ÿ«·»…')
+         
+         
 ORDER BY 1;
 
 -- ·ﬂ· ÿ·«» «·’Ì›Ì «·„ Œ’’Ì‰
@@ -59,6 +63,7 @@ SELECT COUNT (DISTINCT sfrstcr_crn) all_reg_crn
                         AND c2.scbcrse_eff_term <= '144320')
          AND ssbsect_term_code = '144320'
          AND SSBSECT_MAX_ENRL > 0
+         and ssbsect_ptrm_code=1
          AND SSBSECT_SEATS_AVAIL = SSBSECT_MAX_ENRL
          AND SSBSECT_SSTS_CODE = '‰'
 ORDER BY 1;

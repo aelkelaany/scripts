@@ -1,19 +1,21 @@
-delete bu_dev.tmp_tbl03 where COL02 is null ;
-UPDATE bu_dev.tmp_tbl03 SET COL02=F_GET_PIDM(COL01) ;
+create table bu_dev.tmp_tbl_kilany1 as select * from bu_dev.tmp_tbl_kilany where 1=2;
+
+delete bu_dev.tmp_tbl_kilany1 where COL01 is null ;
+UPDATE bu_dev.tmp_tbl_kilany1 SET COL02=F_GET_PIDM(COL01) ;
   
 Insert into GLBSLCT
    (GLBSLCT_APPLICATION, GLBSLCT_SELECTION, GLBSLCT_CREATOR_ID, GLBSLCT_DESC, GLBSLCT_LOCK_IND, 
     GLBSLCT_ACTIVITY_DATE, GLBSLCT_TYPE_IND)
  Values
-   ('STUDENT', 'GRD_SUMR21', 'SAISUSR', 'Œ—ÌÃÌ‰ 2021 ’Ì› ', 'N', 
+   ('STUDENT', 'GRD_FALL22_3', 'SAISUSR', 'Œ—ÌÃÌ‰ 2022 2 ', 'N', 
     SYSDATE, NULL);
  
 
 Insert into GLBEXTR
-   SELECT 'STUDENT', 'GRD_SUMR21', 'SAISUSR', 'SAISUSR', PIDM, 
+   SELECT 'STUDENT', 'GRD_FALL22_3', 'SAISUSR', 'SAISUSR', PIDM, 
     SYSDATE, 'S', NULL  FROM 
     (  SELECT DISTINCT COL02 PIDM
-FROM bu_dev.tmp_tbl03
+FROM bu_dev.tmp_tbl_kilany1
 where COL02 is not null );
 
 ---------------------******************************----------------------------
@@ -24,7 +26,7 @@ WHERE SGBSTDN_PIDM IN
 
     (  SELECT   GLBEXTR_KEY PIDM
 FROM GLBEXTR
-where GLBEXTR_SELECTION='GRD_MAY25DPLM' 
+where GLBEXTR_SELECTION='GRD_FALL22_2' 
 and GLBEXTR_APPLICATION='STUDENT' )
  
 AND SGBSTDN_TERM_CODE_EFF =(SELECT MAX(SGBSTDN_TERM_CODE_EFF)
@@ -55,8 +57,8 @@ SELECT F_GET_STD_ID(SGBSTDN_PIDM)
 FROM SGBSTDN SG
 WHERE SGBSTDN_PIDM IN 
 
-    (  SELECT DISTINCT COL01 PIDM
-FROM bu_dev.tmp_tbl03 )
+    (  SELECT DISTINCT COL02 PIDM
+FROM bu_dev.tmp_tbl_kilany )
  
 AND SGBSTDN_TERM_CODE_EFF =(SELECT MAX(SGBSTDN_TERM_CODE_EFF)
 FROM SGBSTDN
@@ -71,7 +73,7 @@ FROM
 shrdgmr A
 
 WHERE  shrdgmr_pidm IN (  SELECT DISTINCT COL01 PIDM
-FROM bu_dev.tmp_tbl03 )
+FROM bu_dev.tmp_tbl_kilany )
 
     -- and A.SHRDGMR_SEQ_NO=(select max(SHRDGMR_SEQ_NO) from SHRDGMR where shrdgmr_pidm=A.shrdgmr_pidm  )
      and NOT EXISTS (SELECT '1' FROM SHRDGMR
