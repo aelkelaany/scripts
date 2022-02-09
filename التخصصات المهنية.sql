@@ -46,7 +46,7 @@ IS
 
     CURSOR get_major IS
         SELECT    stvmajr_desc
-               || '. '
+               || ' '
                || MOE_major_CODE
                || '\'
                || MOE_LEVEL_CODE
@@ -134,3 +134,16 @@ SELECT get_moe_major (stvmajr_code, 'AR')     arabic,
        MOE_MAJOR_DESC
   FROM stvmajr, moe_majorS
  WHERE BU_MAJOR_CODE = stvmajr_code;
+ 
+ ----------GRADUATES 
+ 
+ SELECT DISTINCT get_moe_major (SHRDGMR_MAJR_CODE_1, 'AR')     arabic,
+       get_moe_major (SHRDGMR_MAJR_CODE_1, 'EN'),
+       SHRDGMR_MAJR_CODE_1 
+        
+  FROM SHRDGMR 
+ WHERE  
+   SHRDGMR_TERM_CODE_GRAD='144310'
+   AND SHRDGMR_DEGS_CODE = 'ÎÌ'
+   AND SHRDGMR_DEGC_CODE='Èß'
+ ;

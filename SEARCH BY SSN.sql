@@ -1,8 +1,17 @@
 select f_get_std_id(sgbstdn_pidm) stid,f_get_std_name(sgbstdn_pidm)std_name, sg.* from sgbstdn sg,spbpers
 where
 sgbstdn_pidm=spbpers_pidm
-and spbpers_ssn like'%1103133367%'
+and spbpers_ssn like'%1119077301%'
 ;
+
+select f_get_std_id(spbpers_pidm) stid,f_get_std_name(spbpers_pidm)std_name from spbpers
+where
+ 
+  spbpers_ssn like'%1123316091%'
+;
+
+
+
 /*
 update shrdgmr set SHRDGMR_GRAD_DATE=TO_DATE('05/05/2019', 'MM/DD/YYYY') ,SHRDGMR_TERM_CODE_GRAD='143920',SHRDGMR_ACYR_CODE='1439'
  

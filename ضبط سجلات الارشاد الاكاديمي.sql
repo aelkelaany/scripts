@@ -6,7 +6,7 @@ SELECT f_get_std_id(SGRADVR_PIDM) student_id ,f_get_std_name(SGRADVR_PIDM) stude
            (SELECT MAX (SGBSTDN_TERM_CODE_EFF)
               FROM SGBSTDN
              WHERE     SGBSTDN_PIDM = SG.SGBSTDN_PIDM
-                   AND SGBSTDN_TERM_CODE_EFF <= '144310')
+                   AND SGBSTDN_TERM_CODE_EFF <= '144320')
        AND SGBSTDN_DEPT_CODE NOT IN
                (SELECT SIRDPCL_DEPT_CODE
                   FROM SIRDPCL
@@ -15,6 +15,15 @@ SELECT f_get_std_id(SGRADVR_PIDM) student_id ,f_get_std_name(SGRADVR_PIDM) stude
                            (SELECT MAX (SIRDPCL_TERM_CODE_EFF)
                               FROM SIRDPCL
                              WHERE SIRDPCL_PIDM = SGRADVR_ADVR_PIDM));
+                             
+      SELECT SIRDPCL_DEPT_CODE
+                  FROM SIRDPCL a
+                 WHERE     SIRDPCL_PIDM = f_get_pidm('3685')
+                       AND SIRDPCL_TERM_CODE_EFF =
+                           (SELECT MAX (SIRDPCL_TERM_CODE_EFF)
+                              FROM SIRDPCL
+                             WHERE SIRDPCL_PIDM = a.SIRDPCL_pidm) ;                       
+                             
 
 
 DELETE FROM
@@ -27,7 +36,7 @@ DELETE FROM
                             (SELECT MAX (SGBSTDN_TERM_CODE_EFF)
                                FROM SGBSTDN
                               WHERE     SGBSTDN_PIDM = SG.SGBSTDN_PIDM
-                                    AND SGBSTDN_TERM_CODE_EFF <= '144310')
+                                    AND SGBSTDN_TERM_CODE_EFF <= '144320')
                         AND SGBSTDN_DEPT_CODE NOT IN
                                 (SELECT SIRDPCL_DEPT_CODE
                                    FROM SIRDPCL
@@ -52,7 +61,8 @@ DELETE FROM
                                                   'IS',
                                                   'гд',
                                                   'TE',
-                                                  'гЁ')
+                                                  'гЁ',
+                                                  'Ўд')
                         AND SGBSTDN_TERM_CODE_EFF =
                             (SELECT MAX (SGBSTDN_TERM_CODE_EFF)
                                FROM sgbstdn

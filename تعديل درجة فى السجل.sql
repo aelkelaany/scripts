@@ -1,4 +1,17 @@
-/* Formatted on 04/05/2021 14:57:00 (QP5 v5.227.12220.39754) */
+
+-- before running 
+update bu_dev.tmp_tbl_kilany1 
+set col03=f_get_pidm(col04) ;
+
+-- set grade
+update bu_dev.tmp_tbl_kilany1 
+set col04='До' ;
+
+ select col03, f_get_std_id(col03),f_get_std_name(col03) from bu_dev.tmp_tbl_kilany1 
+ where not  exists 
+ (select '1' from shrtckn where SHRTCKN_PIDM=col03 and SHRTCKN_TERM_CODE=col01 and SHRTCKN_CRN=col02 ) ;
+
+
 DECLARE
    reply_code        NUMBER;
 
@@ -60,8 +73,9 @@ DECLARE
              col03 student_pidm,
              '4' change_reason,
              col04 grade
-        FROM bu_dev.tmp_tbl_kilany
-        where COL02 = '30558';
+        FROM bu_dev.tmp_tbl_kilany1
+         where COL03!= '176736'
+        ;
 
    l_tckn_seq_no     shrtckn.shrtckn_seq_no%TYPE;
    l_credit_hr       sfrstcr.sfrstcr_credit_hr%TYPE;
@@ -187,3 +201,22 @@ BEGIN
       END;
    END LOOP;
 END;
+
+
+-- -RECLACULATE GPA , AND RUNNING COMPLIANCE 
+Insert into GLBSLCT
+   (GLBSLCT_APPLICATION, GLBSLCT_SELECTION, GLBSLCT_CREATOR_ID, GLBSLCT_DESC, GLBSLCT_LOCK_IND, 
+    GLBSLCT_ACTIVITY_DATE, GLBSLCT_TYPE_IND)
+ Values
+   ('STUDENT', 'GRD_CHNG_001' , 'SAISUSR', 'GRD_CHNG_001 ', 'N', 
+    SYSDATE, NULL);
+    
+    
+  
+    
+    Insert into GLBEXTR
+   SELECT 'STUDENT', 'GRD_CHNG_001', 'SAISUSR', 'SAISUSR',  PIDM, 
+    SYSDATE, 'S', NULL  FROM 
+(  SELECT   col03  PIDM
+            from bu_dev.tmp_tbl_kilany1
+           WHERE      col03 IS NOT NULL) ;

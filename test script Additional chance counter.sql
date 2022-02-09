@@ -1,5 +1,5 @@
 declare 
-   p_pidm          spriden.spriden_pidm%TYPE :=f_get_pidm('436003332');
+   p_pidm          spriden.spriden_pidm%TYPE :=f_get_pidm('437007201');
    p_totoal_ind    VARCHAR2(1) := 'C' ;
    
  

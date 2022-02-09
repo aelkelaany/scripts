@@ -24,7 +24,7 @@ INSERT INTO syrmgrd
                     col04,
                     SUBSTR (col06, 1, INSTR (col06, '-') - 2),
                     SUBSTR (col06, INSTR (col06, '-') + 2)
-      FROM BU_DEV.TMP_TBL_KILANY
+      FROM BU_DEV.TMP_TBL_KILANY1
      WHERE col05 IS NOT NULL;
 
 

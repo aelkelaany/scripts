@@ -1,16 +1,17 @@
-/* Formatted on 22/02/2021 09:03:56 (QP5 v5.227.12220.39754) */
+/* Formatted on 08/02/2022 14:13:49 (QP5 v5.227.12220.39754) */
 DECLARE
-   v_STAFF_ID       VARCHAR2 (100) := TRIM(:STAFF_ID);
-   v_FIRST_NAME     VARCHAR2 (100) := TRIM(:FIRST_NAME);
-   v_SECOND_NAME    VARCHAR2 (100) := TRIM(:SECOND_NAME);
-   v_THIRD_NAME     VARCHAR2 (100) := TRIM(:THIRD_NAME);
-   v_FAMILY_NAME    VARCHAR2 (100) := TRIM(:FAMILY_NAME);
-   v_STAFF_MAIL     VARCHAR2 (100) := TRIM(:STAFF_MAIL);
-   v_userName       VARCHAR2 (100) := TRIM(:USERNAME);
-   v_STAFF_SSN      VARCHAR2 (100) := TRIM(:STAFF_SSN);
-   v_STAFF_GENDER   VARCHAR2 (100) :=TRIM( :STAFF_GENDER);
-   V_STAFF_PHONE    VARCHAR2 (100) :=TRIM( :V_STAFF_PHONE);
-   V_COLL           VARCHAR2 (4) := TRIM(:V_COLLEGE);
+   v_STAFF_ID       VARCHAR2 (100) := TRIM (:STAFF_ID);
+   v_FIRST_NAME     VARCHAR2 (100) := TRIM (:FIRST_NAME);
+   v_SECOND_NAME    VARCHAR2 (100) := TRIM (:SECOND_NAME);
+   v_THIRD_NAME     VARCHAR2 (100) := TRIM (:THIRD_NAME);
+   v_FAMILY_NAME    VARCHAR2 (100) := TRIM (:FAMILY_NAME);
+   v_STAFF_MAIL     VARCHAR2 (100) := TRIM (:STAFF_MAIL);
+   v_userName       VARCHAR2 (100) := TRIM (:USERNAME);
+   v_STAFF_SSN      VARCHAR2 (100) := TRIM (:STAFF_SSN);
+   v_STAFF_GENDER   VARCHAR2 (100) := TRIM (:STAFF_GENDER);
+   V_STAFF_PHONE    VARCHAR2 (100) := TRIM (:V_STAFF_PHONE);
+   V_COLL           VARCHAR2 (4) := TRIM (:V_COLLEGE);
+   V_DEPT           VARCHAR2 (4) := TRIM (:V_DEPT);
    v_pidm           NUMBER (9);
 
    CURSOR does_it_exist_cur
@@ -115,8 +116,7 @@ BEGIN
                                SPBPERS_CITZ_CODE,
                                SPBPERS_DATA_ORIGIN,
                                SPBPERS_USER_ID,
-                               SPBPERS_ARMED_SERV_MED_VET_IND 
-                                )
+                               SPBPERS_ARMED_SERV_MED_VET_IND)
         VALUES (v_pidm,
                 v_STAFF_SSN,
                 '',
@@ -127,8 +127,7 @@ BEGIN
                 '',
                 'Banner',
                 'BU_APPS',
-                'N' 
-                 );
+                'N');
 
 
    INSERT INTO GENERAL.GOREMAL (GOREMAL_PIDM,
@@ -181,7 +180,7 @@ BEGIN
                                SIBINST_USER_ID,
                                SIBINST_OVERRIDE_PROCESS_IND)
         VALUES (v_pidm,
-                '144220',
+                '144320',
                 'ä',
                 'Y',
                 'Y',
@@ -195,13 +194,17 @@ BEGIN
    INSERT INTO SATURN.SIRDPCL (SIRDPCL_PIDM,
                                SIRDPCL_TERM_CODE_EFF,
                                SIRDPCL_COLL_CODE,
+                               SIRDPCL_DEPT_CODE,
                                SIRDPCL_HOME_IND,
                                SIRDPCL_ACTIVITY_DATE)
         VALUES (v_pidm,
-                '144220',
+                '144320',
                 v_coll,
+                v_dept,
                 'Y',
                 SYSDATE);
+
+
 
    UPDATE GOBTPAC
       SET GOBTPAC_LDAP_USER = UPPER (v_userName),
