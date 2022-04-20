@@ -48,3 +48,31 @@ SELECT ROWID,
  SEC_HOLD_STD_CHANGE_PIN
  
  LOG_SUCCESS_LOGIN
+ 
+ ---------------
+ 
+ SELECT student_pidm,
+       student_id,
+       SEQUENCE_NO,
+       STUDENT_PIN,
+       ACTIVITY_DATE,
+       unhashed_pin,
+       LENGTH (unhashed_pin) len
+  FROM (SELECT student_pidm,
+               spriden_id student_id,
+               SEQUENCE_NO,
+               STUDENT_PIN,
+               ACTIVITY_DATE,
+               data_encryption.decrypt (STUDENT_PIN || '',
+                                        'h9MI2zwWy3gF22v5')
+                  unhashed_pin
+          FROM log_success_login l1, spriden
+         WHERE     spriden_pidm = l1.student_pidm
+               AND spriden_change_ind IS NULL
+               AND SEQUENCE_NO = (SELECT MAX (SEQUENCE_NO)
+                                    FROM log_success_login l2
+                                   WHERE l2.student_pidm = l1.student_pidm))
+WHERE STUDENT_PIDM  = F_GET_PIDM('438013047')
+;
+
+object_definition

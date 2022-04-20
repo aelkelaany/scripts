@@ -226,3 +226,8 @@ xwckupst.dispLogin
 ÌÏÇæá
 
 SIVASGN
+
+
+-- PG ADMISSION
+
+ADM_PG_DEPT_PROG

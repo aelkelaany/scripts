@@ -11,7 +11,7 @@ DECLARE
              AND SYBSTDC_DISCONNECTED = 'Y'
              AND f_get_styp (SYBSTDC_PIDM) <> 'ä'
              AND ssbsect_term_code = :p_term
-             and ssbsect_ptrm_code='4'
+             and ssbsect_ptrm_code in ('5','1')
              AND ssbsect_crn = SYBSTDC_CRN;
 
    l_count_sfrstcr     NUMBER := 0;

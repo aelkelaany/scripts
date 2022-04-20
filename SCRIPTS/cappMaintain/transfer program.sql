@@ -1,8 +1,8 @@
-
+ 
 declare 
-l_process_id number(9):=4500;
-l_reply_code varchar2(50);
-l_reply_message varchar2(200);
+l_process_id number(9):=6800;
+l_reply_code VARCHAR2(50);
+l_reply_message VARCHAR2(200);
 begin
 --START REPLACING TO NEW PROGRAM
 delete TRANSFER_STUDENT_PROGRAM ;
@@ -10,7 +10,7 @@ delete TRANSFER_STUDENT_PROGRAM ;
                                                      l_reply_code,
                                                      l_reply_message);
        DBMS_OUTPUT.PUT_LINE (
-              'parameters 8: REPLACE_PROGRAM NUTR'
+              'parameters 8: REPLACE_PROGRAM CIVE33'
            || l_reply_code
            || '-----'
            || l_reply_message
@@ -23,12 +23,12 @@ Insert into GLBSLCT
    (GLBSLCT_APPLICATION, GLBSLCT_SELECTION, GLBSLCT_CREATOR_ID, GLBSLCT_DESC, GLBSLCT_LOCK_IND, 
     GLBSLCT_ACTIVITY_DATE, GLBSLCT_TYPE_IND)
  Values
-   ('STUDENT', 'CAPP_STD_NUTR35', 'SAISUSR', 'ÿ·»… NUTR 35', 'N', 
+   ('STUDENT', 'CAPP_STD_CIVE33', 'SAISUSR', 'ÿ·»… CIVE 38', 'N', 
     SYSDATE, NULL);
  
  
 Insert into GLBEXTR
-   SELECT 'STUDENT', 'CAPP_STD_ENGL', 'SAISUSR', 'SAISUSR', PIDM, 
+   SELECT 'STUDENT', 'CAPP_STD_CIVE33', 'SAISUSR', 'SAISUSR', PIDM, 
     SYSDATE, 'S', NULL  FROM 
 ( SELECT 
      PIDM_CD PIDM 
@@ -42,10 +42,10 @@ WHERE NOTES='Y'
 
 select f_get_std_id(GLBEXTR_KEY) id ,f_get_std_name(GLBEXTR_KEY) name ,GLBEXTR_KEY ,F_GET_STATUS(GLBEXTR_KEY) ST_STATUS from GLBEXTR
 where 
-GLBEXTR_SELECTION='CAPP_STD_MIS33'
+GLBEXTR_SELECTION='CAPP_STD_MIS38'
 and F_GET_STATUS(GLBEXTR_KEY)='AS'
 ;
---select f_get_pidm('2233') from dual;
+--select f_get_pidm('2238') from dual;
 
 --ELC10105
 
@@ -79,7 +79,7 @@ WHERE NOTES='Y'
                                   
    update  SORLFOS s 
    set S.SORLFOS_TERM_CODE_CTLG='143810' 
-   where SORLFOS_TERM_CODE='144310'
+   where SORLFOS_TERM_CODE='143310'
    and SORLFOS_CACT_CODE='ACTIVE'
    and SORLFOS_PIDM IN ( SELECT 
      PIDM_CD PIDM 
@@ -99,3 +99,7 @@ WHERE NOTES='Y'
  )
                           --   and SORLCUR_CACT_CODE='ACTIVE'
                               ;
+                              
+                              
+                              
+                              
