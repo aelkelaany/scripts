@@ -43,7 +43,7 @@ INSERT INTO new_students_email ("Term Code",
                  (SELECT MAX (sgbstdn_term_code_eff)
                     FROM sgbstdn d
                    WHERE     d.sgbstdn_pidm = x.sgbstdn_pidm
-                         AND d.sgbstdn_term_code_eff <= '144310')
+                         AND d.sgbstdn_term_code_eff <= '144320')
           AND sgbstdn_coll_code_1 = stvcoll_code
           AND sgbstdn_camp_code = stvcamp_code
           AND sgbstdn_stst_code = 'AS'

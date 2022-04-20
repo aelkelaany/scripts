@@ -8,7 +8,7 @@ DECLARE
                AND object_code = 'WF_REG_MAINTAIN'
                AND m.request_status = 'P'
                AND F.FLOW_SEQ = 4
-               AND USER_PIDM = f_get_pidm ('3497') -->>> From
+               AND USER_PIDM = f_get_pidm ('3466') -->>> From
                AND ACTION_CODE IS NULL
                AND ROWNUM <= 15
       ORDER BY 1 ASC;
@@ -17,7 +17,7 @@ BEGIN
    FOR REC IN GET_REQUESTS
    LOOP
       UPDATE wf_request_flow
-         SET USER_PIDM = f_get_pidm ('3179')--<<< To
+         SET USER_PIDM = f_get_pidm ('2521')--<<< To
        WHERE REQUEST_NO = REC.REQ_NO AND FLOW_SEQ = 4 --AND  USER_PIDM IS NULL
              AND ACTION_CODE IS NULL;
    END LOOP;
@@ -53,7 +53,7 @@ select f_get_pidm('2521') from dual ;
          AND B.FLOW_SEQ = (SELECT MAX (FLOW_SEQ)
                              FROM wf_request_flow
                             WHERE request_no = B.REQUEST_NO)
-         AND B.FLOW_SEQ =  4
+         AND B.FLOW_SEQ  =  4
 GROUP BY b.user_pidm
 order by 1 desc;
 

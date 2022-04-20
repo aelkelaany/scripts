@@ -1,0 +1,32 @@
+/* Formatted on 3/9/2022 9:42:47 AM (QP5 v5.371) */
+SELECT DISTINCT SHRTCKN_TERM_CODE,
+                SHRTCKN_REPEAT_COURSE_IND,
+                SHRTCKN_SUBJ_CODE,
+                SHRTCKN_CRSE_NUMB,
+                SHRTCKN_CRN,
+                ' ' || SHRTCKN_CRSE_TITLE                  SHRTCKN_CRSE_TITLE,
+                SHRTCKG_CREDIT_HOURS,
+                SHRTCKL_LEVL_CODE,
+                SHRTCKN_PIDM,
+                B.SHRTCKG_GRDE_CODE_FINAL,
+                (SELECT SHRGRDE_QUALITY_POINTS
+                   FROM SHRGRDE
+                  WHERE     SHRGRDE_CODE = B.SHRTCKG_GRDE_CODE_FINAL
+                        AND SHRGRDE_LEVL_CODE = 'Ã„')    points
+  FROM SHRTCKN, SHRTCKG B, SHRTCKL
+ WHERE     SHRTCKL_TCKN_SEQ_NO = SHRTCKN_SEQ_NO
+       AND SHRTCKL_TERM_CODE = SHRTCKN_TERM_CODE
+       AND SHRTCKL_PIDM = SHRTCKN_PIDM
+       AND SHRTCKG_TCKN_SEQ_NO = SHRTCKN.SHRTCKN_SEQ_NO
+       AND SHRTCKG_TERM_CODE = SHRTCKN.SHRTCKN_TERM_CODE
+       AND SHRTCKG_PIDM = SHRTCKN.SHRTCKN_PIDM
+       AND SHRTCKG_SEQ_NO =
+           (SELECT MAX (SHRTCKG_SEQ_NO)
+              FROM SHRTCKG
+             WHERE     SHRTCKG_PIDM = B.SHRTCKG_PIDM
+                   AND SHRTCKG_TERM_CODE = B.SHRTCKG_TERM_CODE
+                   AND SHRTCKG_TCKN_SEQ_NO = B.SHRTCKG_TCKN_SEQ_NO)
+       AND SHRTCKN_PIDM = f_get_pidm ('437009575')
+       order by 1
+       
+       

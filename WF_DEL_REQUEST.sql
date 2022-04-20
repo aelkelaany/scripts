@@ -1,20 +1,40 @@
-exec p_Delete_wf('319563') ;
-select f_get_std_id('215491') from  dual ;
+exec p_Delete_wf('356589') ;
+select f_get_pidm('2233') from  dual ;
 SGAASST
    -----------------------------cancel rejection   
 update wf_request_flow f
 set ACTION_CODE='',
 NOTES=''
 where 
-request_no=322983
+request_no=350647 
 and ACTION_CODE like '%REJECT%' 
 and SEQUENCE_NO=(select max(SEQUENCE_NO)
 from wf_request_flow
 where request_no=f.request_no)  ;
 
 update request_master set REQUEST_STATUS='P'
-where REQUEST_NO=322983
+where REQUEST_NO=350647 
 and REQUEST_STATUS='R' ;
+
+update wf_request_flow
+set user_pidm =67800
+
+where 
+request_no=356530 
+AND ROLE_CODE = 'RO_GRADE_CHANGE' ; 
+
+ 
+
+
+
+
+
+
+
+
+
+
+
 ------------------------------------------------------
 --------------------------------------------------Reject request
 
