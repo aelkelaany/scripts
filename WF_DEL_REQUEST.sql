@@ -1,4 +1,4 @@
-exec p_Delete_wf('356589') ;
+exec p_Delete_wf('359987') ;
 select f_get_pidm('2233') from  dual ;
 SGAASST
    -----------------------------cancel rejection   
@@ -25,7 +25,7 @@ AND ROLE_CODE = 'RO_GRADE_CHANGE' ;
 
  
 
-
+ 
 
 
 

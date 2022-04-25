@@ -13,7 +13,7 @@ declare
              AND sfrstcr_term_code = shrtckn_term_code(+)
              AND sfrstcr_crn = shrtckn_crn(+)
              AND sfrstcr_term_code = '144310'
-              AND sfrstcr_crn in ( '12068'/*,'15130','15034','15149','15091'*/)
+              AND sfrstcr_crn in ( '17888'/*,'15130','15034','15149','15091'*/)
           -- and sfrstcr_pidm=f_get_pidm('441015688') --
              ;
 

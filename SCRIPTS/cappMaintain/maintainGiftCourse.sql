@@ -1,9 +1,9 @@
  declare
- P_PROCESS_ID number(8):=3300;
- l_subjCode varchar2(5):='IS';
- l_crseNumb varchar(5):='10002';
+ P_PROCESS_ID number(8):=6100;
+ l_subjCode varchar2(5):='PUBH';
+ l_crseNumb varchar(5):='1761';
  l_credit_hrs number(2):=3;
- l_desc varchar2(30):='';
+ l_desc varchar2(30):='Graduation Project II';
  REPLY_CODE varchar2(50);
   REPLY_message varchar2(500);
   l_row_count number:=0;
@@ -16,7 +16,8 @@
                  AND D.MAPPING_SUCCESS_IND = 'N'
                 and  D.LHS_SUBJ_CODE=l_subjCode
                 and  D.LHS_CRSE_NUMB=l_crseNumb  
-              --  and D.STD_PIDM=167100
+               and f_get_std_id(D.STD_PIDM) in ('438000534','438001296','438001675','438002215','438003302','438004072','438004601','438007070','438007996','438009178','438009645','438000891','438001934','438005295','438006628','438007793','438007905','438008681','438008725','438008737','438008762','438009290','438010256','438010367','438010947','438000688','438004366','438005090','438005679','438005803','438006418','438006800','438009716','438012910')
+ 
                  ;
 
        
@@ -103,7 +104,8 @@
 
       
          L_TRAM_SEQ_NO := L_TRIT_SEQ_NO+0;
- /*
+   ---- hash here for multiple courses on the same process id  /*      
+
 BEGIN
         INSERT INTO SHRTRAM (SHRTRAM_PIDM,
                               SHRTRAM_TRIT_SEQ_NO,
@@ -131,8 +133,9 @@ BEGIN
                       '');
                       
 END ; 
- 
-        */  
+ -- end here ....  */
+
+         
             SELECT NVL (MAX (SHRTRCR_SEQ_NO), 0) + 1
               INTO L_TRCR_SEQ_NO
               FROM SHRTRCR A, SHRTRIT B, SHRTRAM C
