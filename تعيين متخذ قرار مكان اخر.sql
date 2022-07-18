@@ -10,7 +10,7 @@ where USER_PIDM=f_get_pidm(:old);
 update wf_request_flow
 set USER_PIDM=f_get_pidm(:new)
 where USER_PIDM=f_get_pidm(:old)
-and ACTION_CODE is null OR ACTION_CODE LIKE '%HOLD%' ;
+and ACTION_CODE is null   ;
 
 
 SELECT * FROM REQUEST_MASTER

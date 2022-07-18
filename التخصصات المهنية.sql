@@ -147,3 +147,10 @@ SELECT get_moe_major (stvmajr_code, 'AR')     arabic,
    AND SHRDGMR_DEGS_CODE = 'ÎÌ'
    AND SHRDGMR_DEGC_CODE='Èß'
  ;
+ 
+ 
+ SELECT get_moe_major (BU_MAJOR_CODE, 'AR')               MOE_MAJOR_DESC_ar,
+       get_moe_major (BU_MAJOR_CODE, 'EN')               MOE_MAJOR_DESC_en,
+       f_get_desc_fnc ('stvmajr', BU_MAJOR_CODE, 30)     bu_desc,
+       MOE_MAJOR_DESC
+  FROM moe_majors

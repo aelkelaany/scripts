@@ -17,8 +17,8 @@
             AS "Vice Dean Name" 
          
     FROM STVCOLL B, USERS_ATTRIBUTES D, USERS_ATTRIBUTES e
-   WHERE     stvCOLL_CODE NOT IN ('00', '34', '44', '39', '11', '12', '22')
-         AND B.STVCOLL_CODE = D.ATTRIBUTE_VALUE
+   WHERE     --stvCOLL_CODE NOT IN ('00', '34', '44', '39', '11', '12', '22')AND
+          B.STVCOLL_CODE = D.ATTRIBUTE_VALUE
          AND NVL (D.ATTRIBUTE_CODE, 'COLLEGE') = 'COLLEGE'
          AND d.ROLE_CODE = 'RO_COLLEGE_DEAN'
          AND EXISTS
