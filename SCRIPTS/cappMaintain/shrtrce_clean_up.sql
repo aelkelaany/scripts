@@ -12,7 +12,7 @@ DELETE FROM shrtrce
             AND EXISTS
                    (SELECT '2'
                       FROM CAPP_MNPL_LOG_DETAIL
-                     WHERE shrtrce_pidm = std_pidm AND process_id = 2900);
+                     WHERE shrtrce_pidm = std_pidm AND process_id = 7200);
 
 DELETE FROM SHRTRCR
       WHERE     EXISTS
@@ -27,7 +27,7 @@ DELETE FROM SHRTRCR
             AND EXISTS
                    (SELECT '2'
                       FROM CAPP_MNPL_LOG_DETAIL
-                     WHERE SHRTRCR_pidm = std_pidm AND process_id = 2900);
+                     WHERE SHRTRCR_pidm = std_pidm AND process_id = 7200);
 
 
 DELETE FROM SHRTRAM
@@ -40,7 +40,7 @@ DELETE FROM SHRTRAM
             AND EXISTS
                    (SELECT '2'
                       FROM CAPP_MNPL_LOG_DETAIL
-                     WHERE SHRTRAM_pidm = std_pidm AND process_id = 2900);
+                     WHERE SHRTRAM_pidm = std_pidm AND process_id = 7200);
 
 
 DELETE FROM SHRTRIT
@@ -48,4 +48,4 @@ DELETE FROM SHRTRIT
             AND EXISTS
                    (SELECT '2'
                       FROM CAPP_MNPL_LOG_DETAIL
-                     WHERE SHRTRIT_pidm = std_pidm AND process_id = 2900)
+                     WHERE SHRTRIT_pidm = std_pidm AND process_id = 7200)

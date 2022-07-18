@@ -13,7 +13,7 @@ INSERT INTO BU_APPS.GRADES_APPROVAL_EXECLUDED_CRN (TERM_CODE,
                                                    VICE_DEAN_PIDM,
                                                    DEAN_ID,
                                                    DEAN_PIDM)
-    SELECT DISTINCT '144310',
+    SELECT DISTINCT '144320',
                     col01,
                     col07,
                     f_get_pidm (col07),

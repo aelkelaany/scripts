@@ -8,16 +8,16 @@ DECLARE
                AND object_code = 'WF_REG_MAINTAIN'
                AND m.request_status = 'P'
                AND F.FLOW_SEQ = 4
-               AND USER_PIDM = f_get_pidm ('3466') -->>> From
+               AND USER_PIDM = f_get_pidm ('947') -->>> From
                AND ACTION_CODE IS NULL
-               AND ROWNUM <= 15
+               AND ROWNUM <= 5
       ORDER BY 1 ASC;
 
 BEGIN
    FOR REC IN GET_REQUESTS
    LOOP
       UPDATE wf_request_flow
-         SET USER_PIDM = f_get_pidm ('2521')--<<< To
+         SET USER_PIDM = f_get_pidm ('3344')--<<< To
        WHERE REQUEST_NO = REC.REQ_NO AND FLOW_SEQ = 4 --AND  USER_PIDM IS NULL
              AND ACTION_CODE IS NULL;
    END LOOP;

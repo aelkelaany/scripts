@@ -19,7 +19,7 @@
    LOOP
       UPDATE wf_request_flow
          SET USER_PIDM = 216492,
-             --ACTION_CODE = 'HOLD',
+              ACTION_CODE = 'HOLD',
              ACTIVITY_DATE = SYSDATE,
              USER_ID = USER
        WHERE REQUEST_NO = i.request_no AND SEQUENCE_NO = 5 AND FLOW_SEQ = 5;

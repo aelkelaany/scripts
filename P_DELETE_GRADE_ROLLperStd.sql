@@ -12,9 +12,9 @@ declare
        WHERE     sfrstcr_pidm = shrtckn_pidm(+)
              AND sfrstcr_term_code = shrtckn_term_code(+)
              AND sfrstcr_crn = shrtckn_crn(+)
-             AND sfrstcr_term_code = '144310'
-              AND sfrstcr_crn in ( '12068'/*,'15130','15034','15149','15091'*/)
-          -- and sfrstcr_pidm=f_get_pidm('441015688') --
+             AND sfrstcr_term_code = '144320'
+              AND sfrstcr_crn in ( '23469'/*,'15130','15034','15149','15091'*/)
+          --  and sfrstcr_pidm=f_get_pidm('441005321') --
              ;
 
    l_shrtckg_count   NUMBER := 0;

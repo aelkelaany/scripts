@@ -3,10 +3,10 @@ TRUNCATE TABLE bu_dev.tmp_tbl_kilany;
 
 INSERT INTO bu_dev.tmp_tbl_kilany (col01, col02, col03)
       SELECT SHRTCKN_PIDM STD_ID, shrtckn_term_code term, SHRTCKN_CRN crn
-         SELECT F_GET_STD_ID (SHRTCKN_PIDM) STD_ID,
+       /*  SELECT F_GET_STD_ID (SHRTCKN_PIDM) STD_ID,
                F_GET_STD_NAME (SHRTCKN_PIDM) NAME,
                shrtckn_term_code,
-               scbcrse_title ,a.sgbstdn_term_code_eff ,sgbstdn_coll_code_1 ,shrtckg_grde_code_final 
+               scbcrse_title ,a.sgbstdn_term_code_eff ,sgbstdn_coll_code_1 ,shrtckg_grde_code_final */
         FROM shrtckn,
              sgbstdn a,
              shrtckg g1,
@@ -34,14 +34,14 @@ INSERT INTO bu_dev.tmp_tbl_kilany (col01, col02, col03)
                    WHERE     c2.scbcrse_subj_code = c1.scbcrse_subj_code
                          AND c2.scbcrse_crse_numb = c1.scbcrse_crse_numb
                          AND c2.scbcrse_eff_term <= shrtckn_term_code)
-             AND shrtckg_grde_code_final IN ('Û', 'ÛÔ')
+             AND shrtckg_grde_code_final IN ( 'ÛÔ')
              AND sgbstdn_stst_code = 'ÎÌ'
              AND EXISTS
                      (SELECT '1'
                         FROM SHRDGMR
                        WHERE     SHRDGMR_pidm = a.sgbstdn_pidm
                              AND SHRDGMR_DEGS_CODE = 'ÎÌ'
-                             AND SHRDGMR_TERM_CODE_GRAD = '144310')
+                             AND SHRDGMR_TERM_CODE_GRAD = '144320')
      ;
 
 
