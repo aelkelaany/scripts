@@ -38,4 +38,7 @@ SELECT distinct col01 ,col02,
                                                     SCRRTST_CRSE_NUMB_PREQ
                                                FROM SCRRTST)
                                                and rownum <10
+                                               
+                                               SCRRTST
+                                               SsRRTST
    ;

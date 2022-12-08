@@ -290,3 +290,76 @@ BEGIN
                               '');
    END LOOP;
 END;
+
+---------------- —’œ Õ—„«‰
+
+DECLARE
+   CURSOR crs_get_crn
+   IS
+      SELECT DISTINCT sfrstcr_term_code term_code, sfrstcr_crn crn
+        FROM sfrstcr x, ssbsect
+       WHERE     ssbsect_term_code = sfrstcr_term_code
+             AND ssbsect_crn = sfrstcr_crn
+             AND sfrstcr_term_code = '144340'
+              AND sfrstcr_grde_code IN ('Õ',' ','„‰')
+             AND sfrstcr_grde_code IS NOT NULL
+             AND sfrstcr_grde_date IS NULL
+             AND SSBSECT_GRADABLE_IND = 'Y';
+
+BEGIN
+   FOR r IN crs_get_crn
+   LOOP
+      shkrols.p_do_graderoll (r.term_code,
+                              r.crn,
+                              'WORKFLOW',
+                              '1',
+                              '1',
+                              'O',
+                              '',
+                              '',
+                              '',
+                              '');
+   END LOOP;
+END;
+
+/*   —ÕÌ· „⁄«„·«  «ﬂ „·  */
+DECLARE
+    CURSOR crs_get_crn IS
+        SELECT DISTINCT sfrstcr_term_code term_code, sfrstcr_crn crn
+          FROM sfrstcr x, ssbsect
+         WHERE     ssbsect_term_code = sfrstcr_term_code
+               AND ssbsect_crn = sfrstcr_crn
+               AND sfrstcr_term_code = '144410'
+               AND sfrstcr_grde_code IS NOT NULL
+               AND sfrstcr_grde_date IS NULL
+               AND SSBSECT_GRADABLE_IND = 'Y'
+               AND EXISTS
+                       (SELECT '1'
+                          FROM request_details  crn,
+                               request_details  term,
+                               request_master   a
+                         WHERE     a.object_code = 'WF_GRADE_APPROVAL'
+                               AND A.REQUEST_NO = crn.REQUEST_NO
+                               AND A.REQUEST_NO = term.REQUEST_NO
+                               AND TERM.SEQUENCE_NO = 1
+                               AND CRN.SEQUENCE_NO = 1
+                               AND CRN.ITEM_CODE = 'CRN'
+                               AND TERM.ITEM_CODE = 'TERM'
+                               AND TERM.ITEM_VALUE = sfrstcr_term_code
+                               AND crn.item_value = sfrstcr_crn
+                               AND request_status = 'C');
+BEGIN
+    FOR r IN crs_get_crn
+    LOOP
+        shkrols.p_do_graderoll (r.term_code,
+                                r.crn,
+                                'WORKFLOW',
+                                '1',
+                                '1',
+                                'O',
+                                '',
+                                '',
+                                '',
+                                '');
+    END LOOP;
+END;

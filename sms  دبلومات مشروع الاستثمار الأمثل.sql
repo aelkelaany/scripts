@@ -59,7 +59,7 @@ declare
 BEGIN
    FOR r IN crs_accepted_students
    LOOP
-      bu_apps.p_send_sms (
+     -- bu_apps.p_send_sms (
          '0'||r."Mobile NO",
          v_message || ' ' || r."Student Number" || ' ' || v_message2,
          v_reply_code,

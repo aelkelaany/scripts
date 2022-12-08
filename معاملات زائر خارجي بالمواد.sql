@@ -46,7 +46,7 @@
          AND SG.SGBSTDN_TERM_CODE_EFF = (SELECT MAX (SGBSTDN_TERM_CODE_EFF)
                                            FROM SGBSTDN
                                           WHERE sgbstdn_pidm = REQUESTER_PIDM)
-         AND sgbstdn_coll_code_1 = '14'
+       --  AND sgbstdn_coll_code_1 = '14'
         -- AND f_xml_value (CRN.item_value, 'DECISION') = 'A'
          AND c1.scbcrse_subj_code || '~' || c1.scbcrse_crse_numb =
              f_xml_value (CRN.item_value, 'BANNER_COURSE')

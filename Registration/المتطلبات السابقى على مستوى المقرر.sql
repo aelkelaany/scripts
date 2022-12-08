@@ -6,11 +6,11 @@
                    FROM scbcrse c2
                   WHERE     c2.scbcrse_subj_code = c1.scbcrse_subj_code
                         AND c2.scbcrse_crse_numb = c1.scbcrse_crse_numb
-                        AND c2.scbcrse_eff_term <= '144220')
+                        AND c2.scbcrse_eff_term <= '144420')
          AND EXISTS
                 (SELECT '1'
                    FROM ssbsect
-                  WHERE     ssbsect_term_code = '144220'
+                  WHERE     ssbsect_term_code = '144420'
                         AND ssbsect_subj_code = scbcrse_subj_code
                         AND ssbsect_crse_numb = scbcrse_crse_numb
                          AND SSBSECT_SSTS_CODE='ä')

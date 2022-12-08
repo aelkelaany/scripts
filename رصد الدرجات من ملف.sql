@@ -2,17 +2,25 @@
 --colo2>>crn
 --col03>> pidm
 --col04>> grade code='До'
-
+delete from bu_dev.tmp_tbl_kilany where col01 is null ;
 update bu_dev.tmp_tbl_kilany set COL03=f_get_pidm(trim(COL01)) ;
 update bu_dev.tmp_tbl_kilany set COL02=trim(COL02)  ;
 select distinct * from bu_dev.tmp_tbl_kilany
 WHERE  COL03 IS   NULL ;
 
 select count( *) from bu_dev.tmp_tbl_kilany
-WHERE  COL02 in (select sfrstcr_pidm
+WHERE  COL03 in (select sfrstcr_pidm
 from sfrstcr 
-where sfrstcr_term_code='144010'
-and sfrstcr_crn='11717'
+where sfrstcr_term_code='144340'
+and sfrstcr_crn=col02
+and sfrstcr_rsts_code in ('RE','RW'));
+
+select  *  from bu_dev.tmp_tbl_kilany
+WHERE  not exists (select '1'
+from sfrstcr 
+where sfrstcr_term_code='144340'
+and sfrstcr_crn=col02
+and sfrstcr_pidm=col03
 and sfrstcr_rsts_code in ('RE','RW'));
 
 update bu_dev.tmp_tbl_kilany set col04='До'
@@ -20,7 +28,7 @@ where col03 is not null ;
 
 select  * from  sfrstcr where exists (select '1' from bu_dev.tmp_tbl_kilany where col03=sfrstcr_pidm   and  col02=sfrstcr_crn)
   
-and sfrstcr_term_code='144230'
+and sfrstcr_term_code='144340'
  
 and sfrstcr_rsts_code in ('RE','RW')
 --and SFRSTCR_GRDE_CODE is null
@@ -33,7 +41,7 @@ and sfrstcr_rsts_code in ('RE','RW')
 
  update sfrstcr set SFRSTCR_GRDE_CODE='До'
   ,SFRSTCR_GRDE_CODE_MID=0,SFRSTCR_GRDE_DATE=null
-where sfrstcr_term_code='144230'
+where sfrstcr_term_code='144340'
  
 and sfrstcr_rsts_code in ('RE','RW')
 and (sfrstcr_pidm,sfrstcr_crn) in (select col03,col02 from bu_dev.tmp_tbl_kilany )

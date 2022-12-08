@@ -8,16 +8,16 @@ DECLARE
                AND object_code = 'WF_REG_MAINTAIN'
                AND m.request_status = 'P'
                AND F.FLOW_SEQ = 4
-               AND USER_PIDM = f_get_pidm ('947') -->>> From
+               AND USER_PIDM = f_get_pidm ('2521') -->>> From
                AND ACTION_CODE IS NULL
-               AND ROWNUM <= 5
+               AND ROWNUM <= 50
       ORDER BY 1 ASC;
 
 BEGIN
    FOR REC IN GET_REQUESTS
    LOOP
       UPDATE wf_request_flow
-         SET USER_PIDM = f_get_pidm ('3344')--<<< To
+         SET USER_PIDM = f_get_pidm ('4234')--<<< To
        WHERE REQUEST_NO = REC.REQ_NO AND FLOW_SEQ = 4 --AND  USER_PIDM IS NULL
              AND ACTION_CODE IS NULL;
    END LOOP;
@@ -38,10 +38,12 @@ UPDATE wf_request_flow
 --3344 Nora Ghamdi
 --3179 Ahlam
 --947 MUJAHED
--- Alia 3497
+--3497 Alia
+-- 1009 abofajr
+--4322 szahrani
 ---********
 select f_get_pidm('2521') from dual ; 
----********
+---******** monitor pending requests 
   SELECT COUNT (DISTINCT B.REQUEST_NO),
          f_get_STD_ID (b.user_pidm) EMPLOYEE_ID,
          f_get_STD_NAME (b.user_pidm) EMPLOYEE_NAME,
@@ -82,7 +84,7 @@ SELECT DISTINCT m.request_no REQ_NO ,ACTION_CODE ,REQUEST_DATE
          WHERE     m.request_no = f.request_no
                AND object_code = 'WF_REG_MAINTAIN'
                AND m.request_status = 'P'
-               AND F.FLOW_SEQ = 4
+                AND F.FLOW_SEQ = 4
             --  and user_pidm=235909
              --  AND ACTION_CODE =''
               

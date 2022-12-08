@@ -1,6 +1,22 @@
+/*UPDATE SFRSTCR WHITH OLD GRADES ENGL1001*/
+
+SELECT * FROM SFRSTCR  A
+WHERE 
+
+EXISTS (SELECT '1' FROM SFRSTCR WHERE SFRSTCR_PIDM=A.SFRSTCR_PIDM AND SFRSTCR_TERM_CODE='144410' AND SFRSTCR_CRN='19745'
+ 
+) ;
+
+
 /* REPORT AND FILL THE TABLE */
-truncate table bu_dev.tmp_tbl_kilany ;
-insert into bu_dev.tmp_tbl_kilany (COL01, COL02, COL03, COL04, COL05, COL06)
+ 
+
+
+
+
+
+--truncate table bu_dev.tmp_tbl_kilany1 ;
+ insert into bu_dev.tmp_tbl_kilany (col01,col02,COL03,COL04, COL05, COL06)
   SELECT SFRSTCR_PIDM,
          f_get_std_id (SFRSTCR_PIDM)      stid,
          f_get_std_name (SFRSTCR_PIDM)    name,
@@ -8,20 +24,16 @@ insert into bu_dev.tmp_tbl_kilany (COL01, COL02, COL03, COL04, COL05, COL06)
          SFRSTCR_GRDE_CODE,
          CASE
              WHEN SFRSTCR_GRDE_CODE < '60' THEN 'NF'
-             WHEN SFRSTCR_GRDE_CODE = 'гд' THEN 'NF'
-             WHEN SFRSTCR_GRDE_CODE = 'Н' THEN 'NF'
-              WHEN SFRSTCR_GRDE_CODE = 'Ы' THEN 'Ы'
+             WHEN SFRSTCR_GRDE_CODE = 'гд' THEN 'DC'
+             WHEN SFRSTCR_GRDE_CODE = 'Н' THEN 'DN'
+              WHEN SFRSTCR_GRDE_CODE = 'Ы' THEN 'AB'
+              WHEN SFRSTCR_GRDE_CODE = 'К' THEN 'К'
              WHEN SFRSTCR_GRDE_CODE >= '60' THEN 'NP'
          END                              buGrade
     FROM SATURN.SFRSTCR
-   WHERE     SFRSTCR_TERM_CODE = '144310'
-         AND SFRSTCR_crn IN (17571,
-                             17572,
-                             17573,
-                             17574,
-                             17576,
-                             17577)
-         AND sfrstcr_rsts_code IN ('RE', 'RW')
+   WHERE     SFRSTCR_TERM_CODE = '144410'
+         AND SFRSTCR_crn IN (19745)
+         AND sfrstcr_rsts_code IN ('Ъ','RE', 'RW')
 ORDER BY SFRSTCR_crn, SFRSTCR_PIDM ; 
 
 
@@ -34,16 +46,13 @@ DECLARE
 SELECT DISTINCT sfrstcr_term_code term_code, sfrstcr_crn crn
   FROM sfrstcr x 
  WHERE     
-         sfrstcr_term_code = '144310'
+         sfrstcr_term_code = '144410'
        AND sfrstcr_grde_code IS NOT NULL
        AND sfrstcr_grde_date IS NULL
-       and sfrstcr_crn IN (
-                             17572,
-                             17573,
-                             17574,
-                             17576,
-                             17577)
-         AND sfrstcr_rsts_code IN ('RE', 'RW');
+       and sfrstcr_crn ='19745'
+       --  AND sfrstcr_rsts_code IN (,'RE', 'RW')
+         
+         ;
 
 BEGIN
    FOR r IN crs_get_crn
@@ -123,14 +132,15 @@ DECLARE
 
    CURSOR get_data
    IS
-      SELECT '144310' term,
-             col04 crn,
+      SELECT '144410' term,
+             '19745' crn,
              col01 student_pidm,
              '4' change_reason,
              col06 grade
         FROM bu_dev.tmp_tbl_kilany
-         where COL04 != '17571'
-         and col06<>'Ы'
+          where 
+           
+          -- col02 not in ('444003156','444028761')
        ;
 
    l_tckn_seq_no     shrtckn.shrtckn_seq_no%TYPE;

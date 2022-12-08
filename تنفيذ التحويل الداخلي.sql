@@ -115,7 +115,7 @@ SELECT *
                 WHERE PROGRAM_CODE = PROGRAM_CD AND GENDER = 'F');
 
 
-SELECT DISTINCT PROGRAM_CD, f_get_program_full_desc ('144310', PROGRAM_CD)
+SELECT DISTINCT PROGRAM_CD, f_get_program_full_desc ('144410', PROGRAM_CD)
   FROM TRANSFER_STUDENT_PROGRAM a
  WHERE EXISTS
           (SELECT '1'
@@ -153,22 +153,22 @@ ORDER BY SOBCURR_COLL_CODE;
 
 /*Excuting*/
 
-exec ITRANSFER_PROC ('144310') ;
+exec ITRANSFER_PROC ('144410') ;
 
  SELECT f_get_std_id(pidm_cd),a.*
           FROM TRANSFER_STUDENT_PROGRAM a
-         WHERE notes ='Y' ;
+         WHERE notes !='Y';
          
          ----compilance----
           Insert into GLBSLCT
    (GLBSLCT_APPLICATION, GLBSLCT_SELECTION, GLBSLCT_CREATOR_ID, GLBSLCT_DESC, GLBSLCT_LOCK_IND, 
     GLBSLCT_ACTIVITY_DATE, GLBSLCT_TYPE_IND)
  Values
-   ('STUDENT', 'ST_TRANS_14431', 'SAISUSR', 'ÿ·«» „ÕÊ·Ì‰ 1443', 'N', 
+   ('STUDENT', 'ST_TRANS_14442', 'SAISUSR', 'ÿ·«» „ÕÊ·Ì‰ 1444', 'N', 
     SYSDATE, NULL);
                                   INSERT INTO GLBEXTR
    SELECT 'STUDENT',
-          'ST_TRANS_14431',
+          'ST_TRANS_14442',
           'SAISUSR',
           'SAISUSR',
           PIDM,
@@ -186,6 +186,7 @@ exec ITRANSFER_PROC ('144310') ;
       WHERE SGRADVR_PIDM IN
                 (  SELECT PIDM_CD PIDM
              FROM  TRANSFER_STUDENT_PROGRAM);
+             
              
              
              
