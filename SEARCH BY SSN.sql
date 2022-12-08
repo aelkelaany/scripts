@@ -4,10 +4,10 @@ sgbstdn_pidm=spbpers_pidm
 and spbpers_ssn like'%1080996992%'
 ;
 
-select f_get_std_id(spbpers_pidm) stid,f_get_std_name(spbpers_pidm)std_name from spbpers
+select spbpers_pidm , f_get_std_id(spbpers_pidm) stid,f_get_std_name(spbpers_pidm)std_name from spbpers
 where
  
-  spbpers_ssn like'%2485573311%'
+  spbpers_ssn like'%1124323062%'
   and not exists (select '1' from sgbstdn
   where sgbstdn_pidm=spbpers_pidm)
 ;

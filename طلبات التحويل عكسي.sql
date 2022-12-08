@@ -63,7 +63,7 @@ SELECT f_get_std_id (sgbstdn_pidm)
                                       FROM sgbstdn
                                      WHERE sgbstdn_pidm = REQUESTER_PIDM)
        AND OBJECT_CODE = 'WF_TRANSFER'
-       -- AND REQUEST_STATUS='C'
+        AND REQUEST_STATUS='P'
        AND SGBSTDN_DEPT_CODE = '3101'
        AND EXISTS
                (SELECT '1'
@@ -71,4 +71,4 @@ SELECT f_get_std_id (sgbstdn_pidm)
                  WHERE     request_no = m.request_no
                        AND sequence_no = 1
                        AND item_code = 'TERM'
-                       AND item_value = '144030');
+                       AND item_value = '144340');

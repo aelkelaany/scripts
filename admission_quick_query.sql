@@ -1,20 +1,23 @@
-/* Formatted on 22/08/2021 14:55:33 (QP5 v5.227.12220.39754) */
+/* Formatted on 7/27/2022 9:03:24 AM (QP5 v5.371) */
 /* check admission application*/
 
 SELECT SYBSSNL_SSN,
        sabnstu_pin,
        sabnstu_aidm,
        SARHEAD_APPL_COMP_IND,
-       SYBSSNL_ADMISSION_TYPE ,SYBSSNL_ADMISSION_TYPE ,SYBSSNL_TERM_CODE 
+       SYBSSNL_ADMISSION_TYPE,
+       SYBSSNL_ADMISSION_TYPE,
+       SYBSSNL_TERM_CODE
   FROM SYBSSNL, sabnstu, sarhead
  WHERE sabnstu_aidm = SYBSSNL_aidm AND sarhead_aidm = SYBSSNL_aidm -- AND SYBSSNL_TERM_CODE = '144310'
-                                                                   --AND SYBSSNL_ADMISSION_TYPE = 'UG'
-                                                                   --   AND SYBSSNL_EMAIL = :email
-       AND SYBSSNL_SSN = :ssn;
+                                           --AND SYBSSNL_ADMISSION_TYPE = 'UG'
+                                               --   AND SYBSSNL_EMAIL = :email
+        AND SYBSSNL_SSN = :ssn;
 
 
 SELECT STUDENT_SSN,
-       STUDENT_PIDM,F_GET_STD_ID(STUDENT_PIDM)STID,
+       STUDENT_PIDM,
+       F_GET_STD_ID (STUDENT_PIDM)     STID,
        ADMIT_TERM,
        ADMISSION_TYPE,
        APPLICATION_COMPLETE_IND,
@@ -46,8 +49,8 @@ SELECT STUDENT_SSN,
 
  -- student
 
-SELECT f_get_std_id (sgbstdn_pidm) stid,
-       f_get_std_name (sgbstdn_pidm) std_name,
+SELECT f_get_std_id (sgbstdn_pidm)       stid,
+       f_get_std_name (sgbstdn_pidm)     std_name,
        sg.*
   FROM sgbstdn sg, spbpers
  WHERE sgbstdn_pidm = spbpers_pidm AND spbpers_ssn = '1120560543';
@@ -57,19 +60,17 @@ SELECT f_get_std_id (sgbstdn_pidm) stid,
   SELECT DECODE (sybssnl_gender,
                  'M', '–ﬂ—',
                  'F', '√‰ÀÌ',
-                 '€Ì— „Õœœ')
-            AS "Gender",
+                 '€Ì— „Õœœ')      AS "Gender",
          DECODE (sarhead_appl_comp_ind,
                  'Y', '„ﬂ „·',
                  'N', '€Ì— „ﬂ „·',
-                 '€Ì— „ﬂ „·')
-            AS "Application Status",
-         COUNT (sybssnl_ssn) AS "Count"
+                 '€Ì— „ﬂ „·')    AS "Application Status",
+         COUNT (sybssnl_ssn)             AS "Count"
     FROM sybssnl s, sarhead h
    WHERE     s.sybssnl_aidm = h.sarhead_aidm
          AND h.sarhead_appl_seqno = 1
          AND sybssnl_gender IS NOT NULL
-         AND s.sybssnl_term_code = '144310'
+         AND s.sybssnl_term_code = '144410'
          AND s.sybssnl_admission_type = 'UG'
 GROUP BY sybssnl_gender, sarhead_appl_comp_ind
 ORDER BY 2 ASC, 2 DESC;
@@ -95,32 +96,33 @@ SELECT COUNT (1)
 
 ;
 
-SELECT student_ssn,
-       student_pidm,
-       FIRST_NAME_AR || ' ' || MIDDLE_NAME_AR || ' ' || LAST_NAME_AR stName,
-       (SELECT f_get_program_full_desc ('144310', APPLICANT_CHOICE)
-          FROM VW_APPLICANT_CHOICES
-         WHERE     
-                 APPLICANT_DECISION = 'CA'
-               AND applicant_pidm = student_pidm) description 
-  FROM BU_APPS.STU_MAIN_DATA_VW v
- WHERE EXISTS
-          (SELECT '1'
-             FROM ADM_RECONFIRM_ADM_REQUEST
-            WHERE STUDENT_PIDM = v.STUDENT_PIDM)
-            order by 4
-            ;
+  SELECT student_ssn,
+         student_pidm,
+         FIRST_NAME_AR || ' ' || MIDDLE_NAME_AR || ' ' || LAST_NAME_AR
+             stName,
+         (SELECT f_get_program_full_desc ('144310', APPLICANT_CHOICE)
+            FROM VW_APPLICANT_CHOICES
+           WHERE APPLICANT_DECISION = 'CA' AND applicant_pidm = student_pidm)
+             description
+    FROM BU_APPS.STU_MAIN_DATA_VW v
+   WHERE EXISTS
+             (SELECT '1'
+                FROM ADM_RECONFIRM_ADM_REQUEST
+               WHERE STUDENT_PIDM = v.STUDENT_PIDM)
+ORDER BY 4;
 
 
   SELECT student_ssn,
-         FIRST_NAME_AR || ' ' || MIDDLE_NAME_AR || ' ' || LAST_NAME_AR stName,
-         c.APPLICANT_CHOICE accepted_prog,
+         FIRST_NAME_AR || ' ' || MIDDLE_NAME_AR || ' ' || LAST_NAME_AR
+             stName,
+         c.APPLICANT_CHOICE
+             accepted_prog,
          NEW_PROGRAM,
          priority
-    FROM STU_MAIN_DATA_VW v,
-         ADM_CHANGE_CAMP_REQUEST m,
+    FROM STU_MAIN_DATA_VW         v,
+         ADM_CHANGE_CAMP_REQUEST  m,
          ADM_CHNG_CAMP_REQ_DETAILS d,
-         VW_APPLICANT_CHOICES c
+         VW_APPLICANT_CHOICES     c
    WHERE     REQUEST_STATUS = 'P'
          AND v.STUDENT_PIDM = m.STUDENT_PIDM
          AND v.STUDENT_PIDM = d.STUDENT_PIDM
@@ -128,8 +130,28 @@ SELECT student_ssn,
          AND m.REQUEST_NO = d.REQUEST_NO
          AND APPLICANT_DECISION = 'QA'
 --and v.STUDENT_PIDM = 241839 ;
-ORDER BY accepted_prog, student_ssn, priority
-;
-select f_get_std_name(f_get_pidm('3898')) from dual ;
+ORDER BY accepted_prog, student_ssn, priority;
+
+SELECT f_get_std_name (f_get_pidm ('3898')) FROM DUAL;
 
 
+---- is BU student ?
+
+SELECT f_get_std_id (sgbstdn_pidm)       stid,
+       f_get_std_name (sgbstdn_pidm)     std_name,
+       sg.*
+  FROM sgbstdn sg, spbpers
+ WHERE sgbstdn_pidm = spbpers_pidm AND spbpers_ssn LIKE '%1127365864%';
+
+------ is valid ssn
+
+DECLARE
+    v_ssn   VARCHAR2 (10) := '1127365854';
+BEGIN
+    IF F_VALIDATE_SSN (v_ssn)
+    THEN
+        DBMS_OUTPUT.put_line (' SSN is true');
+    ELSE
+        DBMS_OUTPUT.put_line ('SSN is false');
+    END IF;
+END;

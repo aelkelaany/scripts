@@ -1,8 +1,8 @@
 /* Formatted on 21/12/2021 15:07:48 (QP5 v5.371) */
  --col01>>crn
---col07>>DEPT_MANAGER_ID
---col08>>
---col09>>
+--col03>>DEPT_MANAGER_ID
+--col03>> vice id 
+--col04>> dean id 
 
 
 INSERT INTO BU_APPS.GRADES_APPROVAL_EXECLUDED_CRN (TERM_CODE,
@@ -13,13 +13,13 @@ INSERT INTO BU_APPS.GRADES_APPROVAL_EXECLUDED_CRN (TERM_CODE,
                                                    VICE_DEAN_PIDM,
                                                    DEAN_ID,
                                                    DEAN_PIDM)
-    SELECT DISTINCT '144320',
+    SELECT DISTINCT '144410',
                     col01,
-                    col07,
-                    f_get_pidm (col07),
-                    col08,
-                    f_get_pidm (col08),
-                    col09,
-                    f_get_pidm (col09)
+                    col02,
+                    f_get_pidm (col02),
+                    col03,
+                    f_get_pidm (col03),
+                    col04,
+                    f_get_pidm (col04)
       FROM BU_DEV.TMP_TBL_KILANY
-     WHERE col07 IS NOT NULL;
+     WHERE col02 IS NOT NULL;

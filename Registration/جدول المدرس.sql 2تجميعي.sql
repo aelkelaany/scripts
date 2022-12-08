@@ -35,10 +35,10 @@
                            FROM SCBCRSE
                           WHERE     SCBCRSE_SUBJ_CODE = A.SCBCRSE_SUBJ_CODE
                                 AND SCBCRSE_CRSE_NUMB = A.SCBCRSE_CRSE_NUMB
-                                AND SCBCRSE_EFF_TERM <= '144230')
+                                AND SCBCRSE_EFF_TERM <= '144410')
                  AND A.SCBCRSE_SUBJ_CODE = ssbsect_subj_code
                  AND A.SCBCRSE_CRSE_NUMB = ssbsect_crse_numb
-                 AND ssbsect_term_code = '144230'
+                 AND ssbsect_term_code = '144410'
                 -- AND ssbsect_ptrm_code = '4'      --------------------->>level
                  AND sirasgn_term_code = ssbsect_term_code
                  AND sirasgn_crn = ssbsect_crn
@@ -111,10 +111,10 @@ ORDER BY COLL_DESC,
                            FROM SCBCRSE
                           WHERE     SCBCRSE_SUBJ_CODE = A.SCBCRSE_SUBJ_CODE
                                 AND SCBCRSE_CRSE_NUMB = A.SCBCRSE_CRSE_NUMB
-                                AND SCBCRSE_EFF_TERM <= '144230')
+                                AND SCBCRSE_EFF_TERM <= '144410')
                  AND A.SCBCRSE_SUBJ_CODE = ssbsect_subj_code
                  AND A.SCBCRSE_CRSE_NUMB = ssbsect_crse_numb
-                 AND ssbsect_term_code = '144230'
+                 AND ssbsect_term_code = '144410'
                  -- AND ssbsect_ptrm_code = '4'      --------------------->>level
                  AND sirasgn_term_code = ssbsect_term_code
                  and ssbsect_enrl>0

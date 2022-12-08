@@ -1,12 +1,12 @@
 /* Formatted on 8/25/2020 11:43:13 PM (QP5 v5.360) */
-SELECT f_get_std_id(SGRADVR_PIDM) student_id ,f_get_std_name(SGRADVR_PIDM) student_name,f_get_std_id(SGRADVR_ADVR_PIDM) advisor_id ,  f_get_std_name(SGRADVR_ADVR_PIDM) advisor_name , SGBSTDN_STST_CODE , sgbstdn_dept_code
+SELECT SGRADVR_PIDM ,f_get_std_id(SGRADVR_PIDM) student_id ,f_get_std_name(SGRADVR_PIDM) student_name,f_get_std_id(SGRADVR_ADVR_PIDM) advisor_id ,  f_get_std_name(SGRADVR_ADVR_PIDM) advisor_name , SGBSTDN_STST_CODE , sgbstdn_dept_code
   FROM sgradvr, SGBSTDN SG
  WHERE     SGRADVR_PIDM = SGBSTDN_PIDM
        AND SGBSTDN_TERM_CODE_EFF =
            (SELECT MAX (SGBSTDN_TERM_CODE_EFF)
               FROM SGBSTDN
              WHERE     SGBSTDN_PIDM = SG.SGBSTDN_PIDM
-                   AND SGBSTDN_TERM_CODE_EFF <= '144340')
+                   AND SGBSTDN_TERM_CODE_EFF <= '144420')
        AND SGBSTDN_DEPT_CODE NOT IN
                (SELECT SIRDPCL_DEPT_CODE
                   FROM SIRDPCL
@@ -36,7 +36,7 @@ DELETE FROM
                             (SELECT MAX (SGBSTDN_TERM_CODE_EFF)
                                FROM SGBSTDN
                               WHERE     SGBSTDN_PIDM = SG.SGBSTDN_PIDM
-                                    AND SGBSTDN_TERM_CODE_EFF <= '144340')
+                                    AND SGBSTDN_TERM_CODE_EFF <= '144420')
                         AND SGBSTDN_DEPT_CODE NOT IN
                                 (SELECT SIRDPCL_DEPT_CODE
                                    FROM SIRDPCL

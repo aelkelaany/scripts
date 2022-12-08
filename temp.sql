@@ -195,7 +195,7 @@ SELECT shrttrm_term_code, shrttrm_astd_code_end_of_term
  
  insert into WTAILOR.TWGRROLE
  SELECT 
-   f_get_pidm('898'), TWGRROLE_ROLE, TWGRROLE_ACTIVITY_DATE
+   f_get_pidm('1009'), TWGRROLE_ROLE, TWGRROLE_ACTIVITY_DATE
 FROM WTAILOR.TWGRROLE
 Where
 TWGRROLE_PIDM = f_get_pidm('6603') ;
@@ -231,3 +231,12 @@ SIVASGN
 -- PG ADMISSION
 
 ADM_PG_DEPT_PROG
+
+---
+„ﬂ«›¬  
+„”Ì—« 
+Rwtpayr
+tbraccd
+ 
+
+stvmajr

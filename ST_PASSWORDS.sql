@@ -72,7 +72,7 @@ SELECT ROWID,
                AND SEQUENCE_NO = (SELECT MAX (SEQUENCE_NO)
                                     FROM log_success_login l2
                                    WHERE l2.student_pidm = l1.student_pidm))
-WHERE STUDENT_PIDM  = F_GET_PIDM('443047492')
+WHERE STUDENT_PIDM  = F_GET_PIDM('444028385')
 ;
 
  
