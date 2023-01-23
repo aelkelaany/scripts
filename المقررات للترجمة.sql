@@ -1,0 +1,19 @@
+/* Formatted on 12/15/2022 9:48:48 AM (QP5 v5.371) */
+SELECT distinct A.SCBCRSE_SUBJ_CODE     SUBJ_CODE,
+       A.SCBCRSE_CRSE_NUMB     CRSE_NUMB,
+       A.SCBCRSE_TITLE         AS "Course Title",
+       SCBCRSE_EFF_TERM
+  FROM SCBCRSE  A,
+       smracaa,
+       SMRPAAP,
+       smrprle
+ WHERE     A.SCBCRSE_CSTA_CODE = 'A'
+       AND SMRACAA_SUBJ_CODE = A.SCBCRSE_SUBJ_CODE
+       AND SMRACAA_CRSE_NUMB_LOW = A.SCBCRSE_CRSE_NUMB
+       AND SMRPAAP_AREA = SMRACAA_AREA
+       AND SMRPRLE_PROGRAM = SMRPAAP_PROGRAM
+       AND SMRPRLE_LEVL_CODE = 'Ã„'
+       AND (   SMRPRLE_COLL_CODE = '41'
+            OR (SMRPRLE_COLL_CODE = '18' AND SMRPRLE_PROGRAM LIKE '%1805%'))
+            
+            order by 1,2,3,4

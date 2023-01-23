@@ -1,6 +1,6 @@
- delete  bu_dev.tmp_tbl03 ;
-insert into bu_dev.tmp_tbl03(col02)
-select pidm from 
+ /*delete  bu_dev.tmp_tbl03 ;
+insert into bu_dev.tmp_tbl03(col02)*/
+select * from 
 (
 SELECT DISTINCT
 SGBSTDN_PIDM AS  PIDM,
@@ -66,7 +66,7 @@ AND SGBSTDN_PROGRAM_1=SMRPRLE_PROGRAM(+)
 AND SHRTTRM_ASTD_CODE_END_OF_TERM=STVASTD_CODE(+)                        
 AND SGBSTDN_STST_CODE IN ('AS','„Ê','„⁄','ÿ„','≈ﬁ','›ﬂ','≈ ','„‰')
 and SGBSTDN_DEGC_CODE_1 IN   ('»ﬂ  ','»ﬂ','000000','œ»')
- AND SGBSTDN_COLL_CODE_1 NOT IN ('14','25','330','550')
+ AND SGBSTDN_COLL_CODE_1 NOT IN ('14','25','330','550') -- ﬂ·Ì«  ’ÕÌ…
 -- and sgbstdn_program_1 like '%-3303-1433'
 --and sgbstdn_styp_code in ('„',' ')
 AND SMBPOGN_MET_IND='Y'
