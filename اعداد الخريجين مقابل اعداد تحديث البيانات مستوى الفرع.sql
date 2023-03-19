@@ -10,7 +10,7 @@
                 and a.request_no=b.request_no
                 and b.SEQUENCE_NO=1
                 and b.ITEM_CODE='TERM_CODE'
-                and b.ITEM_VALUE='144030'
+                and b.ITEM_VALUE='144430'
                 and a.REQUESTER_PIDM=c.sgbstdn_pidm
                 and c.SGBSTDN_TERM_CODE_EFF=(select max(SGBSTDN_TERM_CODE_EFF)
                 from sgbstdn

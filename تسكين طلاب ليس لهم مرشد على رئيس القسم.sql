@@ -6,7 +6,7 @@ SELECT sgbstdn_pidm st_pidm, sgbstdn_dept_code
                        (SELECT MAX (b.sgbstdn_term_code_eff)
                           FROM sgbstdn b
                          WHERE b.sgbstdn_pidm = a.sgbstdn_pidm
-                         and b.sgbstdn_term_code_eff <= '144320')
+                         and b.sgbstdn_term_code_eff <= '144430')
                 AND sgbstdn_stst_code = 'AS'
                 AND sgbstdn_levl_code   IN ('Ìã')
                 and not exists (select '1' from SGRADVR where SGRADVR_pidm=a.sgbstdn_pidm )
@@ -33,7 +33,7 @@ UPDATE BU_DEV.TMP_TBL_kilany1
 -- col01 student pidm
 --col02 dept code 
 --col03 adv pidm
-  select * from BU_DEV.TMP_TBL_kilany1 ;
+  select f_get_std_id(COL01) stid,f_get_std_name(COL01) stname, f_get_desc_fnc('stvdept',COL02,30) dept, COL03, COL04 from BU_DEV.TMP_TBL_kilany1 ;
 
 DECLARE
     CURSOR GET_STUDENTS IS

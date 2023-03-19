@@ -6,7 +6,7 @@ INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
                      SFBRGRP_RGRP_CODE,
                      SFBRGRP_USER,
                      SFBRGRP_ACTIVITY_DATE)
-    SELECT '144420',
+    SELECT '144430',
            SG.sgbstdn_pidm,
            'UGR1',
            USER,
@@ -29,7 +29,7 @@ INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
                    (SELECT '1'
                       FROM SFBRGRP
                      WHERE SFBRGRP_PIDM = SG.sgbstdn_pidm
-                     and SFBRGRP_TERM_CODE='144420'
+                     and SFBRGRP_TERM_CODE='144430'
                      );
 
                            --------
@@ -40,7 +40,7 @@ INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
                      SFBRGRP_RGRP_CODE,
                      SFBRGRP_USER,
                      SFBRGRP_ACTIVITY_DATE)
-    SELECT '144420',
+    SELECT '144430',
            SG.sgbstdn_pidm,
            'UGR2',
            USER,
@@ -63,7 +63,7 @@ INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
                    (SELECT '1'
                       FROM SFBRGRP
                      WHERE SFBRGRP_PIDM = SG.sgbstdn_pidm
-                     and SFBRGRP_TERM_CODE='144420'
+                     and SFBRGRP_TERM_CODE='144430'
                      );
 
                                                        --UGR3
@@ -73,7 +73,7 @@ INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
                      SFBRGRP_RGRP_CODE,
                      SFBRGRP_USER,
                      SFBRGRP_ACTIVITY_DATE)
-    SELECT '144420',
+    SELECT '144430',
            SG.sgbstdn_pidm,
            'UGR3',
            USER,
@@ -96,7 +96,7 @@ INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
                    (SELECT '1'
                       FROM SFBRGRP
                      WHERE SFBRGRP_PIDM = SG.sgbstdn_pidm
-                     and SFBRGRP_TERM_CODE='144420'
+                     and SFBRGRP_TERM_CODE='144430'
                        
                      );
                      
@@ -105,7 +105,7 @@ INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
                      SFBRGRP_RGRP_CODE,
                      SFBRGRP_USER,
                      SFBRGRP_ACTIVITY_DATE)
-    SELECT '144420',
+    SELECT '144430',
            SG.sgbstdn_pidm,
            'UGR3',
            USER,
@@ -128,7 +128,7 @@ INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
                    (SELECT '1'
                       FROM SFBRGRP
                      WHERE SFBRGRP_PIDM = SG.sgbstdn_pidm
-                     and SFBRGRP_TERM_CODE='144420'
+                     and SFBRGRP_TERM_CODE='144430'
                        
                      );
 
@@ -137,7 +137,7 @@ DELETE FROM sprhold
                     (SELECT '1'
                        FROM SFBRGRP
                       WHERE SFBRGRP_PIDM = SPRHOLD_PIDM
-                      and SFBRGRP_TERM_CODE='144420'
+                      and SFBRGRP_TERM_CODE='144430'
                       )
             AND SPRHOLD_HLDD_CODE = 'RH';
 
@@ -148,7 +148,7 @@ INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
                      SFBRGRP_RGRP_CODE,
                      SFBRGRP_USER,
                      SFBRGRP_ACTIVITY_DATE)
-    SELECT '144420',
+    SELECT '144430',
            SG.sgbstdn_pidm,
            'UGR3',
            USER,
@@ -170,7 +170,7 @@ INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
            AND NOT EXISTS
                    (SELECT '1'
                       FROM sfrstcr
-                     WHERE     sfrstcr_term_code = '144420'
+                     WHERE     sfrstcr_term_code = '144430'
                            AND sfrstcr_pidm = SG.sgbstdn_pidm)
            AND NOT EXISTS
                    (SELECT '1'
@@ -187,7 +187,7 @@ INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
                      SFBRGRP_RGRP_CODE,
                      SFBRGRP_USER,
                      SFBRGRP_ACTIVITY_DATE)
-    SELECT '144420',
+    SELECT '144430',
            SG.sgbstdn_pidm,
            F_GET_STD_ID (SG.sgbstdn_pidm),
            'UGI1',
@@ -222,7 +222,7 @@ INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
                      SFBRGRP_RGRP_CODE,
                      SFBRGRP_USER,
                      SFBRGRP_ACTIVITY_DATE)
-    SELECT '144420',
+    SELECT '144430',
            SG.sgbstdn_pidm,
            'DPM1',
            USER,
@@ -246,7 +246,7 @@ INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
                    (SELECT '1'
                       FROM SFBRGRP
                      WHERE SFBRGRP_PIDM = SG.sgbstdn_pidm
-                      and SFBRGRP_TERM_CODE='144420');
+                      and SFBRGRP_TERM_CODE='144430');
 
                   --- MASTER  
 
@@ -255,7 +255,7 @@ INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
                      SFBRGRP_RGRP_CODE,
                      SFBRGRP_USER,
                      SFBRGRP_ACTIVITY_DATE)
-    SELECT '144420',
+    SELECT '144430',
            SG.sgbstdn_pidm,
            'MA',
            USER,
@@ -272,7 +272,7 @@ INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
                       FROM SFBRGRP
                      WHERE     SFBRGRP_PIDM = SG.sgbstdn_pidm
                            AND SFBRGRP_RGRP_CODE = 'MA'
-                           and SFBRGRP_TERM_CODE='144420'
+                           and SFBRGRP_TERM_CODE='144430'
                            );
                            
                            

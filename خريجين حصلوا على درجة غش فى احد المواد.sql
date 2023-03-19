@@ -41,7 +41,7 @@ INSERT INTO bu_dev.tmp_tbl_kilany (col01, col02, col03)
                         FROM SHRDGMR
                        WHERE     SHRDGMR_pidm = a.sgbstdn_pidm
                              AND SHRDGMR_DEGS_CODE = 'ÎÌ'
-                             AND SHRDGMR_TERM_CODE_GRAD = '144320')
+                             AND SHRDGMR_TERM_CODE_GRAD = '144420')
      ;
 
 

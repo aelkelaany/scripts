@@ -5,20 +5,20 @@
 Insert into BU_APPS.RULE_ITEMS
    (ITEM_CODE, ITEM_DESC, DB_FUNCTION, ACTIVITY_DATE, USER_ID)
  Values
-   ('I_CAPP_DH_38', 'Œÿ… DH 38', 'F_CAPP_DH_38', SYSDATE,USER);
+   ('I_NOT_STD_INFO_UPD', '⁄œ„  ÕœÌÀ «·»Ì«‰«  ··Œ—ÌÃÌ‰', 'F_NOT_STD_INFO_UPD', SYSDATE,USER);
  
  
 Insert into BU_APPS.RULE_DEFINITION
    (RULE_CODE, RULE_DESC, ACTIVITY_DATE, USER_ID)
  Values
-   ('R_CAPP_DH_38', 'DH 38', SYSDATE, USER);
+   ('R_NOT_STD_INFO_UPD', '⁄œ„  ÕœÌÀ «·»Ì«‰«  ··Œ—ÌÃÌ‰', SYSDATE, USER);
  
  
 Insert into BU_APPS.RULE_FORMATION
    (RULE_CODE, SEQENCE_NO, ITEM_CODE, OPERATOR, VALUE, 
     ACTIVITY_DATE, USER_ID)
  Values
-   ('R_CAPP_DH_38', 1, 'I_CAPP_DH_38', '=', '''Y''', 
+   ('R_NOT_STD_INFO_UPD', 1, 'I_NOT_STD_INFO_UPD', '=', '''Y''', 
     SYSDATE, USER);
     
   

@@ -4,7 +4,7 @@ SELECT SSBSECT_CRN,
        f_get_desc_fnc ('STVCAMP', SSBSECT_CAMP_CODE, 30) campus,f_get_desc_fnc ('STVCOLL', scbcrse_coll_CODE, 30) college ,
        scbcrse_title
   FROM ssbsect, scbcrse
- WHERE     ssbsect_term_code = '144220'
+ WHERE     ssbsect_term_code = '144430'
        AND SCBCRSE_EFF_TERM =
               (SELECT MAX (SCBCRSE_EFF_TERM)
                  FROM SCBCRSE
@@ -36,7 +36,7 @@ SELECT SSBSECT_CRN,
           NULL,
           SYSDATE
      FROM ssbsect
-    WHERE     ssbsect_term_code = '144220'
+    WHERE     ssbsect_term_code = '144430'
        and SSBSECT_PTRM_CODE =1
 and SSBSECT_SSTS_CODE='ä'
             and  NOT EXISTS
@@ -59,7 +59,7 @@ INSERT INTO SSRRCMP (SSRRCMP_TERM_CODE,
           SSBSECT_CAMP_CODE,
           SYSDATE
      FROM ssbsect
-    WHERE     ssbsect_term_code = '144220'
+    WHERE     ssbsect_term_code = '144430'
        and SSBSECT_PTRM_CODE =1
 and SSBSECT_SSTS_CODE='ä'
             and  NOT EXISTS
