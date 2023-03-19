@@ -11,13 +11,15 @@
                           'R', ' „ —›÷ «·ÿ·»')
                      request_status,
                   object_desc,
-                  ro.role_decription role_desc
+                  ro.role_decription role_desc ,(select F_GET_DESC_FNC('stvdept',item_value,30)||'^'||item_value from request_details where request_no= m1.request_no
+                  and sequence_no=1 and item_code='DEPARTMENT'
+                  ) dept
              FROM wf_request_flow r1,
                   request_master m1,
                   role_definition ro,
                   object_definition o1,
                   wf_actions ac,
-                  wf_flow f
+                  wf_flow f 
             WHERE     r1.request_no = m1.request_no
                   AND r1.role_code = ro.role_code(+)
                   AND m1.object_code = o1.object_code(+)

@@ -72,7 +72,17 @@ SELECT ROWID,
                AND SEQUENCE_NO = (SELECT MAX (SEQUENCE_NO)
                                     FROM log_success_login l2
                                    WHERE l2.student_pidm = l1.student_pidm))
-WHERE STUDENT_PIDM  = F_GET_PIDM('444028385')
+WHERE 
+
+STUDENT_PIDM =182077 ;
+
+exists  (SELECT 1 FROM DUAL 
+ WHERE 
+   F_GET_STYP(STUDENT_PIDM) IN ('„') 
+ AND  F_INTRNL_VSTOR_FNC(STUDENT_PIDM) = 'Y' 
+ AND  F_GET_LEVEL(STUDENT_PIDM) = 'Ã„' 
+ AND  F_GET_STATUS(STUDENT_PIDM) = 'AS' ) 
+--STUDENT_PIDM  = F_GET_PIDM('441000781')
 ;
 
  

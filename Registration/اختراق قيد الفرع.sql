@@ -9,7 +9,7 @@ SELECT DISTINCT
        SFRSTCR_CRN,
        SFRSTCR_PIDM,
        SFRSTCR_TERM_CODE,
-       f_get_std_name (SFRSTCR_PIDM),
+       f_get_std_name (SFRSTCR_PIDM),f_get_std_id (SFRSTCR_PIDM) stid,
        sfrstcr_rsts_code,
        sgbstdn_camp_code,
        f_get_desc_fnc ('STVCAMP', sgbstdn_camp_code, 60)
@@ -44,25 +44,25 @@ SELECT DISTINCT
            60)
            AS "ÞíÏ ÇáÝÑÚ"
   FROM SFRSTCR, SGBSTDN SG
- WHERE     SFRSTCR_TERM_CODE = '144210'
+ WHERE     SFRSTCR_TERM_CODE = '144430'
        AND SGBSTDN_TERM_CODE_EFF =
            (SELECT MAX (SGBSTDN_TERM_CODE_EFF)
               FROM SGBSTDN
              WHERE     SGBSTDN_PIDM = SG.SGBSTDN_PIDM
-                   AND SGBSTDN_TERM_CODE_EFF <= '144210')
+                   AND SGBSTDN_TERM_CODE_EFF <= '144430')
        AND SGBSTDN_PIDM = SFRSTCR_PIDM
        AND EXISTS
                (SELECT '1'
                   FROM SSRRCMP
                  WHERE     SSRRCMP_CRN = SFRSTCR_CRN
-                       AND SSRRCMP_TERM_CODE = '144210'
+                       AND SSRRCMP_TERM_CODE = '144430'
                        AND sfrstcr_rsts_code IN ('RW', 'RE')
                        AND SGBSTDN_CAMP_CODE IS NOT NULL)
        AND NOT EXISTS
                (SELECT '1'
                   FROM SSRRCMP
                  WHERE     SSRRCMP_CRN = SFRSTCR_CRN
-                       AND SSRRCMP_TERM_CODE = '144210'
+                       AND SSRRCMP_TERM_CODE = '144430'
                        AND SSRRCMP_CAMP_CODE = SGBSTDN_CAMP_CODE)
 ORDER BY 1
 --  )

@@ -1,12 +1,12 @@
 /* Formatted on 07/06/2021 09:56:21 (QP5 v5.227.12220.39754) */  ADM_REALOCATE_CAMP_REQUEST
 -- »‰«¡ ⁄ «·‰Ê⁄ Ê«·œ›⁄« 
 
-  SELECT SUBSTR (f_get_std_id (sfrstcr_pidm), 1, 3),
+  SELECT SUBSTR (f_get_std_id (sfrstcr_pidm), 1, 3) intake,
          DECODE (f_get_gender (sfrstcr_pidm), 'M', 'ÿ«·»', 'ÿ«·»…')
-            sex,SFRSTCR_LEVL_CODE ,
-         COUNT (DISTINCT sfrstcr_pidm) all_reg_students 
+            sex,SFRSTCR_LEVL_CODE slevel ,
+         COUNT (DISTINCT sfrstcr_pidm) count_reg_students 
     FROM sfrstcr
-   WHERE sfrstcr_term_code = '144420' AND sfrstcr_rsts_code IN ('RW')
+   WHERE sfrstcr_term_code = '144430' AND sfrstcr_rsts_code IN ('RW')
    
   -- and exists (select '1' from sgbstdn where sgbstdn_pidm=sfrstcr_pidm and sgbstdn_levl_code='œ»')
  GROUP BY  SUBSTR (f_get_std_id (sfrstcr_pidm), 1, 3),
@@ -24,47 +24,91 @@ ORDER BY 1;
             sex,
          COUNT (DISTINCT sfrstcr_pidm) all_reg_students
     FROM sfrstcr
-   WHERE sfrstcr_term_code = '144420' AND sfrstcr_rsts_code IN ('RW')
+   WHERE sfrstcr_term_code = '144430' AND sfrstcr_rsts_code IN ('RW')
       AND EXISTS
                (SELECT '1'
                   FROM SFBRGRP
                  WHERE     SFBRGRP_PIDM = sfrstcr_pidm
-                       AND SFBRGRP_RGRP_CODE = 'UGR1'
-                       AND SFBRGRP_TERM_CODE = '144420')
+                       AND SFBRGRP_RGRP_CODE like 'UGR_'
+                       AND SFBRGRP_TERM_CODE = '144430')
  
  GROUP BY   
          DECODE (f_get_gender (sfrstcr_pidm), 'M', 'ÿ«·»', 'ÿ«·»…')
          
-         
+        --
+        
+       ; 
+        
+        SELECT count(SFBRGRP_PIDM)
+                  FROM SFBRGRP
+                 WHERE      
+                         SFBRGRP_RGRP_CODE like 'UGR_'
+                       AND SFBRGRP_TERM_CODE = '144430' 
 ORDER BY 1 ;
 -- ·ﬂ· ÿ·«» «·’Ì›Ì «·„ Œ’’Ì‰
 
 SELECT COUNT (DISTINCT sfrstcr_pidm) all_reg_students
   FROM sfrstcr
- WHERE     sfrstcr_term_code = '144420'
+ WHERE     sfrstcr_term_code = '144430'
        AND sfrstcr_rsts_code IN ('RW', 'RE')
        AND NOT EXISTS
               (SELECT '1'
                  FROM bu_dev.summer_reg_list
                 WHERE pidm = sfrstcr_pidm);
 
+----------
+/* Formatted on 3/13/2023 9:06:20 AM (QP5 v5.371) */
+  SELECT SUBSTR (f_get_std_id (sfrstcr_pidm), 1, 3)
+             intake,
+         DECODE (f_get_gender (sfrstcr_pidm), 'M', 'ÿ«·»', 'ÿ«·»…')
+             sex,
+         SFRSTCR_LEVL_CODE
+             slevel,
+         COUNT (DISTINCT sfrstcr_pidm)
+             count_reg_students,
+         (SELECT COUNT (SFBRGRP_PIDM)
+            FROM SFBRGRP
+           WHERE     SFBRGRP_RGRP_CODE LIKE 'UGR_'
+                 AND SFBRGRP_TERM_CODE = '144430'
+                 AND SUBSTR (f_get_std_id (SFBRGRP_PIDM), 1, 3) =
+                     SUBSTR (f_get_std_id (sfrstcr_pidm), 1, 3)
+                 AND DECODE (f_get_gender (SFBRGRP_PIDM),
+                             'M', 'ÿ«·»',
+                             'ÿ«·»…') =
+                     DECODE (f_get_gender (sfrstcr_pidm),
+                             'M', 'ÿ«·»',
+                             'ÿ«·»…')
+                 AND EXISTS
+                         (SELECT '1'
+                            FROM sgbstdn
+                           WHERE     sgbstdn_pidm = SFBRGRP_PIDM
+                                 AND sgbstdn_levl_code = SFRSTCR_LEVL_CODE))
+             targeted
+    FROM sfrstcr
+   WHERE     sfrstcr_term_code = '144430'
+         AND sfrstcr_rsts_code IN ('RW','RE')
+         -- and exists (select '1' from sgbstdn where sgbstdn_pidm=sfrstcr_pidm and sgbstdn_levl_code='œ»')
+         AND SFRSTCR_LEVL_CODE = 'œ»'
+GROUP BY SUBSTR (f_get_std_id (sfrstcr_pidm), 1, 3),
+         DECODE (f_get_gender (sfrstcr_pidm), 'M', 'ÿ«·»', 'ÿ«·»…'),
+         SFRSTCR_LEVL_CODE
 
 
 -- ﬂ· «·ÿ·«» «·„”Ã·Ì‰
 
 SELECT COUNT (DISTINCT sfrstcr_pidm) all_reg_students
   FROM sfrstcr
- WHERE sfrstcr_term_code = '144420' AND sfrstcr_rsts_code IN ('RW', 'RE');
+ WHERE sfrstcr_term_code = '144430' AND sfrstcr_rsts_code IN ('RW', 'RE');
 
   -- web ﬂ· «·ÿ·«» «·„”Ã·Ì‰
 
 SELECT COUNT (DISTINCT sfrstcr_pidm) all_reg_students
   FROM sfrstcr
- WHERE sfrstcr_term_code = '144420' AND sfrstcr_rsts_code IN ('RW');
+ WHERE sfrstcr_term_code = '144430' AND sfrstcr_rsts_code IN ('RW');
  --all reg crn
 SELECT COUNT (DISTINCT sfrstcr_crn) all_reg_crn
   FROM sfrstcr
- WHERE sfrstcr_term_code = '144420' AND sfrstcr_rsts_code IN ('RW', 'RE');
+ WHERE sfrstcr_term_code = '144430' AND sfrstcr_rsts_code IN ('RW', 'RE');
   -- empty crn
 
   SELECT SSBSECT_CRN,
@@ -73,8 +117,8 @@ SELECT COUNT (DISTINCT sfrstcr_crn) all_reg_crn
          scbcrse_title,
          SSBSECT_MAX_ENRL,
          SSBSECT_ENRL,
-         SSBSECT_SEATS_AVAIL
-    FROM ssbsect, scbcrse c1
+         SSBSECT_SEATS_AVAIL ,SSBSECT_CAMP_CODE,f_get_desc_fnc('stvcamp',SSBSECT_CAMP_CODE,30) campus
+    FROM ssbsect, scbcrse c1  
    WHERE     ssbsect_subj_code = scbcrse_subj_code
          AND ssbsect_crse_numb = scbcrse_crse_numb
          AND scbcrse_eff_term =
@@ -82,12 +126,13 @@ SELECT COUNT (DISTINCT sfrstcr_crn) all_reg_crn
                    FROM scbcrse c2
                   WHERE     c2.scbcrse_subj_code = c1.scbcrse_subj_code
                         AND c2.scbcrse_crse_numb = c1.scbcrse_crse_numb
-                        AND c2.scbcrse_eff_term <= '144420')
-         AND ssbsect_term_code = '144420'
+                        AND c2.scbcrse_eff_term <= '144430')
+         AND ssbsect_term_code = '144430'
          AND SSBSECT_MAX_ENRL > 0
          and ssbsect_ptrm_code=1
          AND SSBSECT_SEATS_AVAIL = SSBSECT_MAX_ENRL
          AND SSBSECT_SSTS_CODE = '‰'
+          
 ORDER BY 1;
 
 --zeros crns
@@ -107,8 +152,8 @@ ORDER BY 1;
                    FROM scbcrse c2
                   WHERE     c2.scbcrse_subj_code = c1.scbcrse_subj_code
                         AND c2.scbcrse_crse_numb = c1.scbcrse_crse_numb
-                        AND c2.scbcrse_eff_term <= '144420')
-         AND ssbsect_term_code = '144420'
+                        AND c2.scbcrse_eff_term <= '144430')
+         AND ssbsect_term_code = '144430'
          AND SSBSECT_MAX_ENRL = 0
          AND SSBSECT_SEATS_AVAIL = 0
          AND SSBSECT_SSTS_CODE = '‰'
@@ -131,8 +176,8 @@ ORDER BY 1;
                    FROM scbcrse c2
                   WHERE     c2.scbcrse_subj_code = c1.scbcrse_subj_code
                         AND c2.scbcrse_crse_numb = c1.scbcrse_crse_numb
-                        AND c2.scbcrse_eff_term <= '144420')
-         AND ssbsect_term_code = '144420'
+                        AND c2.scbcrse_eff_term <= '144430')
+         AND ssbsect_term_code = '144430'
          AND SSBSECT_MAX_ENRL > 0
          AND SSBSECT_SEATS_AVAIL = 0
          AND SSBSECT_SSTS_CODE = '‰'
@@ -155,8 +200,8 @@ ORDER BY 1;
                    FROM scbcrse c2
                   WHERE     c2.scbcrse_subj_code = c1.scbcrse_subj_code
                         AND c2.scbcrse_crse_numb = c1.scbcrse_crse_numb
-                        AND c2.scbcrse_eff_term <= '144420')
-         AND ssbsect_term_code = '144420'
+                        AND c2.scbcrse_eff_term <= '144430')
+         AND ssbsect_term_code = '144430'
          AND SSBSECT_MAX_ENRL > 0
          AND SSBSECT_SEATS_AVAIL >= 0
          AND SSBSECT_SSTS_CODE = '‰'
@@ -179,8 +224,8 @@ ORDER BY 1;
                    FROM scbcrse c2
                   WHERE     c2.scbcrse_subj_code = c1.scbcrse_subj_code
                         AND c2.scbcrse_crse_numb = c1.scbcrse_crse_numb
-                        AND c2.scbcrse_eff_term <= '144420')
-         AND ssbsect_term_code = '144420'
+                        AND c2.scbcrse_eff_term <= '144430')
+         AND ssbsect_term_code = '144430'
          AND SSBSECT_ENRL > 0
          AND SSBSECT_SSTS_CODE = '‰'
 ORDER BY 1;
@@ -189,7 +234,7 @@ ORDER BY 1;
 
 SELECT COUNT (DISTINCT sfrstcr_crn) all_records
   FROM sfrstcr
- WHERE sfrstcr_term_code = '144420' AND sfrstcr_rsts_code IN ('RW', 'RE');
+ WHERE sfrstcr_term_code = '144430' AND sfrstcr_rsts_code IN ('RW', 'RE');
 
  ---«Ã„«·Ì «·„ﬁ«⁄œ «·„ »ﬁÌ…
 
@@ -202,8 +247,8 @@ SELECT COUNT (DISTINCT sfrstcr_crn) all_records
                    FROM scbcrse c2
                   WHERE     c2.scbcrse_subj_code = c1.scbcrse_subj_code
                         AND c2.scbcrse_crse_numb = c1.scbcrse_crse_numb
-                        AND c2.scbcrse_eff_term <= '144420')
-         AND ssbsect_term_code = '144420'
+                        AND c2.scbcrse_eff_term <= '144430')
+         AND ssbsect_term_code = '144430'
          AND SSBSECT_MAX_ENRL > 0
          AND SSBSECT_SEATS_AVAIL > 0
          AND SSBSECT_SSTS_CODE = '‰'
@@ -211,7 +256,7 @@ ORDER BY 1;
 
 SELECT COUNT (DISTINCT sfrstcr_pidm) males_41
   FROM sfrstcr, spbpers
- WHERE     sfrstcr_term_code = '144420'
+ WHERE     sfrstcr_term_code = '144430'
        AND sfrstcr_pidm = spbpers_pidm
        AND f_get_std_id (sfrstcr_pidm) LIKE '441%'
        AND SPBPERS_SEX = 'M'
@@ -219,7 +264,7 @@ SELECT COUNT (DISTINCT sfrstcr_pidm) males_41
 
 SELECT COUNT (DISTINCT sfrstcr_pidm) females_41
   FROM sfrstcr, spbpers
- WHERE     sfrstcr_term_code = '144420'
+ WHERE     sfrstcr_term_code = '144430'
        AND sfrstcr_pidm = spbpers_pidm
        AND f_get_std_id (sfrstcr_pidm) LIKE '441%'
        --and SPBPERS_SEX='F'
@@ -247,14 +292,14 @@ SELECT COUNT (DISTINCT SGBSTDN_PIDM) cohort_41
 
                        /*  update sfbetrm
                          set  SFBETRM_ADD_DATE=to_date('12-01-2020','dd-mm-yyyy')
-                          where SFBETRM_TERM_CODE='144420'
+                          where SFBETRM_TERM_CODE='144430'
                           and to_char(SFBETRM_ADD_DATE,'dd-mm-yyyy')='09-01-2020'*/
 
 
 
   SELECT DISTINCT SSBSECT_CRN
     FROM ssbsect
-   WHERE ssbsect_term_code = '144420' AND SSBSECT_SSTS_CODE = '‰'
+   WHERE ssbsect_term_code = '144430' AND SSBSECT_SSTS_CODE = '‰'
 ORDER BY 1;
 
 
@@ -267,8 +312,8 @@ ORDER BY 1;
                    FROM scbcrse c2
                   WHERE     c2.scbcrse_subj_code = c1.scbcrse_subj_code
                         AND c2.scbcrse_crse_numb = c1.scbcrse_crse_numb
-                        AND c2.scbcrse_eff_term <= '144420')
-         AND ssbsect_term_code = '144420'
+                        AND c2.scbcrse_eff_term <= '144430')
+         AND ssbsect_term_code = '144430'
          AND SSBSECT_SSTS_CODE = '‰'
 ORDER BY 1;
 
@@ -288,8 +333,8 @@ ORDER BY 1;
                    FROM scbcrse c2
                   WHERE     c2.scbcrse_subj_code = c1.scbcrse_subj_code
                         AND c2.scbcrse_crse_numb = c1.scbcrse_crse_numb
-                        AND c2.scbcrse_eff_term <= '144420')
-         AND ssbsect_term_code = '144420'
+                        AND c2.scbcrse_eff_term <= '144430')
+         AND ssbsect_term_code = '144430'
          AND SSBSECT_SSTS_CODE = '‰'
          AND SIRASGN_TERM_CODE = ssbsect_term_code
          AND ssbsect_crn = SIRASGN_crn
@@ -303,7 +348,7 @@ ORDER BY 1;
             sex,SFRSTCR_LEVL_CODE ,
          COUNT (DISTINCT sfrstcr_pidm) all_reg_students 
     FROM sfrstcr
-   WHERE sfrstcr_term_code = '144420' AND sfrstcr_rsts_code IN ('RW')
+   WHERE sfrstcr_term_code = '144430' AND sfrstcr_rsts_code IN ('RW')
    and SFRSTCR_LEVL_CODE='MA'
   -- and exists (select '1' from sgbstdn where sgbstdn_pidm=sfrstcr_pidm and sgbstdn_levl_code='œ»')
  GROUP BY  SUBSTR (f_get_std_id (sfrstcr_pidm), 1, 3),

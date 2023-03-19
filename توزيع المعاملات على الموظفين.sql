@@ -10,24 +10,24 @@ DECLARE
                AND F.FLOW_SEQ = 4
                AND USER_PIDM = f_get_pidm ('2521') -->>> From
                AND ACTION_CODE IS NULL
-               AND ROWNUM <= 50
+               AND ROWNUM <= 100
       ORDER BY 1 ASC;
 
 BEGIN
    FOR REC IN GET_REQUESTS
    LOOP
       UPDATE wf_request_flow
-         SET USER_PIDM = f_get_pidm ('4234')--<<< To
+         SET USER_PIDM = f_get_pidm ('3179')--<<< To
        WHERE REQUEST_NO = REC.REQ_NO AND FLOW_SEQ = 4 --AND  USER_PIDM IS NULL
              AND ACTION_CODE IS NULL;
    END LOOP;
 END;
 
-UPDATE wf_request_flow
+/*UPDATE wf_request_flow
    SET USER_PIDM = NULL
  WHERE     ACTION_CODE IS NULL
        AND USER_PIDM IN (235905, 235906, 235907, 235908, 235909)
-       AND ROWNUM < 21;
+       AND ROWNUM < 50;*/
 
 --4234 riyadh
 --5797 raqoush
@@ -72,7 +72,7 @@ order by 1 desc;
                              FROM wf_request_flow
                             WHERE request_no = B.REQUEST_NO)
          AND B.FLOW_SEQ = 4
-         and exists (select '1' from request_details where request_no=a.request_no and item_value='144320')
+         and exists (select '1' from request_details where request_no=a.request_no and item_value='144420')
           
 GROUP BY b.user_pidm
 ORDER BY 1 DESC;
