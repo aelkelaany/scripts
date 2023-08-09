@@ -29,7 +29,7 @@ SELECT A.*, "OVER_ALL" - ("ACT" + "REG_HRS")
                  (SELECT SUM (SFRSTCR_CREDIT_HR)
                     FROM SFRSTCR
                    WHERE     SFRSTCR_PIDM = SMBPOGN_PIDM
-                         AND sfrstcr_term_code = '144230'
+                         AND sfrstcr_term_code = '144430'
                          AND sfrstcr_rsts_code IN ('RE', 'RW'))
                     AS "REG_HRS"
             FROM SMBPOGN NEW_COMP, sgbstdn A
@@ -39,7 +39,7 @@ SELECT A.*, "OVER_ALL" - ("ACT" + "REG_HRS")
                            FROM SGBSTDN
                           WHERE SGBSTDN_PIDM = A.SGBSTDN_PIDM)
                  AND SGBSTDN_STST_CODE = 'AS'
-                  AND A.SGBSTDN_STYP_CODE IN ('„', '')
+                  AND A.SGBSTDN_STYP_CODE IN ('„')
                  and sgbstdn_coll_code_1 not in ('14','33','55','25')
                  AND SMBPOGN_LEVL_CODE in ( 'Ã„','')
                  AND NEW_COMP.SMBPOGN_REQUEST_NO =
@@ -50,7 +50,7 @@ SELECT A.*, "OVER_ALL" - ("ACT" + "REG_HRS")
                         (SELECT '1'
                            FROM SFRSTCR
                           WHERE     SFRSTCR_PIDM = SMBPOGN_PIDM
-                                AND sfrstcr_term_code = '144230'
+                                AND sfrstcr_term_code = '144430'
                                 AND sfrstcr_rsts_code IN ('RE', 'RW'))
         GROUP BY SMBPOGN_PIDM,
                  NEW_COMP.SMBPOGN_REQUEST_NO,

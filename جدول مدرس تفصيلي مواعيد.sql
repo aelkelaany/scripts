@@ -152,7 +152,7 @@
                          AND sfrstcr_rsts_code IN ('RE', 'RW')
                          AND sfrstcr_crn = ssbsect_crn)
          AND sirasgn_crn = ssbsect_crn
-        --  AND sirasgn_pidm = f_get_pidm ( :inst_id)
+           AND sirasgn_pidm = f_get_pidm ( :inst_id)
          AND THE_SSRMEET_TIMES.THE_crn = ssbsect_crn
          AND THE_SSRMEET_TIMES.THE_TERM = ssbsect_term_code
          AND sirasgn_category = THE_SSRMEET_TIMES.ssrmeet_catagory

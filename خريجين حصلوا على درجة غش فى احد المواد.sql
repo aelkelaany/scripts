@@ -1,4 +1,49 @@
 /* Formatted on 12/01/2022 10:53:56 (QP5 v5.371) */
+--- query
+SELECT SHRTCKN_PIDM STD_ID, shrtckn_term_code term, SHRTCKN_CRN crn
+        ,F_GET_STD_ID (SHRTCKN_PIDM) STD_ID,
+               F_GET_STD_NAME (SHRTCKN_PIDM) NAME,
+               shrtckn_term_code,
+               scbcrse_title ,a.sgbstdn_term_code_eff ,sgbstdn_coll_code_1 ,shrtckg_grde_code_final  
+        FROM shrtckn,
+             sgbstdn a,
+             shrtckg g1,
+             scbcrse c1
+       WHERE     a.sgbstdn_pidm = shrtckn_pidm
+             AND a.sgbstdn_term_code_eff =
+                 (SELECT MAX (b.sgbstdn_term_code_eff)
+                    FROM sgbstdn b
+                   WHERE b.sgbstdn_pidm = a.sgbstdn_pidm)
+             AND shrtckn_pidm = g1.shrtckg_pidm
+             AND g1.shrtckg_term_code = shrtckn_term_code
+             AND sgbstdn_styp_code = 'ã'
+             AND g1.shrtckg_tckn_seq_no = shrtckn_seq_no
+             AND g1.shrtckg_seq_no =
+                 (SELECT MAX (g2.shrtckg_seq_no)
+                    FROM shrtckg g2
+                   WHERE     g2.shrtckg_pidm = shrtckn_pidm
+                         AND g2.shrtckg_term_code = shrtckn_term_code
+                         AND g2.shrtckg_tckn_seq_no = shrtckn_seq_no)
+             AND c1.scbcrse_subj_code = shrtckn_subj_code
+             AND c1.scbcrse_crse_numb = shrtckn_crse_numb
+             AND c1.scbcrse_eff_term =
+                 (SELECT MAX (c2.scbcrse_eff_term)
+                    FROM scbcrse c2
+                   WHERE     c2.scbcrse_subj_code = c1.scbcrse_subj_code
+                         AND c2.scbcrse_crse_numb = c1.scbcrse_crse_numb
+                         AND c2.scbcrse_eff_term <= shrtckn_term_code)
+             AND shrtckg_grde_code_final IN ( 'ÛÔ','Û')
+             AND sgbstdn_stst_code = 'ÎÌ'
+             AND EXISTS
+                     (SELECT '1'
+                        FROM SHRDGMR
+                       WHERE     SHRDGMR_pidm = a.sgbstdn_pidm
+                             AND SHRDGMR_DEGS_CODE = 'ÎÌ'
+                             AND SHRDGMR_TERM_CODE_GRAD = '144430')
+     ;
+
+
+-----
 TRUNCATE TABLE bu_dev.tmp_tbl_kilany;
 
 INSERT INTO bu_dev.tmp_tbl_kilany (col01, col02, col03)
@@ -34,14 +79,14 @@ INSERT INTO bu_dev.tmp_tbl_kilany (col01, col02, col03)
                    WHERE     c2.scbcrse_subj_code = c1.scbcrse_subj_code
                          AND c2.scbcrse_crse_numb = c1.scbcrse_crse_numb
                          AND c2.scbcrse_eff_term <= shrtckn_term_code)
-             AND shrtckg_grde_code_final IN ( 'ÛÔ')
+             AND shrtckg_grde_code_final IN ( 'ÛÔ','Û')
              AND sgbstdn_stst_code = 'ÎÌ'
              AND EXISTS
                      (SELECT '1'
                         FROM SHRDGMR
                        WHERE     SHRDGMR_pidm = a.sgbstdn_pidm
                              AND SHRDGMR_DEGS_CODE = 'ÎÌ'
-                             AND SHRDGMR_TERM_CODE_GRAD = '144420')
+                             AND SHRDGMR_TERM_CODE_GRAD = '144430')
      ;
 
 

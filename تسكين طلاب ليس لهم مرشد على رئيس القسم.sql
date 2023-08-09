@@ -1,14 +1,14 @@
- truncate table BU_DEV.TMP_TBL_kilany1 ;
- insert into BU_DEV.TMP_TBL_kilany1(col01,col02)
+ /*truncate table BU_DEV.TMP_TBL_kilany1 ;
+ insert into BU_DEV.TMP_TBL_kilany1(col01,col02)*/
 SELECT sgbstdn_pidm st_pidm, sgbstdn_dept_code 
            FROM sgbstdn a
           WHERE     sgbstdn_term_code_eff =
                        (SELECT MAX (b.sgbstdn_term_code_eff)
                           FROM sgbstdn b
                          WHERE b.sgbstdn_pidm = a.sgbstdn_pidm
-                         and b.sgbstdn_term_code_eff <= '144430')
+                         and b.sgbstdn_term_code_eff <= '1444510')
                 AND sgbstdn_stst_code = 'AS'
-                AND sgbstdn_levl_code   IN ('Ìã')
+                --AND sgbstdn_levl_code   IN ('Ìã')
                 and not exists (select '1' from SGRADVR where SGRADVR_pidm=a.sgbstdn_pidm )
  ;
 
@@ -52,9 +52,9 @@ SELECT sgbstdn_pidm st_pidm, sgbstdn_dept_code
                        (SELECT MAX (b.sgbstdn_term_code_eff)
                           FROM sgbstdn b
                          WHERE b.sgbstdn_pidm = a.sgbstdn_pidm
-                         and b.sgbstdn_term_code_eff <= '144320')
+                         and b.sgbstdn_term_code_eff <= '144510')
                 AND sgbstdn_stst_code = 'AS'
-                AND sgbstdn_levl_code   IN ('Ìã')
+               -- AND sgbstdn_levl_code   IN ('Ìã')
                 and not exists (select '1' from SGRADVR where SGRADVR_pidm=a.sgbstdn_pidm )
  ;
 
@@ -85,7 +85,7 @@ UPDATE BU_DEV.TMP_TBL_kilany1
                                         SGRADVR_PRIM_IND,
                                         SGRADVR_ACTIVITY_DATE)
                  VALUES (STD.PIDM,
-                         '144320',
+                         '144510',
                          STD.ADV,
                          'ãÑÔÏ',
                          'Y',
@@ -125,7 +125,7 @@ select REQUESTER_PIDM from request_master m , request_details term
 where 
 m.request_no=term.request_no
 and term.item_code='TERM'
-and teRm.item_value='144320'
+and teRm.item_value='1444510'
 AND term.SEQUENCE_NO=1
 and m.object_code='WF_INTERNAL_VISITOR'
 AND m.REQUEST_STATUS='C')

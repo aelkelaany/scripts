@@ -1,4 +1,4 @@
-exec p_Delete_wf('401222') ;
+exec p_Delete_wf('502377') ;
 select f_get_pidm('2233') from  dual ;
 SGAASST
    -----------------------------cancel rejection   

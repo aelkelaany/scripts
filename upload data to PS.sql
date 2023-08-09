@@ -193,3 +193,32 @@ Insert into GLBSLCT
         
         
         end ;
+        
+        
+        
+        
+        -------
+        
+          Insert into GLBSLCT
+   (GLBSLCT_APPLICATION, GLBSLCT_SELECTION, GLBSLCT_CREATOR_ID, GLBSLCT_DESC, GLBSLCT_LOCK_IND, 
+    GLBSLCT_ACTIVITY_DATE, GLBSLCT_TYPE_IND)
+ Values
+   ('STUDENT', 'COLL112', 'SAISUSR', 'COLL12', 'N', 
+    SYSDATE, NULL);
+ 
+ 
+Insert into GLBEXTR
+   SELECT 'STUDENT', 'COLL112', 'SAISUSR', 'SAISUSR', SGBSTDN_PIDM, 
+    SYSDATE, 'S', NULL  FROM 
+(  SELECT A.SGBSTDN_PIDM  
+    FROM SGBSTDN A 
+   WHERE     SGBSTDN_TERM_CODE_EFF =
+                (SELECT MAX (B.SGBSTDN_TERM_CODE_EFF)
+                   FROM SGBSTDN B
+                  WHERE     
+  B.SGBSTDN_PIDM = A.SGBSTDN_PIDM)
+ AND A.SGBSTDN_STST_CODE   IN ('ЮЬ','уг','иф')
+        
+         AND A.SGBSTDN_coll_code_1 ='12'
+ )
+  ;

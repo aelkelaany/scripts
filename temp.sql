@@ -34,7 +34,7 @@ SMRACAA
 SMBPGEN --progheader
 SMBAGEN --area header
 SCREQIV
- 
+ SMRARUL
  
 SMRSSUB
 SSRRCOL

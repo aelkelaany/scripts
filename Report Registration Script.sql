@@ -1,4 +1,4 @@
-/* Formatted on 22/12/2021 12:26:35 (QP5 v5.371) */
+ 
 INSERT INTO GENERAL.GUBOBJS (GUBOBJS_NAME,
                              GUBOBJS_DESC,
                              GUBOBJS_OBJT_CODE,

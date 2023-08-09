@@ -74,7 +74,7 @@ SELECT ROWID,
                                    WHERE l2.student_pidm = l1.student_pidm))
 WHERE 
 
-STUDENT_PIDM =182077 ;
+STUDENT_PIDM =f_get_pidm('444024222') ;
 
 exists  (SELECT 1 FROM DUAL 
  WHERE 
