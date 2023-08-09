@@ -2,7 +2,7 @@ SELECT sgradvr_pidm std_pidm,
                    f_getspridenid (sgradvr_pidm)
                 || ' - '
                 || f_format_name (sgradvr_pidm, 'FML')
-                   std_name ,sgbstdn_dept_code ,f_get_std_name(sgradvr_advr_pidm) advisor_name
+                   std_name ,sgbstdn_dept_code ,f_get_std_name(sgradvr_advr_pidm) advisor_name ,sgbstdn_stst_code
            FROM sgradvr, sgbstdn a, sirdpcl x
           WHERE     sgradvr_advr_pidm = F_GET_PIDM(:ADVR_ID)
                 AND sgradvr_pidm = sgbstdn_pidm

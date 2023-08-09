@@ -37,7 +37,7 @@ INSERT INTO TRANSFER_STUDENT_PROGRAM (PIDM_CD,
                           AND d.sequence_no = 1
                           AND d.item_code = 'TRANSFER_MAJOR')
                      MAJOR_CODE,
-                  NULL NOTES
+                  f_get_gender(REQUESTER_PIDM) NOTES
              FROM request_master m
             WHERE     object_code = 'WF_TRANSFER'
                   AND request_status IN ('C')
@@ -47,7 +47,7 @@ INSERT INTO TRANSFER_STUDENT_PROGRAM (PIDM_CD,
                            WHERE     d.request_no = m.request_no
                                  AND d.sequence_no = 1
                                  AND d.item_code = 'TERM'
-                                 AND D.ITEM_VALUE = '144230'));
+                                 AND D.ITEM_VALUE = '144440'));
 
                                  /*validation after insertion*/
 
@@ -115,14 +115,14 @@ SELECT *
                 WHERE PROGRAM_CODE = PROGRAM_CD AND GENDER = 'F');
 
 
-SELECT DISTINCT PROGRAM_CD, f_get_program_full_desc ('144410', PROGRAM_CD)
+SELECT DISTINCT PROGRAM_CD, f_get_program_full_desc ('144510', PROGRAM_CD)
   FROM TRANSFER_STUDENT_PROGRAM a
  WHERE EXISTS
           (SELECT '1'
              FROM spbpers
             WHERE spbpers_pidm = PIDM_CD AND spbpers_sex = 'F');
             
-            SELECT DISTINCT PROGRAM_CD, f_get_program_full_desc ('144310', PROGRAM_CD)
+            SELECT DISTINCT PROGRAM_CD, f_get_program_full_desc ('144510', PROGRAM_CD)
   FROM TRANSFER_STUDENT_PROGRAM a
  WHERE EXISTS
           (SELECT '1'
@@ -152,8 +152,8 @@ ORDER BY SOBCURR_COLL_CODE;
 
 
 /*Excuting*/
-
-exec ITRANSFER_PROC ('144410') ;
+update TRANSFER_STUDENT_PROGRAM set notes = null;
+exec ITRANSFER_PROC ('144510') ;
 
  SELECT f_get_std_id(pidm_cd),a.*
           FROM TRANSFER_STUDENT_PROGRAM a
@@ -164,11 +164,11 @@ exec ITRANSFER_PROC ('144410') ;
    (GLBSLCT_APPLICATION, GLBSLCT_SELECTION, GLBSLCT_CREATOR_ID, GLBSLCT_DESC, GLBSLCT_LOCK_IND, 
     GLBSLCT_ACTIVITY_DATE, GLBSLCT_TYPE_IND)
  Values
-   ('STUDENT', 'ST_TRANS_14442', 'SAISUSR', 'ÿ·«» „ÕÊ·Ì‰ 1444', 'N', 
+   ('STUDENT', 'ST_TRANS_14445', 'SAISUSR', 'ÿ·«» „ÕÊ·Ì‰ 1445', 'N', 
     SYSDATE, NULL);
                                   INSERT INTO GLBEXTR
    SELECT 'STUDENT',
-          'ST_TRANS_14442',
+          'ST_TRANS_14445',
           'SAISUSR',
           'SAISUSR',
           PIDM,

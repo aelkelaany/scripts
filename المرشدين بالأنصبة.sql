@@ -38,3 +38,4 @@
                                         FROM SIBINST
                                        WHERE SIRDPCL_PIDM = SIBINST_PIDM)
 ORDER BY 1,3
+

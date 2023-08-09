@@ -155,3 +155,6 @@ BEGIN
         DBMS_OUTPUT.put_line ('SSN is false');
     END IF;
 END;
+
+
+-- delete application exec BU_APPS.P_DELETE_ADM_APPLICATION (407824 ) ;

@@ -65,9 +65,10 @@ and SGBSTDN_MAJR_CODE_1=STVMAJR_CODE(+)
 AND SGBSTDN_PROGRAM_1=SMRPRLE_PROGRAM(+)                             
 AND SHRTTRM_ASTD_CODE_END_OF_TERM=STVASTD_CODE(+)                        
 AND SGBSTDN_STST_CODE IN ('AS','„Ê','„⁄','ÿ„','≈ﬁ','›ﬂ','≈ ','„‰')
---and SGBSTDN_DEGC_CODE_1 IN   ('»ﬂ  ','»ﬂ','000000','œ»')
-and SGBSTDN_DEGC_CODE_1 IN   ( 'œ⁄' )
+and SGBSTDN_DEGC_CODE_1 IN   ('»ﬂ  ','»ﬂ','000000','œ»')
+--and SGBSTDN_DEGC_CODE_1 IN   ( 'œ⁄' )
  AND SGBSTDN_COLL_CODE_1 NOT IN ('14','25','330','550') -- ﬂ·Ì«  ’ÕÌ…
+ --AND SGBSTDN_COLL_CODE_1   IN ('33') -- ﬂ·Ì«  ’ÕÌ…
 -- and sgbstdn_program_1 like '%-3303-1433'
 --and sgbstdn_styp_code in ('„',' ')
 AND SMBPOGN_MET_IND='Y'
@@ -78,3 +79,20 @@ ORDER BY STVCOLL_DESC,STVMAJR_DESC,SGBSTDN_PROGRAM_1,SHRTCKG_TERM ASC
 )
 
 ;
+
+
+
+Insert into GLBSLCT
+   (GLBSLCT_APPLICATION, GLBSLCT_SELECTION, GLBSLCT_CREATOR_ID, GLBSLCT_DESC, GLBSLCT_LOCK_IND, 
+    GLBSLCT_ACTIVITY_DATE, GLBSLCT_TYPE_IND)
+ Values
+   ('STUDENT', 'GRD_33_14430', 'SAISUSR', 'MED_SCI', 'N', 
+    SYSDATE, NULL);
+ 
+ 
+Insert into GLBEXTR
+   SELECT 'STUDENT', 'GRD_33_14430', 'SAISUSR', 'SAISUSR',  PIDM, 
+    SYSDATE, 'S', NULL  FROM 
+( 
+SELECT COL02 PIDM FROM bu_dev.tmp_tbl03 WHERE COL02 IS NOT NULL ); 
+

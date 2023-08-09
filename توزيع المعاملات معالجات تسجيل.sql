@@ -70,7 +70,7 @@ END;
                              FROM wf_request_flow
                             WHERE request_no = B.REQUEST_NO)
          AND B.FLOW_SEQ = 4
-         and exists (select '1' from request_details where request_no=a.request_no and item_value='144410')
+         and exists (select '1' from request_details where request_no=a.request_no and item_value='144430')
           
 GROUP BY b.user_pidm
 ORDER BY 1 DESC;
