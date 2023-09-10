@@ -1,5 +1,5 @@
- /*truncate table BU_DEV.TMP_TBL_kilany1 ;
- insert into BU_DEV.TMP_TBL_kilany1(col01,col02)*/
+ /*truncate table BU_DEV.TMP_TBL_kilany_ADVR ;
+ insert into BU_DEV.TMP_TBL_kilany_ADVR(col01,col02)*/
 SELECT sgbstdn_pidm st_pidm, sgbstdn_dept_code 
            FROM sgbstdn a
           WHERE     sgbstdn_term_code_eff =
@@ -12,11 +12,11 @@ SELECT sgbstdn_pidm st_pidm, sgbstdn_dept_code
                 and not exists (select '1' from SGRADVR where SGRADVR_pidm=a.sgbstdn_pidm )
  ;
 
---UPDATE BU_DEV.TMP_TBL_kilany1
+--UPDATE BU_DEV.TMP_TBL_kilany_ADVR
 --   SET COL02 = f_get_pidm (COL01);
 
 
-UPDATE BU_DEV.TMP_TBL_kilany1
+UPDATE BU_DEV.TMP_TBL_kilany_ADVR
    SET (COL03, COL04, col05) =
            (SELECT a.USER_PIDM,
                    f_get_std_id (a.USER_PIDM),
@@ -33,19 +33,19 @@ UPDATE BU_DEV.TMP_TBL_kilany1
 -- col01 student pidm
 --col02 dept code 
 --col03 adv pidm
-  select f_get_std_id(COL01) stid,f_get_std_name(COL01) stname, f_get_desc_fnc('stvdept',COL02,30) dept, COL03, COL04 from BU_DEV.TMP_TBL_kilany1 ;
+  select f_get_std_id(COL01) stid,f_get_std_name(COL01) stname, f_get_desc_fnc('stvdept',COL02,30) dept, COL03, COL04 from BU_DEV.TMP_TBL_kilany_ADVR ;
 
 DECLARE
     CURSOR GET_STUDENTS IS
-        SELECT COL01 PIDM, COL03 ADV FROM BU_DEV.TMP_TBL_kilany1;
+        SELECT COL01 PIDM, COL03 ADV FROM BU_DEV.TMP_TBL_kilany_ADVR;
 
     l_FALIURE_COUNTER    NUMBER := 0;
     L_SUCCSESS_COUNTER   NUMBER := 0;
 BEGIN
 
-
-delete  BU_DEV.TMP_TBL_kilany1  ;
- insert into BU_DEV.TMP_TBL_kilany1(col01,col02)
+ 
+delete  BU_DEV.TMP_TBL_kilany_ADVR  ;
+ insert into BU_DEV.TMP_TBL_kilany_ADVR(col01,col02)
 SELECT sgbstdn_pidm st_pidm, sgbstdn_dept_code 
            FROM sgbstdn a
           WHERE     sgbstdn_term_code_eff =
@@ -58,11 +58,11 @@ SELECT sgbstdn_pidm st_pidm, sgbstdn_dept_code
                 and not exists (select '1' from SGRADVR where SGRADVR_pidm=a.sgbstdn_pidm )
  ;
 
---UPDATE BU_DEV.TMP_TBL_kilany1
+--UPDATE BU_DEV.TMP_TBL_kilany_ADVR
 --   SET COL02 = f_get_pidm (COL01);
 
 
-UPDATE BU_DEV.TMP_TBL_kilany1
+UPDATE BU_DEV.TMP_TBL_kilany_ADVR
    SET (COL03, COL04, col05) =
            (SELECT a.USER_PIDM,
                    f_get_std_id (a.USER_PIDM),
@@ -93,7 +93,7 @@ UPDATE BU_DEV.TMP_TBL_kilany1
 
             L_SUCCSESS_COUNTER := L_SUCCSESS_COUNTER + 1;
 
-            UPDATE BU_DEV.TMP_TBL_kilany1
+            UPDATE BU_DEV.TMP_TBL_kilany_ADVR
                SET COL05 = 'DONE'
              WHERE col02 = STD.PIDM;
         EXCEPTION

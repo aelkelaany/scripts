@@ -22,13 +22,13 @@
          SYRBLKR_CAPACITY_USED
          /*,(SELECT COUNT (applicant_pidm)
             FROM VW_APPLICANT_CHOICES
-           WHERE     ADMIT_TERM = '144310'
+           WHERE     ADMIT_TERM = '144510'
                  AND APPLICANT_DECISION IN ('QA', 'FA')
                  AND APPLICANT_CHOICE = SYRBLKR_PROGRAM)
              "«·›⁄·Ì"*/
     FROM stvblck, syrblkr
    WHERE     SYRBLKR_BLCK_CODE = STVBLCK_CODE
-         AND SYRBLKR_TERM_CODE = '144310'
+         AND SYRBLKR_TERM_CODE = '144510'
          AND EXISTS
                  (SELECT 'x'
                     FROM SSRBLCK
@@ -43,13 +43,13 @@ ORDER BY SYRBLKR_COLL_CODE, SYRBLKR_PROGRAM;
          b.*,
          (SELECT MAX (scbcrse_title)
             FROM scbcrse, ssbsect
-           WHERE     ssbsect_term_code = '144310'
+           WHERE     ssbsect_term_code = '144510'
                  AND ssbsect_crn = SSRBLCK_CRN
                  AND scbcrse_subj_code || scbcrse_crse_numb =
                      ssbsect_subj_code || ssbsect_crse_numb)    title
     FROM SSRBLCK a, stvblck b
    WHERE     SSRBLCK_BLCK_CODE = stvblck_CODE
-         AND SSRBLCK_TERM_CODE = '144310'
+         AND SSRBLCK_TERM_CODE = '144510'
          AND NOT EXISTS
                  (SELECT '1'
                     FROM SYRBLKR
@@ -62,7 +62,7 @@ ORDER BY 2;
  SELECT  distinct stvblck_code,stvblck_desc
     FROM SSRBLCK a, stvblck b
    WHERE     SSRBLCK_BLCK_CODE = stvblck_CODE
-         AND SSRBLCK_TERM_CODE = '144310'
+         AND SSRBLCK_TERM_CODE = '144510'
          and stvblck_CODE not like '%PG%'
          and stvblck_desc not like '%«‰ ”«»%'
          AND   EXISTS
@@ -75,7 +75,7 @@ ORDER BY 1;
 
 --DELETE FROM
     SYRBLKR
-      WHERE     SYRBLKR_TERM_CODE = '144310'
+      WHERE     SYRBLKR_TERM_CODE = '144510'
             AND NOT EXISTS
 
 (SELECT 'x'
@@ -89,7 +89,7 @@ ORDER BY 1;
 
 
   SELECT COUNT (A.SGBSTDN_PIDM)                                    std_count,
-         f_get_program_full_desc ('144310', sgbstdn_program_1)     description,
+         f_get_program_full_desc ('144510', sgbstdn_program_1)     description,
          sgbstdn_program_1                                         prog_code
     FROM SGBSTDN A
    WHERE     A.SGBSTDN_TERM_CODE_EFF = (SELECT MAX (SGBSTDN_TERM_CODE_EFF)
@@ -98,7 +98,7 @@ ORDER BY 1;
          AND SGBSTDN_STST_CODE = 'AS'
          and SGBSTDN_levl_code='Ã„'
          AND A.SGBSTDN_STYP_CODE = '„'
-         AND SGBSTDN_TERM_CODE_ADMIT = '144310'
+         AND SGBSTDN_TERM_CODE_ADMIT = '144510'
        
      --    AND sgbstdn_program_1 LIKE '1F15E%'
       AND EXISTS
@@ -106,7 +106,7 @@ ORDER BY 1;
                             FROM SARAPPD
                            WHERE     SARAPPD_PIDM = A.SGBSTDN_PIDM
                                  AND SARAPPD_APDC_CODE = 'FA'
-                                 AND SARAPPD_TERM_CODE_ENTRY = '144310')
+                                 AND SARAPPD_TERM_CODE_ENTRY = '144510')
 GROUP BY sgbstdn_program_1
 ORDER BY 3;
 
@@ -118,7 +118,7 @@ ORDER BY 3;
                                          WHERE SGBSTDN_PIDM = A.SGBSTDN_PIDM)
          AND SGBSTDN_STST_CODE = 'AS'
          AND A.SGBSTDN_STYP_CODE = '„'
-         AND SGBSTDN_TERM_CODE_ADMIT = '144310'
+         AND SGBSTDN_TERM_CODE_ADMIT = '144510'
  
  ;
  
@@ -128,13 +128,13 @@ ORDER BY 3;
          b.*,
          (SELECT MAX (scbcrse_title)
             FROM scbcrse, ssbsect
-           WHERE     ssbsect_term_code = '144310'
+           WHERE     ssbsect_term_code = '144510'
                  AND ssbsect_crn = SSRBLCK_CRN
                  AND scbcrse_subj_code || scbcrse_crse_numb =
                      ssbsect_subj_code || ssbsect_crse_numb)    title
     FROM SSRBLCK a, stvblck b
    WHERE     SSRBLCK_BLCK_CODE = stvblck_CODE 
-         AND SSRBLCK_TERM_CODE = '144310'
+         AND SSRBLCK_TERM_CODE = '144510'
 --         AND NOT EXISTS
 --                 (SELECT '1'
 --                    FROM SYRBLKR
@@ -147,7 +147,7 @@ ORDER BY  substr(SSRBLCK_BLCK_CODE,-1) asc ,SSRBLCK_BLCK_CODE;
 select * from stvblck
 where stvblck_CODE not in (select SSRBLCK_BLCK_CODE
 from ssrblck
-where SSRBLCK_TERM_CODE='144310' )
+where SSRBLCK_TERM_CODE='144510' )
  and stvblck_CODE like '%PG%'; 
  
  
@@ -157,17 +157,24 @@ where SSRBLCK_TERM_CODE='144310' )
          b.*,
          (SELECT MAX (scbcrse_title)
             FROM scbcrse, ssbsect
-           WHERE     ssbsect_term_code = '144310'
+           WHERE     ssbsect_term_code = '144510'
                  AND ssbsect_crn = SSRBLCK_CRN
                  AND scbcrse_subj_code || scbcrse_crse_numb =
                      ssbsect_subj_code || ssbsect_crse_numb)    title
     FROM SSRBLCK a, stvblck b
    WHERE     SSRBLCK_BLCK_CODE = stvblck_CODE
-         AND SSRBLCK_TERM_CODE = '144310'
-         AND SSRBLCK_BLCK_CODE LIKE '%PG%'
+         AND SSRBLCK_TERM_CODE = '144510'
+         AND SSRBLCK_BLCK_CODE not LIKE '%PG%'
          AND NOT EXISTS
                  (SELECT '1'
                     FROM SYRBLKR
                    WHERE     SSRBLCK_TERM_CODE = SYRBLKR_TERM_CODE
                          AND SSRBLCK_BLCK_CODE = SYRBLKR_BLCK_CODE)
 ORDER BY 2;
+
+
+select * from SYRBLKR
+where SYRBLKR_TERM_CODE='144510' 
+and  not exists (select '1' from  SSRBLCK where SSRBLCK_TERM_CODE = SYRBLKR_TERM_CODE
+                         AND SSRBLCK_BLCK_CODE = SYRBLKR_BLCK_CODE)
+;

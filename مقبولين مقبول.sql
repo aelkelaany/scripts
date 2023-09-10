@@ -70,7 +70,7 @@ SELECT *
                AND x.ADMIT_TERM = sarappd_term_code_entry
                AND spbpers_ssn = z."Student_Identity"
                AND z."Student_Identity"(+) = x.student_ssn
-               AND s1.sarappd_term_code_entry = '144410'
+               AND s1.sarappd_term_code_entry = '144510'
                AND x.admission_type = 'UG'
                AND s1.sarappd_seq_no =
                    (SELECT MAX (s2.sarappd_seq_no)
@@ -84,7 +84,7 @@ SELECT *
                        (SELECT 1
                           FROM adm_student_confirmation
                          WHERE     applicant_pidm = sarappd_pidm
-                               AND admit_term = '144410'))
+                               AND admit_term = '144510'))
 UNION
 SELECT *
   FROM (SELECT spbpers_ssn,
@@ -157,7 +157,7 @@ SELECT *
                AND x.ADMIT_TERM = sarappd_term_code_entry
                AND spbpers_ssn = z."Student_Identity"
                AND z."Student_Identity"(+) = x.student_ssn
-               AND s1.sarappd_term_code_entry = '144410'
+               AND s1.sarappd_term_code_entry = '144510'
                AND x.admission_type = 'UG'
                AND s1.sarappd_seq_no =
                    (SELECT MAX (s2.sarappd_seq_no)
@@ -171,4 +171,4 @@ SELECT *
                        (SELECT 1
                           FROM adm_student_confirmation
                          WHERE     applicant_pidm = sarappd_pidm
-                               AND admit_term = '144410'));
+                               AND admit_term = '144510'));

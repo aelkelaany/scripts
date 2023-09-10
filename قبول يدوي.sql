@@ -1,4 +1,4 @@
-/* Formatted on 24/01/2022 10:31:17 (QP5 v5.371) */
+ 
 DECLARE
     v_ID            VARCHAR2 (100);
     v_FIRST_NAME    VARCHAR2 (100);
@@ -7,6 +7,7 @@ DECLARE
     v_FAMILY_NAME   VARCHAR2 (100);
     v_SSN           VARCHAR2 (100);
     v_GENDER        VARCHAR2 (100);
+    V_BDAY          DATE;
     V_PHONE         VARCHAR2 (100);
     v_pidm          NUMBER (9);
 
@@ -22,9 +23,10 @@ DECLARE
                col10     major,
                col11     BLCK_CODE,
                col12     master_pidm
-          FROM bu_dev.tmp_tbl_kilany
+               
+          FROM bu_dev.tmp_tbl_kilany_qadm
           where col13 is null
-         -- and col08='4FM13CT43'
+         -- and col01='2457479422'
          -- AND COL11='MKT2'
           ;
 BEGIN
@@ -116,7 +118,7 @@ BEGIN
 
 
 
-        UPDATE bu_dev.tmp_tbl_kilany
+        UPDATE bu_dev.tmp_tbl_kilany_qadm
            SET col13 = v_pidm
          WHERE col01 = v_ssn;
 
@@ -127,7 +129,7 @@ BEGIN
 
 
         -- sgbstdn
-
+ 
         INSERT INTO sgbstdn (SGBSTDN_PIDM,
                              SGBSTDN_TERM_CODE_EFF,
                              SGBSTDN_STST_CODE,
@@ -492,6 +494,10 @@ BEGIN
               FROM SORLFOS
              WHERE SORLFOS_pidm = rec.master_pidm;
     END LOOP;
+    exception
+    when others then 
+     DBMS_OUTPUT.PUT_LINE(sqlerrm);
+    
 END;
 
 DECLARE
@@ -509,7 +515,7 @@ DECLARE
                     (SELECT MAX (s2.sgbstdn_term_code_eff)
                        FROM sgbstdn s2
                       WHERE s2.sgbstdn_pidm = s1.sgbstdn_pidm)
-             AND sgbstdn_pidm in (select col13 from bu_dev.tmp_tbl_kilany);
+             AND sgbstdn_pidm in (select col13 from bu_dev.tmp_tbl_kilany_qadm);
 
    l_hashed_pwd   VARCHAR2 (150);
 BEGIN
@@ -582,15 +588,15 @@ Insert into GLBSLCT
    (GLBSLCT_APPLICATION, GLBSLCT_SELECTION, GLBSLCT_CREATOR_ID, GLBSLCT_DESC, GLBSLCT_LOCK_IND, 
     GLBSLCT_ACTIVITY_DATE, GLBSLCT_TYPE_IND)
  Values
-   ('STUDENT', 'ADM_ADPLM_43' , 'SAISUSR', '—“„ œ»·Ê„ ⁄«·Ì 43  ', 'N', 
+   ('STUDENT', 'ADM_MANUAL_451' , 'SAISUSR', '—“„ ﬁ»Ê· ÌœÊÌ', 'N', 
     SYSDATE, NULL);
     
     
   
     
     Insert into GLBEXTR
-   SELECT 'STUDENT', 'ADM_ADPLM_43', 'SAISUSR', 'SAISUSR',  PIDM, 
+   SELECT 'STUDENT', 'ADM_ISCLR_45', 'SAISUSR', 'SAISUSR',  PIDM, 
     SYSDATE, 'S', NULL  FROM 
 (  SELECT   col13  PIDM
-            from bu_dev.tmp_tbl_kilany
+            from bu_dev.tmp_tbl_kilany_qadm
            WHERE      col13 IS NOT NULL) ;

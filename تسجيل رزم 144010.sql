@@ -7,16 +7,16 @@ INSERT INTO GLBSLCT (GLBSLCT_APPLICATION,
                      GLBSLCT_ACTIVITY_DATE,
                      GLBSLCT_TYPE_IND)
      VALUES ('STUDENT',
-             'BLOCKS_REGS_144310',
+             'BLOCKS_REGS_144510',
              'SAISUSR',
-             ' ”ÃÌ· —“„ 144310  ',
+             ' ”ÃÌ· —“„ 144510',
              'N',
              SYSDATE,
              NULL);
 
 INSERT INTO GLBEXTR
    SELECT 'STUDENT',
-          'BLOCKS_REGS_144310',
+          'BLOCKS_REGS_144510',
           'SAISUSR',
           'SAISUSR',
           SGBSTDN_PIDM,
@@ -31,13 +31,13 @@ INSERT INTO GLBEXTR
                            WHERE SGBSTDN_PIDM = A.SGBSTDN_PIDM)
                   AND SGBSTDN_STST_CODE = 'AS'
                   AND A.SGBSTDN_STYP_CODE = '„'
-                  AND SGBSTDN_TERM_CODE_ADMIT = '144310'
+                  AND SGBSTDN_TERM_CODE_ADMIT = '144510'
                   AND EXISTS
                          (SELECT '1'
                             FROM SARAPPD
                            WHERE     SARAPPD_PIDM = A.SGBSTDN_PIDM
                                  AND SARAPPD_APDC_CODE = 'FA'
-                                 AND SARAPPD_TERM_CODE_ENTRY = '144310'));
+                                 AND SARAPPD_TERM_CODE_ENTRY = '144510'));
 
 
  --delete from GLBEXTR where  GLBEXTR_SELECTION='BLOCKS_REGS_144010' ;
@@ -46,7 +46,12 @@ INSERT INTO GLBEXTR
 
 UPDATE SYRBLKR
    SET SYRBLKR_CAPACITY_USED = 0
- WHERE SYRBLKR_TERM_CODE = '144310';
+ WHERE SYRBLKR_TERM_CODE = '144510';
+
+
+
+
+
 
 UPDATE SGBSTDN A
    SET A.sgbstdn_blck_code = NULL
@@ -54,8 +59,27 @@ UPDATE SGBSTDN A
               (SELECT MAX (SGBSTDN_TERM_CODE_EFF)
                  FROM SGBSTDN
                 WHERE     SGBSTDN_PIDM = A.SGBSTDN_PIDM
-                      AND SGBSTDN_TERM_CODE_EFF <= '144310')
-       AND SGBSTDN_TERM_CODE_ADMIT = '144310';
+                      AND SGBSTDN_TERM_CODE_EFF <= '144510')
+       AND SGBSTDN_TERM_CODE_ADMIT = '144510'
+       and A.sgbstdn_coll_code_1='16'
+          AND EXISTS
+                         (SELECT '1'
+                            FROM SARAPPD
+                           WHERE     SARAPPD_PIDM = A.SGBSTDN_PIDM
+                                 AND SARAPPD_APDC_CODE = 'FA'
+                                 AND SARAPPD_TERM_CODE_ENTRY = '144510')
+                                 
+                                 and sgbstdn_blck_code is not null 
+                                 
+       
+       ;
+       
+     UPDATE SYRBLKR
+   SET SYRBLKR_CAPACITY_USED = 0
+ WHERE SYRBLKR_TERM_CODE = '144510';  
+       
+       
+       
 
 INSERT INTO GLBSLCT (GLBSLCT_APPLICATION,
                      GLBSLCT_SELECTION,
@@ -116,7 +140,11 @@ and sfrstcr_crn='14438' */
 ;
 UPDATE SYRBLKR
    SET SYRBLKR_CAPACITY_NO = 0
- WHERE SYRBLKR_TERM_CODE = '144310';
+ WHERE SYRBLKR_TERM_CODE = '144510';
+ 
+ 
+ 
+ 
 
 
  ---  ”ÃÌ· «·„«ÃÌ” Ì— „” ÊÏ 2 „”œœÌ‰ ›ﬁÿ
@@ -159,7 +187,7 @@ INSERT INTO GLBEXTR
                   AND EXISTS
                          (SELECT '1'
                             FROM BU_APPS.BNK_REG_PAYMENT
-                           WHERE     TERM_CODE = '144310'
+                           WHERE     TERM_CODE = '144510'
                                  AND STUDENT_PIDM = SGBSTDN_PIDM
                                  AND INVOICE_STATUS = 'PAID'));
 
@@ -169,7 +197,7 @@ SELECT f_get_std_id (GLBEXTR_KEY)
        AND NOT EXISTS
               (SELECT '1'
                  FROM sfrstcr
-                WHERE     sfrstcr_term_code = '144310'
+                WHERE     sfrstcr_term_code = '144510'
                       AND sfrstcr_pidm = GLBEXTR_KEY
                      );
 
@@ -191,7 +219,7 @@ SELECT DISTINCT SMRPRLE_PROGRAM,
        AND STVBLCK_CODE IN
               (SELECT DISTINCT SSRBLCK_BLCK_CODE
                  FROM SSRBLCK
-                WHERE     SSRBLCK_TERM_CODE = '144310'
+                WHERE     SSRBLCK_TERM_CODE = '144510'
                       AND SSRBLCK_BLCK_CODE LIKE '%PG')
        AND EXISTS
               (SELECT '1'
@@ -213,7 +241,7 @@ SELECT DISTINCT SMRPRLE_PROGRAM,
        AND STVBLCK_CODE IN
               (SELECT DISTINCT SSRBLCK_BLCK_CODE
                  FROM SSRBLCK
-                WHERE     SSRBLCK_TERM_CODE = '144310'
+                WHERE     SSRBLCK_TERM_CODE = '144510'
                       AND SSRBLCK_BLCK_CODE LIKE '%PG2%')
        AND EXISTS
               (SELECT '1'

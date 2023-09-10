@@ -1,0 +1,46 @@
+select * from 
+
+SATURN.RWTPAYR crnt
+where RWTPAYR_TRAN_NUMBER=913
+and  not  exists (select '1' from SATURN.RWTPAYR where RWTPAYR_PIDM=crnt.RWTPAYR_PIDM 
+and RWTPAYR_TRAN_NUMBER=907
+) 
+
+and RWTPAYR_PAYMENT in (2000,1700)
+;
+
+delete  from  TBRACCD trns
+where exists 
+(select 1 from 
+
+SATURN.RWTPAYR crnt
+where RWTPAYR_TRAN_NUMBER=913
+and RWTPAYR_pidm=TBRACCD_pidm
+and    exists (select '1' from SATURN.RWTPAYR where RWTPAYR_PIDM=crnt.RWTPAYR_PIDM 
+and RWTPAYR_TRAN_NUMBER=907
+))
+
+and TBRACCD_TERM_CODE='144510'
+and TBRACCD_DETAIL_CODE in ('уп.к','уп.Ч')
+and to_char(TBRACCD_EFFECTIVE_DATE,'mm/dd/yyyy')='09/10/2023'
+and TBRACCD_DESC like '%09/2023%'
+and TBRACCD_TRAN_NUMBER=(select max(TBRACCD_TRAN_NUMBER) from TBRACCD where TBRACCD_pidm=trns.TBRACCD_pidm 
+and  TBRACCD_TERM_CODE=trns.TBRACCD_TERM_CODE
+and TBRACCD_DETAIL_CODE=trns.TBRACCD_DETAIL_CODE
+and TBRACCD_AMOUNT=trns.TBRACCD_AMOUNT
+
+
+)
+ ;
+ 
+ 
+ 
+ 
+ 
+ update SATURN.RWTPAYR crnt set RWTPAYR_PAYMENT=RWTPAYR_PAYMENT/2
+ where 
+ RWTPAYR_TRAN_NUMBER=913
+and    exists (select '1' from SATURN.RWTPAYR where RWTPAYR_PIDM=crnt.RWTPAYR_PIDM 
+and RWTPAYR_TRAN_NUMBER=907
+) ; 
+  

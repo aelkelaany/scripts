@@ -8,8 +8,8 @@ GROUP BY APPLICANT_CHOICE, smrprle_program_desc
 ORDER BY 2;
 -- accpeted
   SELECT COUNT (applicant_pidm),APPLICANT_CHOICE ,
-         f_get_program_full_desc ('144310', APPLICANT_CHOICE)     description
+         f_get_program_full_desc ('144510', APPLICANT_CHOICE)     description
     FROM VW_APPLICANT_CHOICES
-   WHERE ADMIT_TERM = '144310' AND APPLICANT_DECISION = 'QA'
+   WHERE ADMIT_TERM = '144510' AND APPLICANT_DECISION = 'FA'
 GROUP BY APPLICANT_CHOICE
-ORDER BY 2
+ORDER BY 2 ;

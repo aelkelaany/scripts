@@ -1,6 +1,6 @@
 /* Formatted on 8/25/2022 9:35:16 AM (QP5 v5.371) */
 DECLARE
-    l_term_code    VARCHAR2 (8) := '144410';
+    l_term_code    VARCHAR2 (8) := '144510';
     l_ptrm_code    VARCHAR2 (1) := '4';
     l_level_code   VARCHAR2 (8) := 'MA';
     l_row_count    NUMBER (4) := 0;
