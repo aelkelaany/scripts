@@ -164,11 +164,11 @@ exec ITRANSFER_PROC ('144510') ;
    (GLBSLCT_APPLICATION, GLBSLCT_SELECTION, GLBSLCT_CREATOR_ID, GLBSLCT_DESC, GLBSLCT_LOCK_IND, 
     GLBSLCT_ACTIVITY_DATE, GLBSLCT_TYPE_IND)
  Values
-   ('STUDENT', 'ST_TRANS_14445', 'SAISUSR', 'ÿ·«» „ÕÊ·Ì‰ 1445', 'N', 
+   ('STUDENT', 'ST_ADM_TRNS_14445', 'SAISUSR', 'ÿ·«» „ÕÊ·Ì‰ 1445 adm', 'N', 
     SYSDATE, NULL);
                                   INSERT INTO GLBEXTR
    SELECT 'STUDENT',
-          'ST_TRANS_14445',
+          'ST_ADM_TRNS_14445',
           'SAISUSR',
           'SAISUSR',
           PIDM,

@@ -15,15 +15,16 @@ GROUP BY b.user_pidm
 order by 1 desc; 
 -- 2 
 --4234 riyadh
---5797 raqoush
+ 
 --2521 saeed
---6603 Omair
---3377 khadraa
---3466 Reem
+ 
+--3377 khadraa  -
+--3466 Reem     -
 --3344 Nora Ghamdi
---3179 Ahlam
+--3179 Ahlam    -
 --947 MUJAHED
--- Alia 3497
+-- Alia 3497    - 
+-- Gamash 1009  -
 ---********
 
 -----------------------------  ‰›Ì– «· Ê“Ì⁄  3 
@@ -36,16 +37,16 @@ DECLARE
                AND object_code = 'WF_REG_MAINTAIN'
                AND m.request_status = 'P'
                AND F.FLOW_SEQ = 4
-               AND USER_PIDM = f_get_pidm ('947') -->>> From „‰ 
+               AND USER_PIDM = f_get_pidm ('2521') -->>> From „‰ 
                AND ACTION_CODE IS NULL
-               AND ROWNUM <= 5       -- «·⁄œœ
+               AND ROWNUM <= 50       -- «·⁄œœ
       ORDER BY 1 ASC;
 
 BEGIN
    FOR REC IN GET_REQUESTS
    LOOP
       UPDATE wf_request_flow
-         SET USER_PIDM = f_get_pidm ('3344')--<<< To «·Ï 
+         SET USER_PIDM = f_get_pidm ('1009')--<<< To «·Ï 
        WHERE REQUEST_NO = REC.REQ_NO AND FLOW_SEQ = 4 --AND  USER_PIDM IS NULL
              AND ACTION_CODE IS NULL;
    END LOOP;
@@ -70,7 +71,7 @@ END;
                              FROM wf_request_flow
                             WHERE request_no = B.REQUEST_NO)
          AND B.FLOW_SEQ = 4
-         and exists (select '1' from request_details where request_no=a.request_no and item_value='144430')
+         and exists (select '1' from request_details where request_no=a.request_no and item_value='144510')
           
 GROUP BY b.user_pidm
 ORDER BY 1 DESC;

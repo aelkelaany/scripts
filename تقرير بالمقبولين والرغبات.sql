@@ -1,6 +1,6 @@
-/* Formatted on 8/8/2023 1:26:37 PM (QP5 v5.371) */
+/* Formatted on 8/22/2023 12:31:47 PM (QP5 v5.371) */
   SELECT *
-    FROM (SELECT spbpers_ssn
+    FROM (SELECT sarappd_pidm ,spbpers_ssn
                      AS "—ﬁ„ «·ÂÊÌ…",
                  DECODE (ADMISSION_TYPE, 'UG', '«”«”Ì…', '‘Ê«€—')
                      AS "ﬂÊœ «·»Ê«»…",
@@ -42,7 +42,8 @@
                      major,
                  LOWER (x.email)
                      "«·«Ì„Ì·",
-                EDUCATION_CENTER, GPA,
+                 EDUCATION_CENTER,
+                 GPA,
                  STUDENT_QUDORAT_SCORE
                      qdurat,
                  STUDENT_TAHSEELY_SCORE
@@ -76,11 +77,17 @@
                              AND s2.sarappd_term_code_entry =
                                  s1.sarappd_term_code_entry
                              AND s2.sarappd_appl_no = s1.sarappd_appl_no)
-                 AND sarappd_apdc_code IN ('QA')
+                 -- AND sarappd_apdc_code IN ('QA')
                  AND EXISTS
                          (SELECT 1
                             FROM adm_student_confirmation
                            WHERE     applicant_pidm = sarappd_pidm
                                  AND admit_term = '144510'))
-   WHERE "APPStatus" = '1'
-ORDER BY 1;
+   WHERE     "APPStatus" = '1'
+         AND EXISTS
+                 (SELECT '1'
+                    FROM sgbstdn
+                   WHERE     SGBSTDN_PIDM = sarappd_pidm
+                         AND SGBSTDN_TERM_CODE_EFF = '144510'
+                         AND SGBSTDN_STST_CODE = 'AS')
+ORDER BY 6;

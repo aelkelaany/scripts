@@ -78,7 +78,7 @@ Insert into GLBEXTR
           
   ;
   
-  -------------------
+  ------------------- ÿ·«» „”Ã·Ì‰ ›Ï ›’·
   Insert into GLBSLCT
    (GLBSLCT_APPLICATION, GLBSLCT_SELECTION, GLBSLCT_CREATOR_ID, GLBSLCT_DESC, GLBSLCT_LOCK_IND, 
     GLBSLCT_ACTIVITY_DATE, GLBSLCT_TYPE_IND)

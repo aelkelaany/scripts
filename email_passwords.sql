@@ -14,7 +14,7 @@ INSERT INTO new_students_email ("Term Code",
                                 "Path",
                                 pidm,
                                 batch_no)
-   SELECT '144310' "Term Code",
+   SELECT '144510' "Term Code",
           SPRIDEN_FIRST_NAME || ' ' || SPRIDEN_MI || ' ' || SPRIDEN_LAST_NAME
              "Name",
           SPRIDEN_FIRST_NAME || ' ' || SPRIDEN_MI || ' ' || SPRIDEN_LAST_NAME
@@ -43,12 +43,12 @@ INSERT INTO new_students_email ("Term Code",
                  (SELECT MAX (sgbstdn_term_code_eff)
                     FROM sgbstdn d
                    WHERE     d.sgbstdn_pidm = x.sgbstdn_pidm
-                         AND d.sgbstdn_term_code_eff <= '144320')
+                          )
           AND sgbstdn_coll_code_1 = stvcoll_code
           AND sgbstdn_camp_code = stvcamp_code
           AND sgbstdn_stst_code = 'AS'
-          AND sgbstdn_levl_code = 'Ìã'
-          and spriden_id like '443%'
+         -- AND sgbstdn_levl_code = 'Ìã'
+          and spriden_id like '445%'
           and not exists (select '1' from new_students_email where "SamAccountName"=spriden_id)
          -- AND TRUNC (sgbstdn_activity_date) = TRUNC (SYSDATE)
           --AND spriden_id IN('443046010', '443046011', '443046012', '443046013') 
@@ -56,7 +56,63 @@ INSERT INTO new_students_email ("Term Code",
 SELECT *
   FROM new_students_email
  WHERE BATCH_NO =(select max(BATCH_NO) from new_students_email);
+ 
+ update 
+ new_students_email set "AccountPassword"
+ =(select col08 from bu_dev.tmp_tbl_kilany4
+ where col05="SamAccountName" and COL07="EmployeeID")
+ where 
+ BATCH_NO=12 ;
+ 
+-------- transfer password to banner 
 
+DECLARE
+   l_pin            VARCHAR2 (30);
+   l_hashed_pin     VARCHAR2 (500);
+   l_update_count   NUMBER := 0;
+BEGIN
+   FOR i
+      IN (SELECT spriden_pidm, "SamAccountName", "AccountPassword" pwd
+            FROM NEW_STUDENTS_EMAIL, sgbstdn s1, spriden
+           WHERE     spriden_id = "SamAccountName"
+                 AND spriden_pidm = sgbstdn_pidm
+                 AND spriden_change_ind IS NULL
+                 AND sgbstdn_term_code_eff =
+                        (SELECT MAX (s2.sgbstdn_term_code_eff)
+                           FROM sgbstdn s2
+                          WHERE s2.sgbstdn_pidm = s1.sgbstdn_pidm)
+                          and "BATCH_NO"=12
+                          )
+   LOOP
+      l_hashed_pin := NULL;
+      gspcrpt.p_saltedhash_md5 (i.pwd, l_hashed_pin);
+
+      UPDATE gobtpac
+         SET gobtpac_pin = l_hashed_pin,
+             gobtpac_salt = '',
+             gobtpac_activity_date = SYSDATE,
+             gobtpac_user = USER,
+             gobtpac_data_origin = 'Update Banner PWD to LDAP PWD',
+             GOBTPAC_PIN_EXP_DATE = SYSDATE - 7
+       WHERE gobtpac_pidm = i.spriden_pidm;
+
+      l_update_count := l_update_count + SQL%ROWCOUNT;
+   END LOOP;
+
+   DBMS_OUTPUT.put_line ('Update Count :' || l_update_count);
+END; 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+/*
 DECLARE
    l_hashed_pin   VARCHAR2 (100);
    l_salt         VARCHAR2 (20) := 'CX1XSYHL';
@@ -105,3 +161,12 @@ BEGIN
    commit;
 END;
 /
+*/
+select count(distinct STUDENT_PIDM) from
+log_success_login
+where  exists(select '1' from spriden where spriden_pidm= STUDENT_PIDM and spriden_id like '445%') ;
+
+select * from spriden 
+where spriden_id like '445%'
+and not exists (select '1' from log_success_login where spriden_pidm=STUDENT_PIDM)
+and exists (select '1' from sgbstdn where sgbstdn_pidm=spriden_pidm) ;

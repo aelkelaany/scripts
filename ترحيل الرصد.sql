@@ -7,7 +7,7 @@ SELECT DISTINCT sfrstcr_term_code term_code, sfrstcr_crn crn
   FROM sfrstcr x, ssbsect
  WHERE     ssbsect_term_code = sfrstcr_term_code
        AND ssbsect_crn = sfrstcr_crn
-       AND sfrstcr_term_code = '144030'
+       AND sfrstcr_term_code = '144440'
        AND sfrstcr_grde_code IS NOT NULL
        AND sfrstcr_grde_date IS NULL
        AND SSBSECT_GRADABLE_IND = 'Y'
@@ -18,7 +18,7 @@ SELECT DISTINCT sfrstcr_term_code term_code, sfrstcr_crn crn
                        AND crn.SEQUENCE_NO = 1
                        AND term.SEQUENCE_NO = 1
                        AND term.item_code = 'TERM'
-                       AND term.item_value = '144030'
+                       AND term.item_value = '144440'
                        AND term.request_no = crn.request_no
                        AND m.request_no = term.request_no
                        AND m.OBJECT_CODE = 'WF_GRADE_APPROVAL'
@@ -31,13 +31,13 @@ SELECT DISTINCT sfrstcr_term_code term_code, sfrstcr_crn crn
  WHERE     ssbsect_term_code = sfrstcr_term_code
   AND SSBSECT_GRADABLE_IND = 'Y'
        AND ssbsect_crn = sfrstcr_crn
-       AND sfrstcr_term_code = '144030'
+       AND sfrstcr_term_code = '144440'
        AND sfrstcr_grde_code IS NOT NULL
        AND sfrstcr_grde_date IS   NULL
       
        AND SFRSTCR_CRN   IN
                (SELECT crn from gac_crn
-               where term_code='144030'
+               where term_code='144440'
               and WF_REQUEST_NO is   null
 and COLL_CODE=15)
                 
@@ -47,7 +47,7 @@ and COLL_CODE=15)
   FROM sfrstcr x, ssbsect
  WHERE     ssbsect_term_code = sfrstcr_term_code
        AND ssbsect_crn = sfrstcr_crn
-       AND sfrstcr_term_code = '144030'
+       AND sfrstcr_term_code = '144440'
        AND sfrstcr_grde_code IS NOT NULL
        AND sfrstcr_grde_date IS NULL
        AND SSBSECT_GRADABLE_IND = 'Y'
@@ -60,7 +60,7 @@ and COLL_CODE=15)
                        AND crn.SEQUENCE_NO = 1
                        AND term.SEQUENCE_NO = 1
                        AND term.item_code = 'TERM'
-                       AND term.item_value = '144030'
+                       AND term.item_value = '144440'
                        AND term.request_no = crn.request_no
                        AND m.request_no = term.request_no
                        AND m.OBJECT_CODE = 'WF_GRADE_APPROVAL'

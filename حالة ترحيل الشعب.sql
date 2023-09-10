@@ -8,35 +8,35 @@ select f_get_desc_fnc('stvcoll',scbcrse_coll_code,30) coll ,f_get_desc_fnc('stvd
                    FROM SCBCRSE
                   WHERE     SCBCRSE_SUBJ_CODE = A.SCBCRSE_SUBJ_CODE
                         AND SCBCRSE_CRSE_NUMB = A.SCBCRSE_CRSE_NUMB
-                        AND SCBCRSE_EFF_TERM <= '144420')
+                        AND SCBCRSE_EFF_TERM <= '144440')
                         and A.SCBCRSE_SUBJ_CODE=ssbsect_subj_code
                         and A.SCBCRSE_CRSE_NUMB=ssbsect_crse_numb
-                        and ssbsect_term_code='144420'
+                        and ssbsect_term_code='144440'
                         and SSBSECT_GRADABLE_IND='Y'
                         and SSBSECT_SSTS_CODE='ä'
                         and SSBSECT_ENRL>0
                          and exists (select  'a' from sfrstcr x 
        WHERE     ssbsect_term_code = sfrstcr_term_code
              AND ssbsect_crn = sfrstcr_crn
-             AND sfrstcr_term_code = '144420'
+             AND sfrstcr_term_code = '144440'
              AND sfrstcr_rsts_code IN ('RE', 'RW')) 
                         and exists (select  'a' from sfrstcr x 
        WHERE     ssbsect_term_code = sfrstcr_term_code
              AND ssbsect_crn = sfrstcr_crn
-             AND sfrstcr_term_code = '144420'
+             AND sfrstcr_term_code = '144440'
              AND sfrstcr_grde_code IS    NULL
             AND sfrstcr_grde_date IS     NULL
              AND sfrstcr_rsts_code IN ('RE', 'RW')) 
               and exists (select  'x' from sfrstcr x 
        WHERE     ssbsect_term_code = sfrstcr_term_code
              AND ssbsect_crn = sfrstcr_crn
-             AND sfrstcr_term_code = '144420'
+             AND sfrstcr_term_code = '144440'
               
              AND sfrstcr_rsts_code IN ('RE', 'RW')) 
            and not exists (select  'a' from sfrstcr x 
        WHERE     ssbsect_term_code = sfrstcr_term_code
              AND ssbsect_crn = sfrstcr_crn
-             AND sfrstcr_term_code = '144420'
+             AND sfrstcr_term_code = '144440'
              AND sfrstcr_grde_code IS not   NULL
              AND sfrstcr_rsts_code IN ('RE', 'RW'))
               and SSBSECT_SCHD_CODE in ('ä','ã')
@@ -52,23 +52,23 @@ select f_get_desc_fnc('stvcoll',scbcrse_coll_code,30) coll ,f_get_desc_fnc('stvd
                    FROM SCBCRSE
                   WHERE     SCBCRSE_SUBJ_CODE = A.SCBCRSE_SUBJ_CODE
                         AND SCBCRSE_CRSE_NUMB = A.SCBCRSE_CRSE_NUMB
-                        AND SCBCRSE_EFF_TERM <= '144420')
+                        AND SCBCRSE_EFF_TERM <= '144440')
                         and A.SCBCRSE_SUBJ_CODE=ssbsect_subj_code
                         and A.SCBCRSE_CRSE_NUMB=ssbsect_crse_numb
-                        and ssbsect_term_code='144420'
+                        and ssbsect_term_code='144440'
                         and SSBSECT_GRADABLE_IND='Y'
                         and SSBSECT_ENRL>0
                         and exists (select  'a' from sfrstcr x 
        WHERE     ssbsect_term_code = sfrstcr_term_code
              AND ssbsect_crn = sfrstcr_crn
-             AND sfrstcr_term_code = '144420'
+             AND sfrstcr_term_code = '144440'
              AND sfrstcr_grde_code IS    NULL
             AND sfrstcr_grde_date IS     NULL
              AND sfrstcr_rsts_code IN ('RE', 'RW')) 
             and  exists (select  'a' from sfrstcr x 
        WHERE     ssbsect_term_code = sfrstcr_term_code
              AND ssbsect_crn = sfrstcr_crn
-             AND sfrstcr_term_code = '144420'
+             AND sfrstcr_term_code = '144440'
              AND sfrstcr_grde_code IS not   NULL
              AND sfrstcr_rsts_code IN ('RE', 'RW')) 
  --and SCBCRSE_COLL_CODE  NOT in ('11','00')
@@ -82,23 +82,23 @@ select scbcrse_coll_code , scbcrse_dept_code ,
                    FROM SCBCRSE
                   WHERE     SCBCRSE_SUBJ_CODE = A.SCBCRSE_SUBJ_CODE
                         AND SCBCRSE_CRSE_NUMB = A.SCBCRSE_CRSE_NUMB
-                        AND SCBCRSE_EFF_TERM <= '144420')
+                        AND SCBCRSE_EFF_TERM <= '144440')
                         and A.SCBCRSE_SUBJ_CODE=ssbsect_subj_code
                         and A.SCBCRSE_CRSE_NUMB=ssbsect_crse_numb
-                        and ssbsect_term_code='144420'
+                        and ssbsect_term_code='144440'
                         and SSBSECT_GRADABLE_IND='Y'
                         and SSBSECT_ENRL>0
                         and not exists (select  'a' from sfrstcr x 
        WHERE     ssbsect_term_code = sfrstcr_term_code
              AND ssbsect_crn = sfrstcr_crn
-             AND sfrstcr_term_code = '144420'
+             AND sfrstcr_term_code = '144440'
              AND sfrstcr_grde_code IS    NULL
              
              AND sfrstcr_rsts_code IN ('RE', 'RW')) 
               and exists (select  'a' from sfrstcr x 
        WHERE     ssbsect_term_code = sfrstcr_term_code
              AND ssbsect_crn = sfrstcr_crn
-             AND sfrstcr_term_code = '144420'
+             AND sfrstcr_term_code = '144440'
              AND sfrstcr_grde_code IS not  NULL
             AND sfrstcr_grde_date IS     NULL
              AND sfrstcr_rsts_code IN ('RE', 'RW')) 
@@ -112,7 +112,7 @@ select scbcrse_coll_code , scbcrse_dept_code ,
                        AND crn.SEQUENCE_NO = 1
                        AND term.SEQUENCE_NO = 1
                        AND term.item_code = 'TERM'
-                       AND term.item_value = '144420'
+                       AND term.item_value = '144440'
                        AND term.request_no = crn.request_no
                        AND m.request_no = term.request_no
                        AND m.OBJECT_CODE = 'WF_GRADE_APPROVAL'
@@ -132,7 +132,7 @@ select scbcrse_coll_code , scbcrse_dept_code ,
                        AND crn.SEQUENCE_NO = 1
                        AND term.SEQUENCE_NO = 1
                        AND term.item_code = 'TERM'
-                       AND term.item_value = '144420'
+                       AND term.item_value = '144440'
                        AND term.request_no = crn.request_no
                        AND m.request_no = term.request_no
                        AND m.OBJECT_CODE = 'WF_GRADE_APPROVAL'
@@ -144,7 +144,7 @@ select scbcrse_coll_code , scbcrse_dept_code ,
  WHERE     ssbsect_term_code = sfrstcr_term_code
   AND SSBSECT_GRADABLE_IND = 'Y'
        AND ssbsect_crn = sfrstcr_crn
-       AND sfrstcr_term_code = '144420'
+       AND sfrstcr_term_code = '144440'
        AND sfrstcr_grde_code IS NOT NULL
        AND sfrstcr_grde_date IS not NULL
       
@@ -155,7 +155,7 @@ select scbcrse_coll_code , scbcrse_dept_code ,
                        AND crn.SEQUENCE_NO = 1
                        AND term.SEQUENCE_NO = 1
                        AND term.item_code = 'TERM'
-                       AND term.item_value = '144420'
+                       AND term.item_value = '144440'
                        AND term.request_no = crn.request_no
                        AND m.request_no = term.request_no
                        AND m.OBJECT_CODE = 'WF_GRADE_APPROVAL'
@@ -168,7 +168,7 @@ select scbcrse_coll_code , scbcrse_dept_code ,
  WHERE     ssbsect_term_code = sfrstcr_term_code
   AND SSBSECT_GRADABLE_IND = 'Y'
        AND ssbsect_crn = sfrstcr_crn
-       AND sfrstcr_term_code = '144420'
+       AND sfrstcr_term_code = '144440'
        AND sfrstcr_grde_code IS NOT NULL
        AND sfrstcr_grde_date IS   NULL
       
@@ -179,7 +179,7 @@ select scbcrse_coll_code , scbcrse_dept_code ,
                        AND crn.SEQUENCE_NO = 1
                        AND term.SEQUENCE_NO = 1
                        AND term.item_code = 'TERM'
-                       AND term.item_value = '144420'
+                       AND term.item_value = '144440'
                        AND term.request_no = crn.request_no
                        AND m.request_no = term.request_no
                        AND m.OBJECT_CODE = 'WF_GRADE_APPROVAL'
@@ -191,13 +191,13 @@ select scbcrse_coll_code , scbcrse_dept_code ,
  WHERE     ssbsect_term_code = sfrstcr_term_code
   AND SSBSECT_GRADABLE_IND = 'Y'
        AND ssbsect_crn = sfrstcr_crn
-       AND sfrstcr_term_code = '144420'
+       AND sfrstcr_term_code = '144440'
        AND sfrstcr_grde_code IS NOT NULL
        AND sfrstcr_grde_date IS   NULL
       
        AND SFRSTCR_CRN not IN
                (SELECT crn from gac_crn
-               where term_code='144420')
+               where term_code='144440')
        AND sfrstcr_rsts_code IN ('RE', 'RW') ;
        
        

@@ -32,7 +32,7 @@ SELECT m1.request_no,
                 'dd-mm-yyyy',
                 'nls_calendar=''Arabic Hijrah''')
            activity_date,
-       r1.notes
+       r1.notes ,F_GET_STD_ID(USER_PIDM),F_GET_STD_NAME(USER_PIDM)
   FROM wf_request_flow r1, request_master m1
  WHERE     r1.request_no = m1.request_no
 
@@ -51,7 +51,30 @@ SELECT m1.request_no,
        AND EXISTS (SELECT '1' FROM REQUEST_DETAILS WHERE REQUEST_NO=m1.request_no
        AND SEQUENCE_NO=1
        AND ITEM_CODE LIKE'%TERM%' --COLLEGE_CODE
-       AND ITEM_VALUE='144440'
+       AND ITEM_VALUE>='144430'
        )
        -- REMOVE CANCELED REQUESTS 
        AND  NVL(ACTION_CODE,'--')!='CANCEL_REQUEST'
+       
+       AND NVL(USER_PIDM,'0')!=157409
+       AND REQUEST_STATUS ='P' ;
+       
+       
+SELECT sgbstdn_levl_code level_code,
+             sgbstdn_stst_code status_code,
+             sgbstdn_styp_code student_type
+        FROM sgbstdn x
+       WHERE     sgbstdn_pidm = f_get_pidm('442008589')
+             AND sgbstdn_term_code_eff =
+                    (SELECT MAX (sgbstdn_term_code_eff)
+                       FROM sgbstdn d
+                      WHERE     d.sgbstdn_pidm = x.sgbstdn_pidm
+                            AND d.sgbstdn_term_code_eff <=
+                                   f_get_param ('WORKFLOW',
+                                                'CURRENT_TERM',
+                                                1))
+             AND nvl(SGBSTDN_TERM_CODE_ADMIT,'000000') !=
+                    f_get_param ('WORKFLOW', 'CURRENT_TERM', 1)
+                    
+ 
+;

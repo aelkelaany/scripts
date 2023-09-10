@@ -24,13 +24,17 @@ ORDER BY 1;
             sex,
          COUNT (DISTINCT sfrstcr_pidm) all_reg_students
     FROM sfrstcr
-   WHERE sfrstcr_term_code = '144430' AND sfrstcr_rsts_code IN ('RW')
+   WHERE sfrstcr_term_code = '144510' AND sfrstcr_rsts_code IN ('RW')
       AND EXISTS
                (SELECT '1'
                   FROM SFBRGRP
                  WHERE     SFBRGRP_PIDM = sfrstcr_pidm
-                       AND SFBRGRP_RGRP_CODE like 'UGR_'
-                       AND SFBRGRP_TERM_CODE = '144430')
+                       AND SFBRGRP_RGRP_CODE like 'MA2'
+                       AND SFBRGRP_TERM_CODE = '144510')
+                       
+                     --  and exists (select '1' from sgbstdn where sgbstdn_pidm=sfrstcr_pidm and sgbstdn_levl_code='œ»')
+                       
+                       
  
  GROUP BY   
          DECODE (f_get_gender (sfrstcr_pidm), 'M', 'ÿ«·»', 'ÿ«·»…')

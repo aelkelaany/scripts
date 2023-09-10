@@ -1,4 +1,4 @@
-/* Formatted on 23/12/2021 12:00:44 (QP5 v5.371) */
+/* Formatted on 8/16/2023 11:55:01 AM (QP5 v5.371) */
  --UGR1
 
 INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
@@ -6,7 +6,7 @@ INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
                      SFBRGRP_RGRP_CODE,
                      SFBRGRP_USER,
                      SFBRGRP_ACTIVITY_DATE)
-    SELECT '144430',
+    SELECT '144510',
            SG.sgbstdn_pidm,
            'UGR1',
            USER,
@@ -28,9 +28,8 @@ INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
            AND NOT EXISTS
                    (SELECT '1'
                       FROM SFBRGRP
-                     WHERE SFBRGRP_PIDM = SG.sgbstdn_pidm
-                     and SFBRGRP_TERM_CODE='144430'
-                     );
+                     WHERE     SFBRGRP_PIDM = SG.sgbstdn_pidm
+                           AND SFBRGRP_TERM_CODE = '144510');
 
                            --------
                             --UGR2
@@ -40,7 +39,7 @@ INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
                      SFBRGRP_RGRP_CODE,
                      SFBRGRP_USER,
                      SFBRGRP_ACTIVITY_DATE)
-    SELECT '144430',
+    SELECT '144510',
            SG.sgbstdn_pidm,
            'UGR2',
            USER,
@@ -58,13 +57,12 @@ INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
                    (SELECT '1'
                       FROM spriden
                      WHERE     spriden_pidm = SG.sgbstdn_pidm
-                           AND SUBSTR (spriden_id, 1, 3) in( '442','443'))
+                           AND SUBSTR (spriden_id, 1, 3) IN ('442'))
            AND NOT EXISTS
                    (SELECT '1'
                       FROM SFBRGRP
-                     WHERE SFBRGRP_PIDM = SG.sgbstdn_pidm
-                     and SFBRGRP_TERM_CODE='144430'
-                     );
+                     WHERE     SFBRGRP_PIDM = SG.sgbstdn_pidm
+                           AND SFBRGRP_TERM_CODE = '144510');
 
                                                        --UGR3
 
@@ -73,7 +71,7 @@ INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
                      SFBRGRP_RGRP_CODE,
                      SFBRGRP_USER,
                      SFBRGRP_ACTIVITY_DATE)
-    SELECT '144430',
+    SELECT '144510',
            SG.sgbstdn_pidm,
            'UGR3',
            USER,
@@ -91,23 +89,21 @@ INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
                    (SELECT '1'
                       FROM spriden
                      WHERE     spriden_pidm = SG.sgbstdn_pidm
-                           AND SUBSTR (spriden_id, 1, 3) = '444')
+                           AND SUBSTR (spriden_id, 1, 3) = '443')
            AND NOT EXISTS
                    (SELECT '1'
                       FROM SFBRGRP
-                     WHERE SFBRGRP_PIDM = SG.sgbstdn_pidm
-                     and SFBRGRP_TERM_CODE='144430'
-                       
-                     );
-                     
-                     INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
+                     WHERE     SFBRGRP_PIDM = SG.sgbstdn_pidm
+                           AND SFBRGRP_TERM_CODE = '144510');
+
+INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
                      SFBRGRP_PIDM,
                      SFBRGRP_RGRP_CODE,
                      SFBRGRP_USER,
                      SFBRGRP_ACTIVITY_DATE)
-    SELECT '144430',
+    SELECT '144510',
            SG.sgbstdn_pidm,
-           'UGR3',
+           'UGR4',
            USER,
            SYSDATE
       FROM SGBSTDN SG
@@ -116,9 +112,9 @@ INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
                   FROM SGBSTDN
                  WHERE SGBSTDN_PIDM = SG.SGBSTDN_PIDM)
            AND SGBSTDN_STST_CODE IN ('AS')
-           AND SGBSTDN_DEGC_CODE_1 IN ('»ﬂ', '»ﬂ  ', '000000')
+           -- AND SGBSTDN_DEGC_CODE_1 IN ('»ﬂ', '»ﬂ  ', '000000')
            AND SGBSTDN_STYP_CODE IN ('„', ' ')
-           AND SGBSTDN_LEVL_CODE = 'Ã„'
+           AND SGBSTDN_LEVL_CODE = 'œ»'
            AND EXISTS
                    (SELECT '1'
                       FROM spriden
@@ -127,18 +123,16 @@ INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
            AND NOT EXISTS
                    (SELECT '1'
                       FROM SFBRGRP
-                     WHERE SFBRGRP_PIDM = SG.sgbstdn_pidm
-                     and SFBRGRP_TERM_CODE='144430'
-                       
-                     );
+                     WHERE     SFBRGRP_PIDM = SG.sgbstdn_pidm
+                           AND SFBRGRP_TERM_CODE = '144510');
 
-DELETE FROM sprhold
+DELETE FROM
+    sprhold
       WHERE     EXISTS
                     (SELECT '1'
                        FROM SFBRGRP
-                      WHERE SFBRGRP_PIDM = SPRHOLD_PIDM
-                      and SFBRGRP_TERM_CODE='144430'
-                      )
+                      WHERE     SFBRGRP_PIDM = SPRHOLD_PIDM
+                            AND SFBRGRP_TERM_CODE = '144510')
             AND SPRHOLD_HLDD_CODE = 'RH';
 
              --„ÕÊ·Ì‰ Œ«—ÃÌÌ‰
@@ -148,7 +142,7 @@ INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
                      SFBRGRP_RGRP_CODE,
                      SFBRGRP_USER,
                      SFBRGRP_ACTIVITY_DATE)
-    SELECT '144430',
+    SELECT '144510',
            SG.sgbstdn_pidm,
            'UGR3',
            USER,
@@ -170,7 +164,7 @@ INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
            AND NOT EXISTS
                    (SELECT '1'
                       FROM sfrstcr
-                     WHERE     sfrstcr_term_code = '144430'
+                     WHERE     sfrstcr_term_code = '144510'
                            AND sfrstcr_pidm = SG.sgbstdn_pidm)
            AND NOT EXISTS
                    (SELECT '1'
@@ -187,9 +181,9 @@ INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
                      SFBRGRP_RGRP_CODE,
                      SFBRGRP_USER,
                      SFBRGRP_ACTIVITY_DATE)
-    SELECT '144430',
+    SELECT '144510',
            SG.sgbstdn_pidm,
-           F_GET_STD_ID (SG.sgbstdn_pidm),
+           --           F_GET_STD_ID (SG.sgbstdn_pidm),
            'UGI1',
            USER,
            SYSDATE
@@ -216,13 +210,13 @@ INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
 
 
                    --- œ»·Ê„«  €Ì— Ãœœ
- 
+
 INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
                      SFBRGRP_PIDM,
                      SFBRGRP_RGRP_CODE,
                      SFBRGRP_USER,
                      SFBRGRP_ACTIVITY_DATE)
-    SELECT '144430',
+    SELECT '144510',
            SG.sgbstdn_pidm,
            'DPM1',
            USER,
@@ -245,19 +239,19 @@ INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
            AND NOT EXISTS
                    (SELECT '1'
                       FROM SFBRGRP
-                     WHERE SFBRGRP_PIDM = SG.sgbstdn_pidm
-                      and SFBRGRP_TERM_CODE='144430');
+                     WHERE     SFBRGRP_PIDM = SG.sgbstdn_pidm
+                           AND SFBRGRP_TERM_CODE = '144510');
 
-                  --- MASTER  
+----------------------------------------- MASTER  
 
 INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
                      SFBRGRP_PIDM,
                      SFBRGRP_RGRP_CODE,
                      SFBRGRP_USER,
                      SFBRGRP_ACTIVITY_DATE)
-    SELECT '144430',
-           SG.sgbstdn_pidm,
-           'MA',
+    SELECT '144510',
+           SG.sgbstdn_pidm--,f_get_std_id(SG.sgbstdn_pidm) ,
+           ,'MA',
            USER,
            SYSDATE
       FROM SGBSTDN SG
@@ -267,13 +261,73 @@ INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
                  WHERE SGBSTDN_PIDM = SG.SGBSTDN_PIDM)
            AND SGBSTDN_STST_CODE IN ('AS')
            AND SGBSTDN_LEVL_CODE = 'MA'
+           AND sgbstdn_pidm NOT IN (167287, 167279)
+            and SGBSTDN_coll_code_1 !='17'
+          
+           AND   EXISTS
+                   (SELECT '1'
+                      FROM spriden
+                     WHERE     spriden_pidm = SG.sgbstdn_pidm
+                           AND SUBSTR (spriden_id, 1, 3) between '442' and '444')
+           -------------
            AND NOT EXISTS
                    (SELECT '1'
                       FROM SFBRGRP
                      WHERE     SFBRGRP_PIDM = SG.sgbstdn_pidm
                            AND SFBRGRP_RGRP_CODE = 'MA'
-                           and SFBRGRP_TERM_CODE='144430'
-                           );
-                           
-                           
-                        update   SFRRGFE set SFRRGFE_COPY_IND = 'Y' ;
+                           AND SFBRGRP_TERM_CODE = '144510');
+
+
+------+++++++**********------------
+INSERT INTO SFBRGRP (SFBRGRP_TERM_CODE,
+                     SFBRGRP_PIDM,
+                     SFBRGRP_RGRP_CODE,
+                     SFBRGRP_USER,
+                     SFBRGRP_ACTIVITY_DATE)
+    SELECT '144510',
+           SG.sgbstdn_pidm--,f_get_std_id(SG.sgbstdn_pidm) ,
+           ,'MA2',
+           USER,
+           SYSDATE
+      FROM SGBSTDN SG
+     WHERE     SGBSTDN_TERM_CODE_EFF =
+               (SELECT MAX (SGBSTDN_TERM_CODE_EFF)
+                  FROM SGBSTDN
+                 WHERE SGBSTDN_PIDM = SG.SGBSTDN_PIDM)
+           AND SGBSTDN_STST_CODE IN ('AS')
+           AND SGBSTDN_LEVL_CODE = 'MA'
+           AND sgbstdn_pidm NOT IN (167287, 167279)
+            and SGBSTDN_coll_code_1  ='17'
+          
+           AND   EXISTS
+                   (SELECT '1'
+                      FROM spriden
+                     WHERE     spriden_pidm = SG.sgbstdn_pidm
+                           AND SUBSTR (spriden_id, 1, 3) between '442' and '444')
+           -------------
+           AND NOT EXISTS
+                   (SELECT '1'
+                      FROM SFBRGRP
+                     WHERE     SFBRGRP_PIDM = SG.sgbstdn_pidm
+                           AND SFBRGRP_RGRP_CODE = 'MA'
+                           AND SFBRGRP_TERM_CODE = '144510');
+
+
+-- to be sure if all registered program have fixed fees 
+
+SELECT DISTINCT sgbstdn_pidm, sgbstdn_program_1
+  FROM SGBSTDN SG
+ WHERE     SGBSTDN_TERM_CODE_EFF = (SELECT MAX (SGBSTDN_TERM_CODE_EFF)
+                                      FROM SGBSTDN
+                                     WHERE SGBSTDN_PIDM = SG.SGBSTDN_PIDM)
+       AND SGBSTDN_STST_CODE IN ('AS')
+       AND SGBSTDN_LEVL_CODE = 'MA'
+       AND NOT EXISTS
+               (SELECT '1'
+                  FROM SFRRGFE
+                 WHERE SFRRGFE_PROGRAM = sgbstdn_program_1);
+
+
+
+UPDATE SFRRGFE
+   SET SFRRGFE_COPY_IND = 'Y';

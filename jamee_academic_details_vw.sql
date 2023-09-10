@@ -327,7 +327,8 @@ AS
            AND spbpers_citz_code IS NOT NULL
            AND spbpers_ssn IS NOT NULL
            AND LENGTH (spbpers_ssn) = 10
-           AND spbpers_ssn NOT LIKE '0%'
+           ----
+           AND spbpers_ssn   LIKE '1082847110'
     UNION
     SELECT student_id
                studentidentitynumber,
@@ -423,4 +424,7 @@ AS
            (SELECT DISTINCT MOE_ID, MOE_MAJOR_CODE, MOE_LEVEL_CODE
               FROM moe_majors, moe.map_specialization
              WHERE bu_major_code = bu_id) sm
-     WHERE major = MOE_ID(+);
+     WHERE major = MOE_ID(+)
+      AND spbpers_ssn   LIKE '1082847110'
+     
+     ;

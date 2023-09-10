@@ -2,7 +2,7 @@
 DECLARE
     CURSOR crs_accepted_students IS
         SELECT spriden_pidm                                   "Pidm",
-               spriden_id                                     "Student Number",
+               /*spriden_id                                     "Student Number",
                (SELECT spbpers_ssn
                   FROM spbpers
                  WHERE spbpers_pidm = sgbstdn_pidm)           "SSN",
@@ -22,7 +22,7 @@ DECLARE
                  WHERE stvcoll_code = sgbstdn_coll_code_1)    "College",
                (SELECT stvdept_desc
                   FROM stvdept
-                 WHERE stvdept_code = sgbstdn_dept_code)      "Department",
+                 WHERE stvdept_code = sgbstdn_dept_code)      "Department",*/
                (SELECT sprtele_intl_access
                   FROM sprtele
                  WHERE     sprtele_pidm = sgbstdn_pidm
@@ -37,27 +37,32 @@ DECLARE
                      WHERE d.sgbstdn_pidm = x.sgbstdn_pidm)
                AND sgbstdn_stst_code = stvstst_code
                AND stvstst_code IN ('AS')
+               and spriden_id like '444%'
                AND EXISTS
                        (SELECT '1'
                           FROM BU_APPS.BNK_INVOICES
                          WHERE     
                            STUDENT_PIDM=sgbstdn_pidm
-                         and TERM_CODE = '144420'
+                         and TERM_CODE = '144510'
                                AND INVOICE_STATUS = 'NEW')
                                
- 
+                               
+ union 
+ select 123 , '0568134765' from dual   
                                ;
 
 
     v_message         VARCHAR2 (300)
-        := '⁄“Ì“Ì «·ÿ«·»/«·ÿ«·»… ‰√„· „‰ﬂ„ ”œ«œ «·—”Ê„ «·œ—«”Ì… ·»—«„Ã «·„«Ã” Ì— »Ã«„⁄… «·»«Õ… ··›’· «·œ—«”Ì «·À«‰Ì 1444Â‹†⁄»— »Ê«»… Ã«„⁄ Ì (My BU) ›Ì „Ê⁄œ √ﬁ’«Â  ÌÊ„†«·Œ„Ì” 7-5-1444Â‹°  Ê”Ì „ «·€«¡ «· ”ÃÌ· ÊÿÌ «·ﬁÌœ ·„‰ ·„ Ìœ›⁄ «·—”Ê„.';
+        := ' Êœ Ã«„⁄… «·»«Õ… ≈Õ«ÿ ﬂ„ »≈ «Õ…  ”œÌœ «·—”Ê„ «·œ—«”Ì… ·»—«„Ã «·„«Ã” Ì— «·„œ›Ê⁄… ··›’· «·œ—«”Ì «·√Ê· ··⁄«„ «·Ã«„⁄Ì 1445 Â‹.
+
+‰√„·  ”œÌœ «·—”Ê„ ⁄»— »Ê«»… Ã«„⁄ Ì (My BU) ›Ì „Ê⁄œ √ﬁ’«Â ÌÊ„ «·√Õœ 1445/2/25Â‹ «·”«⁄… 12:00 ŸÂ—«  ·«›Ì« ·≈·€«¡ «· ”ÃÌ· ÊÿÌ «·ﬁÌœ.';
 
     v_reply_code      VARCHAR2 (2);
     v_reply_messege   VARCHAR2 (200);
 BEGIN
     FOR r IN crs_accepted_students
     LOOP
-       -- bu_apps.p_send_sms ('0' || r."Mobile NO",
+       bu_apps.p_send_sms ('0' || r."Mobile NO",
                             v_message,
                             v_reply_code,
                             v_reply_messege);
