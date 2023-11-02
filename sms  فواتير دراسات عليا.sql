@@ -37,14 +37,18 @@ DECLARE
                      WHERE d.sgbstdn_pidm = x.sgbstdn_pidm)
                AND sgbstdn_stst_code = stvstst_code
                AND stvstst_code IN ('AS')
-               and spriden_id like '444%'
+              -- and spriden_id like '444%'
                AND EXISTS
                        (SELECT '1'
                           FROM BU_APPS.BNK_INVOICES
                          WHERE     
                            STUDENT_PIDM=sgbstdn_pidm
                          and TERM_CODE = '144510'
-                               AND INVOICE_STATUS = 'NEW')
+                               AND INVOICE_STATUS = 'NEW'
+                               and to_char(ACTIVITY_DATE,'ddmmyyyy')='14092023'
+                               )
+                            --  and '1'='3'
+                               
                                
                                
  union 
@@ -52,10 +56,8 @@ DECLARE
                                ;
 
 
-    v_message         VARCHAR2 (300)
-        := 'йФо лгЦзи гАхгми емгьйъЦ хейгми йсоМо гАясФЦ гАоягсМи АхягЦл гАЦглсйМя гАЦощФзи ААщуА гАоягсМ гАцФА ААзгЦ гАлгЦзМ 1445 Еэ.
-
-ДцЦА йсоМо гАясФЦ зхя хФгхи лгЦзйМ (My BU) щМ ЦФзо цчугЕ МФЦ гАцмо 1445/2/25Еэ гАсгзи 12:00 ыЕягП йАгщМПг АеАшга гАйслМА ФьМ гАчМо.';
+    v_message         VARCHAR2 (700)
+        := 'зрМрМ гАьгАх/гАьгАхи йФо лгЦзи гАхгми емгьйъЦ хеуогя щгйФяи гАсого АясФЦ езгои гАйслМА щМ гАщуА гАоягсМ гАцФА ААзгЦ гАлгЦзМ 1445 Еэ ххягЦл гАЦглсйМя гАЦощФзи. ДцЦА йсоМо гАясФЦ зхя хФгхи лгЦзйМ (My BU) щМ ЦФзоР цчугЕ МФЦ гАнЦМс 1445/3/6Еэ гАЦФгщч 2023/9/21 Ц гАсгзи гАзгтяи ухгмПг йАгщМПг АеАшга гАйслМА ФьМ гАчМо.';
 
     v_reply_code      VARCHAR2 (2);
     v_reply_messege   VARCHAR2 (200);

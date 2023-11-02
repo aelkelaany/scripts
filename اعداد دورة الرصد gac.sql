@@ -45,10 +45,10 @@ DECLARE
                       FROM SCBCRSE
                      WHERE     SCBCRSE_SUBJ_CODE = A.SCBCRSE_SUBJ_CODE
                            AND SCBCRSE_CRSE_NUMB = A.SCBCRSE_CRSE_NUMB
-                           AND SCBCRSE_EFF_TERM <= '144420')
+                           AND SCBCRSE_EFF_TERM <= '144510')
                AND A.SCBCRSE_SUBJ_CODE = ssbsect_subj_code
                AND A.SCBCRSE_CRSE_NUMB = ssbsect_crse_numb
-               AND ssbsect_term_code = '144420'
+               AND ssbsect_term_code = '144510'
                AND SSBSECT_GRADABLE_IND = 'Y'
               -- AND SSBSECT_ENRL > 0
                AND EXISTS
@@ -75,18 +75,18 @@ DECLARE
                                AND CRN.SEQUENCE_NO = 1
                                AND CRN.ITEM_CODE = 'CRN'
                                AND TERM.ITEM_CODE = 'TERM'
-                               AND TERM.ITEM_VALUE = '144420'
+                               AND TERM.ITEM_VALUE = '144510'
                                AND a.REQUEST_STATUS = 'C')
                AND ssbsect_crn NOT IN (SELECT CRN
                                          FROM GRADES_APPROVAL_EXECLUDED_CRN
-                                        WHERE TERM_CODE = '144420');
+                                        WHERE TERM_CODE = '144510');
 
     l_vice_pidm     NUMBER;
     l_dept_pidm     NUMBER;
     l_dean_pidm     NUMBER;
 BEGIN
     DELETE FROM GAC_CRN
-          WHERE term_code = '144420';
+          WHERE term_code = '144510';
 
     items_t (1) := 'TERM';
     items_t (2) := 'CRN';
@@ -95,7 +95,7 @@ BEGIN
 
     FOR rec IN get_crns
     LOOP
-        items_value_t (1) := '144420';
+        items_value_t (1) := '144510';
         items_value_t (2) := rec.ssbsect_crn;                            --CRN
         items_value_t (3) := rec.scbcrse_coll_code;                  --College
         items_value_t (4) := rec.scbcrse_dept_code;                --Departmnt
@@ -137,7 +137,7 @@ BEGIN
 
         --DBMS_OUTPUT.put_line ('College Dean = ' || f_get_std_name(l_pidm));
         INSERT INTO GAC_CRN
-             VALUES ('144420',
+             VALUES ('144510',
                      rec.ssbsect_crn,
                      rec.scbcrse_coll_code,
                      rec.scbcrse_dept_code,
@@ -165,13 +165,13 @@ BEGIN
                        AND CRN.SEQUENCE_NO = 1
                        AND CRN.ITEM_CODE = 'CRN'
                        AND TERM.ITEM_CODE = 'TERM'
-                       AND TERM.ITEM_VALUE = '144420'
+                       AND TERM.ITEM_VALUE = '144510'
                        AND crn.item_value = GAC_CRN.crn)
-     WHERE     term_code = '144420'
+     WHERE     term_code = '144510'
            AND NOT EXISTS
                    (SELECT '1'
                       FROM sfrstcr
-                     WHERE     sfrstcr_term_code = '144420'
+                     WHERE     sfrstcr_term_code = '144510'
                            AND SFRSTCR_GRDE_CODE IS NULL
                            AND sfrstcr_crn = GAC_CRN.crn);
 
@@ -195,7 +195,7 @@ END;
 
 -- select a.* ,f_get_std_name(dept_pidm) ,f_get_std_name(vice_pidm),f_get_std_name(dean_pidm) from 
 --gac_crn a
---where term_code='144420'
+--where term_code='144510'
 
 BEGIN
     UPDATE GAC_CRN
@@ -211,9 +211,9 @@ BEGIN
                        AND CRN.SEQUENCE_NO = 1
                        AND CRN.ITEM_CODE = 'CRN'
                        AND TERM.ITEM_CODE = 'TERM'
-                       AND TERM.ITEM_VALUE = '144420'
+                       AND TERM.ITEM_VALUE = '144510'
                        AND crn.item_value = GAC_CRN.crn)
-     WHERE term_code = '144420';
+     WHERE term_code = '144510';
 
     COMMIT;
 END;

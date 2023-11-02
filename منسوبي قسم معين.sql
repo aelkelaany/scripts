@@ -22,9 +22,13 @@
          -- and (SIRDPCL_DEPT_CODE like '41__' or SIRDPCL_DEPT_CODE='1705')
          -- and f_get_desc_fnc('stvdept',SIRDPCL_DEPT_CODE,30) like '%Õ«”»%'
          -- and  SIRDPCL_coll_CODE   in ('41','17','18','42','19')
-         AND SIRDPCL_DEPT_CODE LIKE '3107%'
+         AND SIRDPCL_DEPT_CODE LIKE '42%'
          AND SIBINST_FCST_CODE = '‰'
          AND SIBINST_TERM_CODE_EFF = (SELECT MAX (SIBINST_TERM_CODE_EFF)
                                         FROM SIBINST
                                        WHERE SIRDPCL_PIDM = SIBINST_PIDM)
+                                       
+                                        and  exists (select '1' from sirasgn 
+                                        where sirasgn_pidm=SIBINST_PIDM
+                                        and sirasgn_term_code='144510' )
 ORDER BY 1

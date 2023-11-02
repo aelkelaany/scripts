@@ -66,3 +66,71 @@ and SSBSECT_BILL_HRS is null ;
   WHERE   exists (SELECT '2' FROM SFRSTCR WHERE sfrstcr_crn=col03 and SFRSTCR_PIDM=COL02 AND SFRSTCR_term_code='144510' ) ;
   update bu_dev.tmp_tbl_kilany set col06='REG'
   where exists (SELECT '2' FROM SFRSTCR WHERE sfrstcr_crn=col03 and SFRSTCR_PIDM=COL02 AND SFRSTCR_term_code='144510' ) ; 
+    update bu_dev.tmp_tbl_kilany set col07=f_get_level(col02);
+  
+--- ÑÕÏ 
+ update sfrstcr set SFRSTCR_GRDE_CODE='ÚÝ'
+  ,SFRSTCR_GRDE_CODE_MID=0,SFRSTCR_GRDE_DATE=null
+where sfrstcr_term_code='144510'
+ 
+and sfrstcr_rsts_code in ('RE','RW')
+and (sfrstcr_pidm,sfrstcr_crn) in (select col02,col03 from bu_dev.tmp_tbl_kilany ) ;
+
+
+------ ÊÑÍíá
+
+DECLARE
+   CURSOR crs_get_crn
+   IS
+SELECT DISTINCT sfrstcr_term_code term_code, sfrstcr_crn crn
+  FROM sfrstcr x 
+ WHERE     
+         sfrstcr_term_code = '144510'
+       AND sfrstcr_grde_code IS NOT NULL
+       AND sfrstcr_grde_date IS NULL
+       and sfrstcr_crn IN (SELECT DISTINCT COL03 FROM bu_dev.tmp_tbl_kilany  )
+       AND sfrstcr_rsts_code IN ('RE', 'RW');
+
+BEGIN
+   FOR r IN crs_get_crn
+   LOOP
+      shkrols.p_do_graderoll (r.term_code,
+                              r.crn,
+                              'WORKFLOW_ELC',
+                              '1',
+                              '1',
+                              'O',
+                              '',
+                              '',
+                              '',
+                              '');
+   END LOOP;
+END;
+
+---- COMPLIANCE 
+
+        INSERT INTO GLBSLCT (GLBSLCT_APPLICATION,
+                             GLBSLCT_SELECTION,
+                             GLBSLCT_CREATOR_ID,
+                             GLBSLCT_DESC,
+                             GLBSLCT_LOCK_IND,
+                             GLBSLCT_ACTIVITY_DATE,
+                             GLBSLCT_TYPE_IND)
+             VALUES ('STUDENT',
+                     'ELC_STUDENTS001',
+                     'SAISUSR',
+                     'ELC COMP',
+                     'N',
+                     SYSDATE,
+                     NULL);
+
+        INSERT INTO GLBEXTR
+            SELECT DISTINCT 'STUDENT',
+                   'ELC_STUDENTS001',
+                   'SAISUSR',
+                   'SAISUSR', col02  PIDM , SYSDATE,
+                   'S',
+                   NULL
+                      FROM bu_dev.tmp_tbl_kilany
+                     WHERE  
+                       col02 is not null AND COL06 IS NOT NULL  ;

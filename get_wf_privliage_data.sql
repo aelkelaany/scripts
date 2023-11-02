@@ -17,6 +17,8 @@
          AND a.ROLE_CODE = r.ROLE_CODE
          AND r.ROLE_CODE = 'RO_DEPT_MANAGER'
          AND ATTRIBUTE_VALUE LIKE NVL ( :dept, '%')
+         and exists (select '1' from users_attributes where USER_PIDM = r.USER_PIDM and ROLE_CODE = r.ROLE_CODE
+         and ATTRIBUTE_CODE = 'COLLEGE' AND ATTRIBUTE_VALUE LIKE NVL ( :COLL, '%')  )
 ORDER BY 3, 1;
 
 
@@ -80,11 +82,36 @@ SELECT f_get_std_id (a.USER_PIDM)                            emp_id,
        AND a.USER_PIDM = s.USER_PIDM;
        
        
-       
+       -- email
        select f_get_std_id(GOBTPAC_PIDM),f_get_std_name (GOBTPAC_PIDM) ,upper(GOBTPAC_LDAP_USER)
        from 
-       GOBTPAC where upper(GOBTPAC_LDAP_USER)=upper('malomari');
+       GOBTPAC where upper(GOBTPAC_LDAP_USER)=upper('falsalmi');
        
+       -- id 
        select f_get_std_id(GOBTPAC_PIDM),f_get_std_name (GOBTPAC_PIDM) ,upper(GOBTPAC_LDAP_USER)
        from 
-       GOBTPAC where GOBTPAC_PIDM=f_get_pidm('1016');
+       GOBTPAC where GOBTPAC_PIDM=f_get_pidm('3898');
+       
+       
+        
+       -- ssn
+       select f_get_std_id(GOBTPAC_PIDM),f_get_std_name (GOBTPAC_PIDM) ,upper(GOBTPAC_LDAP_USER)
+       from 
+       GOBTPAC ,spbpers 
+       where 
+       spbpers_pidm=GOBTPAC_PIDM
+       and spbpers_ssn= '1040696682' ;
+       
+       
+       
+         select f_get_std_id(GOBEACC_PIDM),f_get_std_name (GOBEACC_PIDM)  ,GOBEACC_USERNAME
+       from 
+       GOBEACC ,spbpers 
+       where 
+       spbpers_pidm=GOBEACC_PIDM
+       and spbpers_ssn= '1040696682' ;
+       
+        grant ALL on  ROLE_USERS to RZAHRANI ;
+        
+        
+         

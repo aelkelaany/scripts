@@ -6,7 +6,7 @@ and  not  exists (select '1' from SATURN.RWTPAYR where RWTPAYR_PIDM=crnt.RWTPAYR
 and RWTPAYR_TRAN_NUMBER=907
 ) 
 
-and RWTPAYR_PAYMENT in (2000,1700)
+and RWTPAYR_PAYMENT not in (2000,1700)
 ;
 
 delete  from  TBRACCD trns
@@ -43,4 +43,31 @@ and TBRACCD_AMOUNT=trns.TBRACCD_AMOUNT
 and    exists (select '1' from SATURN.RWTPAYR where RWTPAYR_PIDM=crnt.RWTPAYR_PIDM 
 and RWTPAYR_TRAN_NUMBER=907
 ) ; 
+  
+
+
+ update SATURN.RWTPAYR crnt set RWTPAYR_DEDUCTION=RWTPAYR_DEDUCTION*2
+ 
+ where 
+ RWTPAYR_TRAN_NUMBER=913
+and   not  exists (select '1' from SATURN.RWTPAYR where RWTPAYR_PIDM=crnt.RWTPAYR_PIDM 
+and RWTPAYR_TRAN_NUMBER=907
+)   and RWTPAYR_PAYMENT  in (2000,1700); 
+
+update TBRACCD set TBRACCD_AMOUNT=TBRACCD_AMOUNT*2,TBRACCD_BALANCE=TBRACCD_BALANCE*2
+ 
+where
+TBRACCD_DETAIL_CODE='Õ.Ø'
+and     exists 
+(select 1 from 
+
+SATURN.RWTPAYR crnt
+where RWTPAYR_TRAN_NUMBER=913
+and RWTPAYR_pidm=TBRACCD_pidm
+ and RWTPAYR_PAYMENT  in (2000,1700)
+and not   exists (select '1' from SATURN.RWTPAYR where RWTPAYR_PIDM=crnt.RWTPAYR_PIDM 
+and RWTPAYR_TRAN_NUMBER=907
+))
+and TBRACCD_TERM_CODE='144510'
+ and to_char(TBRACCD_EFFECTIVE_DATE,'mm/dd/yyyy')='09/11/2023'
   
