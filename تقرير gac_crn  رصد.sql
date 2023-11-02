@@ -1,4 +1,4 @@
- 
+ --*
 SELECT TERM_CODE,
        CRN,
        COLL_CODE,
@@ -19,4 +19,6 @@ SELECT TERM_CODE,
        f_get_desc_fnc ('stvcamp', CAMP_CODE, 30)     camp_desc,
        PTERM_CODE
   FROM gac_crn
- WHERE term_code = '144510';
+ WHERE term_code = '144510'
+ order by coll_code,dept_code,crn
+ ;
