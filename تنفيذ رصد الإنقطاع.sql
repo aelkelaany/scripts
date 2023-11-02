@@ -9,6 +9,7 @@ DECLARE
          WHERE     SYBSTDC_TERM_CODE = :p_term
                AND SYBSTDC_DISCONNECTED = 'Y'
                AND f_get_styp (SYBSTDC_PIDM) <> 'д'
+                AND f_GET_STATUS (SYBSTDC_PIDM)='AS'
                AND ssbsect_term_code = :p_term
                -- and ssbsect_ptrm_code in ('5','1')
                AND ssbsect_crn = SYBSTDC_CRN
@@ -45,12 +46,12 @@ DECLARE
                                      WHERE sgbstdn_pidm = sfrstcr_pidm)
                                AND sgbstdn_pidm = sfrstcr_pidm
                                AND sgbstdn_stst_code != 'гд')
-                                AND  NOT  EXISTS
-               (SELECT '1'
-                  FROM sfrstcr
-                 WHERE     sfrstcr_pidm = s.sfrstcr_pidm
-                       AND sfrstcr_term_code = '144430'
-                       AND SFRSTCR_RSTS_CODE IN ('RE', 'RW'))
+--                                AND  NOT  EXISTS
+--               (SELECT '1'
+--                  FROM sfrstcr
+--                 WHERE     sfrstcr_pidm = s.sfrstcr_pidm
+--                       AND sfrstcr_term_code = '144430'
+--                       AND SFRSTCR_RSTS_CODE IN ('RE', 'RW'))
                                
                                ;
 BEGIN

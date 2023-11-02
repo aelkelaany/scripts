@@ -27,6 +27,22 @@ INSERT INTO syrmgrd
       FROM BU_DEV.TMP_TBL_KILANY1
      WHERE col05 IS NOT NULL;
 
+select *  
+ FROM BU_DEV.TMP_TBL_KILANY1 ;
+ 
+ update BU_DEV.TMP_TBL_KILANY1 set col01=f_get_pidm(col03);
+
+update BU_DEV.TMP_TBL_KILANY1 set col04=( select SPRIDEN_FIRST_NAME||' '||SPRIDEN_MI||' '||SPRIDEN_LAST_NAME from dle.spriden
+where SPRIDEN_PIDM=col01
+and SPRIDEN_CHANGE_IND is null ) ;
+
+
+
+insert into syrmgrd (SYRMGRD_PIDM, SYRMGRD_NAME_EN, SYRMGRD_INTERNSHIP_START, SYRMGRD_INTERNSHIP_END, SYRMGRD_GROUP_CODE)
+select col01,col04,'04/07/2023','03/06/2024','25-1445'
+
+from BU_DEV.TMP_TBL_KILANY1 ;
+
 
 
   SELECT sgbstdn_pidm,

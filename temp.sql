@@ -173,7 +173,7 @@ SPBPERS
     select bu_apps.f_chances_count (f_get_pidm('434011556'), 'C')  from dual
     
                       GURUOBJ
-
+sfrstca
  
 WF_REACTIVATE
 
@@ -233,8 +233,15 @@ SIVASGN
 ADM_PG_DEPT_PROG
 
 ---
-„ﬂ«›¬  
-„”Ì—« 
+ FA 
+ 
+ RORSTAT
+RWTPDST
+TBRACCD
+TBBDETC
+RFRBASE
+RWTPAYR
+
 Rwtpayr
 tbraccd
  
@@ -243,3 +250,7 @@ stvmajr
 
 
 xwsksschd.dispSchedule
+
+
+SHRINST Acad Hist Instructor Table  
+SHRTCKD

@@ -1,14 +1,28 @@
 /* Formatted on 4/26/2022 5:43:41 PM (QP5 v5.365) */
 SELECT *
   FROM sgbstdn
- WHERE     SGBSTDN_TERM_CODE_EFF = '144320'
+ WHERE     SGBSTDN_TERM_CODE_EFF = '144510'
        AND SGBSTDN_STST_CODE = 'гЪ'
        AND EXISTS
                (SELECT '1'
                   FROM sfrstcr
-                 WHERE     sfrstcr_term_code = '144320'
+                 WHERE     sfrstcr_term_code = '144510'
                        AND sfrstcr_pidm = sgbstdn_pidm
                        AND sfrstcr_grde_code = 'гд');
+                       
+                       
+                       SELECT *
+  FROM sgbstdn
+ WHERE     SGBSTDN_TERM_CODE_EFF = '144510'
+       AND SGBSTDN_STST_CODE = 'гд'
+       AND EXISTS
+               (SELECT '1'
+                  FROM sfrstcr
+                 WHERE     sfrstcr_term_code = '144510'
+                       AND sfrstcr_pidm = sgbstdn_pidm
+                       AND sfrstcr_grde_code = 'К');
+
+
 
 
 ---------
@@ -17,12 +31,12 @@ SELECT sfrstcr_pidm,
        f_get_std_id (sfrstcr_pidm),
        f_get_std_name (sfrstcr_pidm)
   FROM sfrstcr
- WHERE     sfrstcr_term_code = '144320'
+ WHERE     sfrstcr_term_code = '144510'
        AND sfrstcr_grde_code = 'гд'
        AND EXISTS
                (SELECT '1'
                   FROM sgbstdn
-                 WHERE     SGBSTDN_TERM_CODE_EFF = '144320'
+                 WHERE     SGBSTDN_TERM_CODE_EFF = '144510'
                        AND SGBSTDN_STST_CODE = 'гЪ'
                        AND sfrstcr_pidm = sgbstdn_pidm);
 
@@ -33,12 +47,12 @@ SELECT sfrstcr_pidm,
          f_get_std_name (sfrstcr_pidm),
          COUNT (*)
     FROM sfrstcr
-   WHERE     sfrstcr_term_code = '144320'
+   WHERE     sfrstcr_term_code = '144510'
          AND sfrstcr_grde_code = 'гд'
          AND EXISTS
                  (SELECT '1'
                     FROM sgbstdn
-                   WHERE     SGBSTDN_TERM_CODE_EFF = '144320'
+                   WHERE     SGBSTDN_TERM_CODE_EFF = '144510'
                          AND SGBSTDN_STST_CODE = 'гЪ'
                          AND sfrstcr_pidm = sgbstdn_pidm)
 GROUP BY sfrstcr_pidm;
@@ -59,19 +73,19 @@ DECLARE
                AND sfrstcr_term_code = shrtckn_term_code(+)
                AND sfrstcr_crn = shrtckn_crn(+)
                AND SFRSTCR_GRDE_CODE = 'гд'
-               AND sfrstcr_term_code = '144320'
+               AND sfrstcr_term_code = '144510'
                -- AND sfrstcr_crn in ( '12068'/*,'15130','15034','15149','15091'*/)
                ---
                AND sfrstcr_pidm IN
                        (SELECT sgbstdn_pidm
                           FROM sgbstdn
-                         WHERE     SGBSTDN_TERM_CODE_EFF = '144320'
+                         WHERE     SGBSTDN_TERM_CODE_EFF = '144510'
                                AND SGBSTDN_STST_CODE = 'гЪ'
                                AND EXISTS
                                        (SELECT '1'
                                           FROM sfrstcr
                                          WHERE     sfrstcr_term_code =
-                                                   '144320'
+                                                   '144510'
                                                AND sfrstcr_pidm =
                                                    sgbstdn_pidm
                                                AND sfrstcr_grde_code = 'гд'))

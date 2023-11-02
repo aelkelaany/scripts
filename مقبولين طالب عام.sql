@@ -27,6 +27,7 @@ ORDER BY STVCOLL_VR_MSG_NO ASC;
 SELECT  A.SGBSTDN_PIDM ,spbpers_ssn,spriden_id,SPRIDEN_FIRST_NAME||' '||SPRIDEN_MI||' '|| SPRIDEN_LAST_NAME stu_name , 
          stvcoll_desc,
          stvdept_desc,
+         spbpers_sex,
          STVCOLL_VR_MSG_NO ,SGBSTDN_LEVL_CODE ,SGBSTDN_camp_CODE ,f_get_program_full_desc ('144510', sgbstdn_program_1)     description
          ,f_get_desc_fnc('stvcamp',SGBSTDN_camp_CODE,30) campus ,(SELECT sprtele_intl_access
                   FROM sprtele
@@ -46,12 +47,14 @@ SELECT  A.SGBSTDN_PIDM ,spbpers_ssn,spriden_id,SPRIDEN_FIRST_NAME||' '||SPRIDEN_
          AND SPRIDEN_PIDM = SGBSTDN_PIDM
          and spbpers_pidm=SGBSTDN_PIDM
          AND SPRIDEN_ID LIKE '445%'
-         and sgbstdn_levl_code!='MA'
+        -- and sgbstdn_levl_code='MA'
+        -- and sgbstdn_coll_code_1='17'
+       -- and sgbstdn_program_1='6F17MIC42'
          --AND SPRIDEN_ID not LIKE '4459%'
-and spbpers_sex='F'
+--and spbpers_sex='F'
          AND SGBSTDN_COLL_CODE_1 = stvcoll_code
          AND SGBSTDN_DEPT_CODE = stvdept_code
-order BY   STVCOLL_VR_MSG_NO ,stvdept_code
+order BY   STVCOLL_VR_MSG_NO ,stvdept_code ,spbpers_sex
  ;
 
 

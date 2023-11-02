@@ -1,7 +1,13 @@
 
+select * from bu_dev.tmp_tbl_kilany1  ;
+
+-- pidm col13
+--grade col04
 -- before running 
 update bu_dev.tmp_tbl_kilany1 
-set col03=f_get_pidm(col04) ;
+set col13=f_get_pidm(col03) ;
+
+ 
 
 -- set grade
 update bu_dev.tmp_tbl_kilany1 
@@ -9,7 +15,7 @@ set col04='До' ;
 
  select col03, f_get_std_id(col03),f_get_std_name(col03) from bu_dev.tmp_tbl_kilany1 
  where not  exists 
- (select '1' from shrtckn where SHRTCKN_PIDM=col03 and SHRTCKN_TERM_CODE=col01 and SHRTCKN_CRN=col02 ) ;
+ (select '1' from shrtckn where SHRTCKN_PIDM=col03 and SHRTCKN_TERM_CODE=col01 and SHRTCKN_CRN=col12 ) ;
 
 
 DECLARE

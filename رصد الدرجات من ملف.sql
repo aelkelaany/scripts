@@ -5,30 +5,32 @@
 delete from bu_dev.tmp_tbl_kilany where col01 is null ;
 update bu_dev.tmp_tbl_kilany set COL03=f_get_pidm(trim(COL01)) ;
 update bu_dev.tmp_tbl_kilany set COL02=trim(COL02)  ;
+update bu_dev.tmp_tbl_kilany set COL04=trim(COL04)  ;
 select distinct * from bu_dev.tmp_tbl_kilany
 WHERE  COL03 IS   NULL ;
 
 select count( *) from bu_dev.tmp_tbl_kilany
 WHERE  COL03 in (select sfrstcr_pidm
 from sfrstcr 
-where sfrstcr_term_code='144340'
+where sfrstcr_term_code='144440'
 and sfrstcr_crn=col02
 and sfrstcr_rsts_code in ('RE','RW'));
 
 select  *  from bu_dev.tmp_tbl_kilany
 WHERE  not exists (select '1'
 from sfrstcr 
-where sfrstcr_term_code='144340'
+where sfrstcr_term_code='144440'
 and sfrstcr_crn=col02
 and sfrstcr_pidm=col03
 and sfrstcr_rsts_code in ('RE','RW'));
 
 update bu_dev.tmp_tbl_kilany set col04='До'
-where col03 is not null ;
+where col03 is not null 
+and col04 is null;
 
 select  * from  sfrstcr where exists (select '1' from bu_dev.tmp_tbl_kilany where col03=sfrstcr_pidm   and  col02=sfrstcr_crn)
   
-and sfrstcr_term_code='144340'
+and sfrstcr_term_code='144440'
  
 and sfrstcr_rsts_code in ('RE','RW')
 --and SFRSTCR_GRDE_CODE is null
